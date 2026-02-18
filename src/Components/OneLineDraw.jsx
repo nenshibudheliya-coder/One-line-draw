@@ -35,6 +35,7 @@ export default function OneLineDraw() {
     const isMobile = WIDTH < 600;
     const isSmallMobile = WIDTH < 400;
     const isLandscape = WIDTH > HEIGHT && HEIGHT < 500;
+    const isTablet = !isMobile && !isLandscape && WIDTH >= 600 && WIDTH < 1024;
     const G_SCALE = isMobile ? Math.min(1, (isLandscape ? HEIGHT / 400 : WIDTH / 500)) : 1;
 
     // Initialize background particles
@@ -375,6 +376,35 @@ export default function OneLineDraw() {
             ]
         },
 
+        {
+            name: 'LEVEL 16',
+            nodes: [
+                // Top left & right
+                { id: 0, x: WIDTH / 2 - 150 * G_SCALE, y: HEIGHT * 0.25 },
+                { id: 1, x: WIDTH / 2 + 150 * G_SCALE, y: HEIGHT * 0.25 },
+
+                // Middle top center
+                { id: 2, x: WIDTH / 2, y: HEIGHT * 0.38 },
+
+                // Inner left & right
+                { id: 3, x: WIDTH / 2 - 60 * G_SCALE, y: HEIGHT * 0.48 },
+                { id: 4, x: WIDTH / 2 + 60 * G_SCALE, y: HEIGHT * 0.48 },
+
+                // Inner bottom
+                { id: 5, x: WIDTH / 2, y: HEIGHT * 0.62 },
+
+                // Bottom left & right
+                { id: 6, x: WIDTH / 2 - 130 * G_SCALE, y: HEIGHT * 0.80 },
+                { id: 7, x: WIDTH / 2 + 130 * G_SCALE, y: HEIGHT * 0.80 },
+
+                // Bottom center
+                { id: 8, x: WIDTH / 2, y: HEIGHT * 0.88 },
+            ],
+
+            targetEdges: [
+                [0, 1], [0, 6], [1, 7], [6, 8], [7, 8], [0, 2], [1, 2], [2, 3], [2, 4], [3, 5], [4, 5], [5, 8]
+            ]
+        },
 
 
 
@@ -530,8 +560,8 @@ export default function OneLineDraw() {
         ctx.restore();
 
         // Progress pill
-        const progressX = isLandscape ? (WIDTH / 2 - 230 * hudScale) : (isMobile ? (WIDTH / 2 - 100 * hudScale) : (WIDTH * 0.35));
-        const livesX = isLandscape ? (WIDTH / 2 + 230 * hudScale) : (isMobile ? (WIDTH / 2 + 135 * hudScale) : (WIDTH * 0.75));
+        const progressX = isLandscape ? (WIDTH / 2 - 230 * hudScale) : (isMobile ? (WIDTH / 2 - 100 * hudScale) : (isTablet ? WIDTH * 0.22 : WIDTH * 0.35));
+        const livesX = isLandscape ? (WIDTH / 2 + 230 * hudScale) : (isMobile ? (WIDTH / 2 + 135 * hudScale) : (isTablet ? WIDTH * 0.82 : WIDTH * 0.75));
 
         /* DRAW PILL */
         const drawPill = (x, y, w, h, text) => {
