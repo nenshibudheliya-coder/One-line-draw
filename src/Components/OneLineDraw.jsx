@@ -1041,7 +1041,7 @@ export default function OneLineDraw() {
                                 cursor: 'pointer', border: 'none',
                                 display: 'flex', alignItems: 'center', gap: '8px'
                             }}>
-                            {message.type === 'win' ? '[ NEXT LEVEL ➔ ]' : '[ TRY AGAIN ↻ ]'}
+                            {message.type === 'win' ? ' NEXT LEVEL ➔ ' : ' TRY AGAIN ↻ '}
                         </div>
                     </div>
                 </>
