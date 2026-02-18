@@ -563,7 +563,7 @@ export default function OneLineDraw() {
         ctx.fillStyle = 'rgba(255,255,255,0.9)';
         ctx.font = `700 ${isLandscape ? '18px' : (isMobile ? '20px' : '28px')} 'Orbitron', monospace`;
         ctx.textAlign = 'center';
-        const levelY = isLandscape ? hudY + 5 : (isMobile ? hudY + 55 * hudScale : hudY + 10);
+        const levelY = isLandscape ? hudY + 5 : (isMobile ? hudY + 75 * hudScale : hudY + 10);
         ctx.fillText(currentLevelData.name, WIDTH / 2, levelY);
 
         drawPill(livesX, hudY, 160, 50, '');
