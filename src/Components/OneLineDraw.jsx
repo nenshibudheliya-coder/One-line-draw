@@ -12,7 +12,13 @@ export default function OneLineDraw() {
     const [edgesDrawn, setEdgesDrawn] = useState(new Set());
     const [message, setMessage] = useState({ text: '', type: '' });
     const [isWinAnimating, setIsWinAnimating] = useState(false);// 16-02 -- winanimation//
-    const [maxUnlockedLevel, setMaxUnlockedLevel] = useState(0); //09-02 --selectlevel//
+    const [maxUnlockedLevel, setMaxUnlockedLevel] = useState(() => {
+        if (typeof window !== 'undefined') {
+            const saved = localStorage.getItem('oneline_maxLevel');
+            return saved ? parseInt(saved) : 0;
+        }
+        return 0;
+    }); // Persistence added via localStorage
     const [bgParticles, setBgParticles] = useState([]);
     const bgAnimRef = useRef(null);
     const particlesRef = useRef([]);
@@ -30,6 +36,13 @@ export default function OneLineDraw() {
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
+
+    // Save progress to localStorage whenever it changes
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            localStorage.setItem('oneline_maxLevel', maxUnlockedLevel.toString());
+        }
+    }, [maxUnlockedLevel]);
 
     const { width: WIDTH, height: HEIGHT } = dimensions;
     const isMobile = WIDTH < 600;
@@ -406,6 +419,36 @@ export default function OneLineDraw() {
             ]
         },
 
+        {
+            name: 'LEVEL 17',
+            nodes: [
+                // Top
+                { id: 0, x: WIDTH / 2 - 80 * G_SCALE, y: HEIGHT * 0.22 },
+                { id: 1, x: WIDTH / 2 + 80 * G_SCALE, y: HEIGHT * 0.22 },
+
+                // Upper right
+                { id: 2, x: WIDTH / 2 + 160 * G_SCALE, y: HEIGHT * 0.38 },
+
+                // Right middle
+                { id: 3, x: WIDTH / 2 + 160 * G_SCALE, y: HEIGHT * 0.55 },
+
+                // Bottom right
+                { id: 4, x: WIDTH / 2 + 80 * G_SCALE, y: HEIGHT * 0.72 },
+
+                // Bottom left
+                { id: 5, x: WIDTH / 2 - 80 * G_SCALE, y: HEIGHT * 0.72 },
+
+                // Left middle
+                { id: 6, x: WIDTH / 2 - 160 * G_SCALE, y: HEIGHT * 0.55 },
+
+                // Upper left
+                { id: 7, x: WIDTH / 2 - 160 * G_SCALE, y: HEIGHT * 0.38 },
+            ],
+            targetEdges: [
+                [0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 0],
+                [5, 1], [5, 2]
+            ]
+        },
 
 
 
@@ -427,7 +470,7 @@ export default function OneLineDraw() {
             const actualW = btnW * btnScale;
             undoX = actualW / 2 + 10; retryX = undoX + actualW + 5; footY = HEIGHT - 55;
         } else {
-            btnW = 180; btnH = 60; undoX = WIDTH / 2 - 120; retryX = WIDTH / 2 + 120;
+            btnW = 180; btnH = 60; undoX = 120; retryX = 310;
         }
         const actualW = btnW * btnScale;
         const actualH = btnH * btnScale;
