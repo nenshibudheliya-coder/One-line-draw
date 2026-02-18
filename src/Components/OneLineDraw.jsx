@@ -956,7 +956,9 @@ export default function OneLineDraw() {
                         position: 'absolute', top: '50%', left: '50%',
                         transform: 'translate(-50%,-50%)',
                         width: isMobile && !isLandscape ? '75%' : '85%', maxWidth: '420px',
-                        padding: isMobile && !isLandscape ? '28px 20px 24px' : '44px 28px 36px',
+                        maxHeight: isMobile && !isLandscape ? '85vh' : 'none',
+                        overflowY: isMobile && !isLandscape ? 'auto' : 'visible',
+                        padding: isMobile && !isLandscape ? '20px 18px 18px' : '44px 28px 36px',
                         borderRadius: '24px',
                         background: message.type === 'win'
                             ? 'linear-gradient(135deg, rgba(0,30,60,0.95), rgba(0,20,50,0.98))'
@@ -968,7 +970,8 @@ export default function OneLineDraw() {
                         zIndex: 10,
                         textAlign: 'center',
                         animation: 'bannerPop 0.4s cubic-bezier(0.175,0.885,0.32,1.275) forwards',
-                        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px'
+                        display: 'flex', flexDirection: 'column', alignItems: 'center',
+                        gap: isMobile && !isLandscape ? '10px' : '16px'
                     }}>
                         {/* Top accent line */}
                         <div style={{
