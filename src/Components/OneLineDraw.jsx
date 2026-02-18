@@ -955,8 +955,8 @@ export default function OneLineDraw() {
                     <div style={{
                         position: 'absolute', top: '50%', left: '50%',
                         transform: 'translate(-50%,-50%)',
-                        width: '85%', maxWidth: '420px',
-                        padding: '44px 28px 36px',
+                        width: isMobile && !isLandscape ? '75%' : '85%', maxWidth: '420px',
+                        padding: isMobile && !isLandscape ? '28px 20px 24px' : '44px 28px 36px',
                         borderRadius: '24px',
                         background: message.type === 'win'
                             ? 'linear-gradient(135deg, rgba(0,30,60,0.95), rgba(0,20,50,0.98))'
@@ -982,13 +982,13 @@ export default function OneLineDraw() {
                         }} />
 
                         <div style={{
-                            width: '80px', height: '80px', borderRadius: '50%',
+                            width: isMobile && !isLandscape ? '60px' : '80px', height: isMobile && !isLandscape ? '60px' : '80px', borderRadius: '50%',
                             background: message.type === 'win'
                                 ? 'radial-gradient(circle, rgba(0,200,255,0.2), rgba(0,100,200,0.1))'
                                 : 'radial-gradient(circle, rgba(255,50,100,0.2), rgba(200,0,50,0.1))',
                             border: message.type === 'win' ? '2px solid rgba(0,200,255,0.4)' : '2px solid rgba(255,50,100,0.4)',
                             display: 'flex', justifyContent: 'center', alignItems: 'center',
-                            fontSize: '36px', marginBottom: '4px'
+                            fontSize: isMobile && !isLandscape ? '28px' : '36px', marginBottom: isMobile && !isLandscape ? '2px' : '4px'
                         }}>
                             {message.type === 'win' ? '⭐' : '💔'}
                         </div>
@@ -997,7 +997,7 @@ export default function OneLineDraw() {
                             <div style={{ display: 'flex', gap: '12px', marginBottom: '4px' }}>
                                 {[1, 2, 3].map(i => (
                                     <div key={i} style={{
-                                        fontSize: i === 2 ? '36px' : '26px',
+                                        fontSize: i === 2 ? (isMobile && !isLandscape ? '28px' : '36px') : (isMobile && !isLandscape ? '20px' : '26px'),
                                         animation: `starPop 0.5s cubic-bezier(0.175,0.885,0.32,1.275) forwards ${i * 0.15 + 0.4}s`,
                                         opacity: 0
                                     }}>⭐</div>
@@ -1006,7 +1006,7 @@ export default function OneLineDraw() {
                         )}
 
                         <div style={{
-                            fontSize: '28px', fontWeight: '900',
+                            fontSize: isMobile && !isLandscape ? '22px' : '28px', fontWeight: '900',
                             color: message.type === 'win' ? '#80e0ff' : '#ff88aa',
                             fontFamily: "'Orbitron', monospace",
                             letterSpacing: '2px',
@@ -1018,7 +1018,7 @@ export default function OneLineDraw() {
                         </div>
 
                         <div style={{
-                            fontSize: '15px', color: 'rgba(200,220,255,0.6)',
+                            fontSize: isMobile && !isLandscape ? '13px' : '15px', color: 'rgba(200,220,255,0.6)',
                             fontFamily: "'Outfit', sans-serif",
                             maxWidth: '80%', lineHeight: '1.6'
                         }}>
@@ -1027,12 +1027,12 @@ export default function OneLineDraw() {
 
                         <div onClick={message.type === 'win' ? handleNextLevel : handleRetry}
                             style={{
-                                marginTop: '8px', padding: '14px 36px',
+                                marginTop: isMobile && !isLandscape ? '4px' : '8px', padding: isMobile && !isLandscape ? '10px 28px' : '14px 36px',
                                 background: message.type === 'win'
                                     ? 'linear-gradient(135deg, #0088ff, #0044cc)'
                                     : 'linear-gradient(135deg, #ff4466, #cc0044)',
                                 color: '#fff', borderRadius: '50px',
-                                fontWeight: '700', fontSize: '15px',
+                                fontWeight: '700', fontSize: isMobile && !isLandscape ? '13px' : '15px',
                                 fontFamily: "'Orbitron', monospace",
                                 letterSpacing: '1px',
                                 boxShadow: message.type === 'win'
