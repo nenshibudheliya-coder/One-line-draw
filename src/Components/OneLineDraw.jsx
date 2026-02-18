@@ -54,7 +54,8 @@ export default function OneLineDraw() {
         particlesRef.current = particles;
     }, [WIDTH, HEIGHT]);
 
-    // Animate background
+
+    /* CANVAS BACKGROUND */
     useEffect(() => {
         const bgCanvas = bgCanvasRef.current;
         if (!bgCanvas) return;
@@ -129,6 +130,7 @@ export default function OneLineDraw() {
                     }
                 }
             }
+
 
             // Draw particles
             parts.forEach(p => {
@@ -383,12 +385,13 @@ export default function OneLineDraw() {
     const nodes = currentLevelData.nodes;
     const targetEdges = currentLevelData.targetEdges;
 
+    /* FOOTER BUTTONS */
     const getFooterButtons = () => {
         const btnScale = isLandscape ? 0.7 : (isMobile ? 0.75 : 1);
         let footY = isLandscape ? HEIGHT - 22 : HEIGHT - (isMobile ? 50 : 60);
         let undoX, retryX, btnW, btnH;
         if (isMobile && !isLandscape) {
-            btnW = 50; btnH = 50; undoX = 30; retryX = 75; footY = HEIGHT - 28;
+            btnW = 50; btnH = 50; undoX = 30; retryX = 75; footY = HEIGHT - 65;
         } else if (isLandscape) {
             btnW = 60; btnH = 60;
             const actualW = btnW * btnScale;
@@ -401,6 +404,7 @@ export default function OneLineDraw() {
         return { footY, undoX, retryX, btnW, btnH, actualW, actualH, btnScale };
     };
 
+    /* DRAW GAME */
     useEffect(() => {
         drawGame();
     }, [drawnPath, currentPos, drawing, edgesDrawn, currentLevel, lives, gameState, dimensions, isWinAnimating]);
@@ -497,12 +501,13 @@ export default function OneLineDraw() {
             return;
         }
 
+
         // HUD
         const hudY = isLandscape ? 20 : (isMobile ? 25 : 55);
         const hudScale = isLandscape ? 0.6 : (isSmallMobile ? 0.65 : (isMobile ? 0.75 : 1));
         const homeX = isLandscape ? 25 : (isMobile ? (isSmallMobile ? 25 : 35) : 50);
 
-        // HOME BUTTON
+        /* HOME BUTTON */
         ctx.save();
         ctx.translate(homeX, hudY);
         ctx.scale(hudScale, hudScale);
@@ -528,6 +533,7 @@ export default function OneLineDraw() {
         const progressX = isLandscape ? (WIDTH / 2 - 230 * hudScale) : (isMobile ? (WIDTH / 2 - 100 * hudScale) : (WIDTH * 0.35));
         const livesX = isLandscape ? (WIDTH / 2 + 230 * hudScale) : (isMobile ? (WIDTH / 2 + 135 * hudScale) : (WIDTH * 0.75));
 
+        /* DRAW PILL */
         const drawPill = (x, y, w, h, text) => {
             ctx.save();
             ctx.translate(x, y);
