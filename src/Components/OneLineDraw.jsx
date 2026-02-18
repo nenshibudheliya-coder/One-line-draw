@@ -1035,23 +1035,24 @@ export default function OneLineDraw() {
                     <div style={{
                         position: 'absolute', top: '50%', left: '50%',
                         transform: 'translate(-50%,-50%)',
-                        width: isMobile && !isLandscape ? '75%' : '85%', maxWidth: '420px',
-                        maxHeight: isMobile && !isLandscape ? '85vh' : 'none',
-                        overflowY: isMobile && !isLandscape ? 'auto' : 'visible',
-                        padding: isMobile && !isLandscape ? '20px 18px 18px' : '44px 28px 36px',
-                        borderRadius: '24px',
+                        width: isMobile ? (isLandscape ? '80%' : '70%') : '85%',
+                        maxWidth: isLandscape ? '400px' : '420px',
+                        maxHeight: isMobile ? '90vh' : 'none',
+                        overflowY: isMobile ? 'auto' : 'visible',
+                        padding: isMobile ? (isLandscape ? '12px 16px' : '16px 14px 14px') : '44px 28px 36px',
+                        borderRadius: isMobile ? '18px' : '24px',
                         background: message.type === 'win'
                             ? 'linear-gradient(135deg, rgba(0,30,60,0.95), rgba(0,20,50,0.98))'
                             : 'linear-gradient(135deg, rgba(40,0,20,0.95), rgba(30,0,30,0.98))',
                         boxShadow: message.type === 'win'
-                            ? '0 0 60px rgba(0,180,255,0.3), 0 0 120px rgba(0,100,200,0.15), inset 0 0 30px rgba(0,100,255,0.05)'
-                            : '0 0 60px rgba(255,50,50,0.2), 0 0 120px rgba(200,0,100,0.1)',
+                            ? '0 0 40px rgba(0,180,255,0.3), inset 0 0 20px rgba(0,100,255,0.05)'
+                            : '0 0 40px rgba(255,50,50,0.2)',
                         border: message.type === 'win' ? '1px solid rgba(0,180,255,0.3)' : '1px solid rgba(255,50,100,0.3)',
                         zIndex: 10,
                         textAlign: 'center',
                         animation: 'bannerPop 0.4s cubic-bezier(0.175,0.885,0.32,1.275) forwards',
                         display: 'flex', flexDirection: 'column', alignItems: 'center',
-                        gap: isMobile && !isLandscape ? '10px' : '16px'
+                        gap: isMobile ? '6px' : '16px'
                     }}>
                         {/* Top accent line */}
                         <div style={{
@@ -1065,22 +1066,24 @@ export default function OneLineDraw() {
                         }} />
 
                         <div style={{
-                            width: isMobile && !isLandscape ? '60px' : '80px', height: isMobile && !isLandscape ? '60px' : '80px', borderRadius: '50%',
+                            width: isMobile ? (isLandscape ? '40px' : '44px') : '80px',
+                            height: isMobile ? (isLandscape ? '40px' : '44px') : '80px',
+                            borderRadius: '50%',
                             background: message.type === 'win'
                                 ? 'radial-gradient(circle, rgba(0,200,255,0.2), rgba(0,100,200,0.1))'
                                 : 'radial-gradient(circle, rgba(255,50,100,0.2), rgba(200,0,50,0.1))',
                             border: message.type === 'win' ? '2px solid rgba(0,200,255,0.4)' : '2px solid rgba(255,50,100,0.4)',
                             display: 'flex', justifyContent: 'center', alignItems: 'center',
-                            fontSize: isMobile && !isLandscape ? '28px' : '36px', marginBottom: isMobile && !isLandscape ? '2px' : '4px'
+                            fontSize: isMobile ? '20px' : '36px', flexShrink: 0
                         }}>
                             {message.type === 'win' ? '⭐' : '💔'}
                         </div>
 
                         {message.type === 'win' && (
-                            <div style={{ display: 'flex', gap: '12px', marginBottom: '4px' }}>
+                            <div style={{ display: 'flex', gap: isMobile ? '8px' : '12px', alignItems: 'center' }}>
                                 {[1, 2, 3].map(i => (
                                     <div key={i} style={{
-                                        fontSize: i === 2 ? (isMobile && !isLandscape ? '28px' : '36px') : (isMobile && !isLandscape ? '20px' : '26px'),
+                                        fontSize: i === 2 ? (isMobile ? '22px' : '36px') : (isMobile ? '16px' : '26px'),
                                         animation: `starPop 0.5s cubic-bezier(0.175,0.885,0.32,1.275) forwards ${i * 0.15 + 0.4}s`,
                                         opacity: 0
                                     }}>⭐</div>
@@ -1089,10 +1092,11 @@ export default function OneLineDraw() {
                         )}
 
                         <div style={{
-                            fontSize: isMobile && !isLandscape ? '22px' : '28px', fontWeight: '900',
+                            fontSize: isMobile ? '16px' : '28px', fontWeight: '900',
                             color: message.type === 'win' ? '#80e0ff' : '#ff88aa',
                             fontFamily: "'Orbitron', monospace",
-                            letterSpacing: '2px',
+                            letterSpacing: isMobile ? '1px' : '2px',
+                            lineHeight: 1.2,
                             textShadow: message.type === 'win'
                                 ? '0 0 20px rgba(0,200,255,0.5)'
                                 : '0 0 20px rgba(255,50,100,0.5)'
@@ -1101,30 +1105,32 @@ export default function OneLineDraw() {
                         </div>
 
                         <div style={{
-                            fontSize: isMobile && !isLandscape ? '13px' : '15px', color: 'rgba(200,220,255,0.6)',
+                            fontSize: isMobile ? '11px' : '15px', color: 'rgba(200,220,255,0.6)',
                             fontFamily: "'Outfit', sans-serif",
-                            maxWidth: '80%', lineHeight: '1.6'
+                            maxWidth: isMobile ? '90%' : '80%', lineHeight: '1.4'
                         }}>
                             {message.type === 'win' ? 'Perfect solution! Keep going.' : "Don't give up, try again."}
                         </div>
 
                         <div onClick={message.type === 'win' ? handleNextLevel : handleRetry}
                             style={{
-                                marginTop: isMobile && !isLandscape ? '4px' : '8px', padding: isMobile && !isLandscape ? '10px 28px' : '14px 36px',
+                                marginTop: isMobile ? '2px' : '8px',
+                                padding: isMobile ? '8px 22px' : '14px 36px',
                                 background: message.type === 'win'
                                     ? 'linear-gradient(135deg, #0088ff, #0044cc)'
                                     : 'linear-gradient(135deg, #ff4466, #cc0044)',
                                 color: '#fff', borderRadius: '50px',
-                                fontWeight: '700', fontSize: isMobile && !isLandscape ? '13px' : '15px',
+                                fontWeight: '700', fontSize: isMobile ? '11px' : '15px',
                                 fontFamily: "'Orbitron', monospace",
                                 letterSpacing: '1px',
                                 boxShadow: message.type === 'win'
-                                    ? '0 4px 20px rgba(0,136,255,0.4)'
-                                    : '0 4px 20px rgba(255,50,100,0.4)',
+                                    ? '0 4px 16px rgba(0,136,255,0.4)'
+                                    : '0 4px 16px rgba(255,50,100,0.4)',
                                 cursor: 'pointer', border: 'none',
-                                display: 'flex', alignItems: 'center', gap: '8px'
+                                display: 'flex', alignItems: 'center', gap: '6px',
+                                whiteSpace: 'nowrap'
                             }}>
-                            {message.type === 'win' ? ' NEXT LEVEL ➔ ' : ' TRY AGAIN ↻ '}
+                            {message.type === 'win' ? 'NEXT LEVEL ➔' : 'TRY AGAIN ↻'}
                         </div>
                     </div>
                 </>
