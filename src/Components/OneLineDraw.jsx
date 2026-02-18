@@ -748,7 +748,7 @@ export default function OneLineDraw() {
         const pos = getMousePos(e);
         const hudY = isLandscape ? 20 : (isMobile ? 25 : 55);
         const hudScale = isLandscape ? 0.6 : (isSmallMobile ? 0.65 : (isMobile ? 0.75 : 1));
-        const homeX = isMobile ? (isSmallMobile ? 25 : 35) : 50;
+        const homeX = isLandscape ? 25 : (isMobile ? (isSmallMobile ? 25 : 35) : 50);
         const isHome = Math.sqrt(Math.pow(pos.x - homeX, 2) + Math.pow(pos.y - hudY, 2)) < (30 * hudScale);
         if (isHome) {
             setGameState(gameState === 'levelSelect' ? 'playing' : 'levelSelect');
