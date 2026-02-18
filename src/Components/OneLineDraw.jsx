@@ -3,7 +3,13 @@ import React, { useState, useRef, useEffect } from 'react';
 export default function OneLineDraw() {
     const canvasRef = useRef(null);
     const bgCanvasRef = useRef(null);
-    const [currentLevel, setCurrentLevel] = useState(0);
+    const [currentLevel, setCurrentLevel] = useState(() => {
+        if (typeof window !== 'undefined') {
+            const saved = localStorage.getItem('oneline_currentLevel');
+            return saved ? parseInt(saved) : 0;
+        }
+        return 0;
+    });
     const [gameState, setGameState] = useState('playing'); // 'playing' or 'levelSelect'
     const [drawnPath, setDrawnPath] = useState([]);
     const [currentPos, setCurrentPos] = useState(null);
@@ -41,8 +47,9 @@ export default function OneLineDraw() {
     useEffect(() => {
         if (typeof window !== 'undefined') {
             localStorage.setItem('oneline_maxLevel', maxUnlockedLevel.toString());
+            localStorage.setItem('oneline_currentLevel', currentLevel.toString());
         }
-    }, [maxUnlockedLevel]);
+    }, [maxUnlockedLevel, currentLevel]);
 
     const { width: WIDTH, height: HEIGHT } = dimensions;
     const isMobile = WIDTH < 600;
