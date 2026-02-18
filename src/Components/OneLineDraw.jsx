@@ -395,7 +395,7 @@ export default function OneLineDraw() {
         } else if (isLandscape) {
             btnW = 60; btnH = 60;
             const actualW = btnW * btnScale;
-            undoX = actualW / 2 + 10; retryX = undoX + actualW + 5; footY = HEIGHT - 25;
+            undoX = actualW / 2 + 10; retryX = undoX + actualW + 5; footY = HEIGHT - 55;
         } else {
             btnW = 180; btnH = 60; undoX = WIDTH / 2 - 120; retryX = WIDTH / 2 + 120;
         }
