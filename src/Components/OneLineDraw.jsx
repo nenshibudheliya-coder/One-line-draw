@@ -480,7 +480,7 @@ export default function OneLineDraw() {
             const actualW = btnW * btnScale;
             undoX = actualW / 2 + 30;
             retryX = undoX + actualW + 15;
-            footY = HEIGHT - 110;
+            footY = HEIGHT - 165;
         } else if (isTabletPortrait) {
             // UBHA TABLET: Left side, shifted higher
             btnW = 160; btnH = 55;
