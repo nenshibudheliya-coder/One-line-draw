@@ -543,6 +543,7 @@ export default function OneLineDraw() {
             undoX = actualW / 2 + 10; retryX = undoX + actualW + 5; footY = HEIGHT - 55;
         } else {
             btnW = 180; btnH = 60; undoX = 120; retryX = 310;
+            footY = HEIGHT - 40;
         }
         const actualW = btnW * btnScale;
         const actualH = btnH * btnScale;
