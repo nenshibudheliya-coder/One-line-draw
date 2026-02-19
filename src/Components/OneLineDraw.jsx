@@ -386,22 +386,6 @@ export default function OneLineDraw() {
         {
             name: 'LEVEL 15',
             nodes: [
-                { id: 0, x: WIDTH / 2 - 120 * G_SCALE, y: HEIGHT * 0.25 },
-                { id: 1, x: WIDTH / 2 - 170 * G_SCALE, y: HEIGHT * 0.55 },
-                { id: 2, x: WIDTH / 2 - 120 * G_SCALE, y: HEIGHT * 0.75 },
-                { id: 3, x: WIDTH / 2, y: HEIGHT * 0.55 },
-                { id: 4, x: WIDTH / 2 + 120 * G_SCALE, y: HEIGHT * 0.25 },
-                { id: 5, x: WIDTH / 2 + 170 * G_SCALE, y: HEIGHT * 0.55 },
-                { id: 6, x: WIDTH / 2 + 120 * G_SCALE, y: HEIGHT * 0.75 }
-            ],
-            targetEdges: [
-                [0, 1], [1, 2], [2, 0], [0, 3], [2, 3], [4, 5], [5, 6], [6, 4], [0, 4], [2, 6]
-            ]
-        },
-
-        {
-            name: 'LEVEL 16',
-            nodes: [
                 // Top left & right
                 { id: 0, x: WIDTH / 2 - 150 * G_SCALE, y: HEIGHT * 0.25 },
                 { id: 1, x: WIDTH / 2 + 150 * G_SCALE, y: HEIGHT * 0.25 },
@@ -430,7 +414,7 @@ export default function OneLineDraw() {
         },
 
         {
-            name: 'LEVEL 17',
+            name: 'LEVEL 16',
             nodes: [
                 // Top
                 { id: 0, x: WIDTH / 2 - 80 * G_SCALE, y: HEIGHT * 0.22 },
