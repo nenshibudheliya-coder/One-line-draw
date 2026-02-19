@@ -56,7 +56,9 @@ export default function OneLineDraw() {
     const isMobileDevice = Math.min(WIDTH, HEIGHT) < 600;
     const isSmallMobile = WIDTH < 400;
     const isLandscape = WIDTH > HEIGHT && HEIGHT < 500;
-    const isTablet = !isMobile && !isLandscape && WIDTH >= 600 && WIDTH <= 1024;
+    const isTabletPortrait = !isMobile && HEIGHT > WIDTH && WIDTH >= 600 && WIDTH <= 1024;
+    const isTabletLandscape = !isMobile && WIDTH > HEIGHT && WIDTH <= 1280 && HEIGHT >= 500;
+    const isTablet = isTabletPortrait || isTabletLandscape;
     const G_SCALE = isMobile ? Math.min(1, (isLandscape ? HEIGHT / 400 : WIDTH / 500)) : 1;
 
     // Initialize background particles
@@ -472,8 +474,15 @@ export default function OneLineDraw() {
         let footY = isLandscape ? HEIGHT - 22 : HEIGHT - (isMobile ? 50 : 60);
         let undoX, retryX, btnW, btnH;
 
-        if (isTablet) {
-            // UBHA TABLET: Left side and slightly higher
+        if (isTabletLandscape) {
+            // TABLET AADU (Landscape): Left side, shifted higher
+            btnW = 160; btnH = 55;
+            const actualW = btnW * btnScale;
+            undoX = actualW / 2 + 30;
+            retryX = undoX + actualW + 15;
+            footY = HEIGHT - 110;
+        } else if (isTabletPortrait) {
+            // UBHA TABLET: Left side, shifted higher
             btnW = 160; btnH = 55;
             const actualW = btnW * btnScale;
             undoX = actualW / 2 + 40;
@@ -1160,7 +1169,7 @@ export default function OneLineDraw() {
                     }}>📱🔄</div>
                     <h2 style={{ fontSize: '24px', marginBottom: '10px', color: '#80e0ff' }}>PLEASE ROTATE DEVICE</h2>
                     <p style={{ fontSize: '14px', opacity: 0.8, maxWidth: '300px', lineHeight: '1.6' }}>
-                        This game is designed to be played in Portrait mode for the best experience.
+                        {/* This game is designed to be played in Portrait mode for the best experience. */}
                     </p>
                     <style>{`
                         @keyframes rotateDevice {
