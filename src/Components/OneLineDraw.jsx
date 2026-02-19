@@ -55,7 +55,7 @@ export default function OneLineDraw() {
     const isMobile = WIDTH < 600;
     const isSmallMobile = WIDTH < 400;
     const isLandscape = WIDTH > HEIGHT && HEIGHT < 500;
-    const isTablet = !isMobile && !isLandscape && WIDTH >= 600 && WIDTH < 1024;
+    const isTablet = !isMobile && !isLandscape && WIDTH >= 600 && WIDTH <= 1024;
     const G_SCALE = isMobile ? Math.min(1, (isLandscape ? HEIGHT / 400 : WIDTH / 500)) : 1;
 
     // Initialize background particles
@@ -422,7 +422,7 @@ export default function OneLineDraw() {
             ],
 
             targetEdges: [
-                [0, 1], [0, 6], [1, 7], [6, 8], [7, 8], [0, 2], [1, 2], [2, 3], [2, 4], [3, 5], [4, 5], [5, 8]
+                [0, 6], [1, 7], [6, 8], [7, 8], [0, 2], [1, 2], [2, 3], [2, 4], [3, 5], [4, 5], [5, 8]
             ]
         },
 
@@ -470,7 +470,15 @@ export default function OneLineDraw() {
         const btnScale = isLandscape ? 0.7 : (isMobile ? 0.75 : 1);
         let footY = isLandscape ? HEIGHT - 22 : HEIGHT - (isMobile ? 50 : 60);
         let undoX, retryX, btnW, btnH;
-        if (isMobile && !isLandscape) {
+
+        if (isTablet) {
+            // UBHA TABLET: Left side and slightly higher
+            btnW = 160; btnH = 55;
+            const actualW = btnW * btnScale;
+            undoX = actualW / 2 + 40;
+            retryX = undoX + actualW + 15;
+            footY = HEIGHT - 135;
+        } else if (isMobile && !isLandscape) {
             btnW = 50; btnH = 50; undoX = 30; retryX = 75; footY = HEIGHT - 65;
         } else if (isLandscape) {
             btnW = 60; btnH = 60;
