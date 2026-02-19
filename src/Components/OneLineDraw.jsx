@@ -1143,6 +1143,35 @@ export default function OneLineDraw() {
                     </div>
                 </>
             )}
+
+            {/* 19-02 -- Mobile Landscape Error Overlay */}
+            {isMobile && isLandscape && (
+                <div style={{
+                    position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh',
+                    background: 'linear-gradient(135deg, #060610 0%, #101030 100%)',
+                    zIndex: 9999, display: 'flex', flexDirection: 'column',
+                    justifyContent: 'center', alignItems: 'center', textAlign: 'center',
+                    padding: '20px', color: '#fff', fontFamily: "'Orbitron', sans-serif"
+                }}>
+                    <div style={{
+                        fontSize: '60px', marginBottom: '20px',
+                        animation: 'rotateDevice 2s ease-in-out infinite'
+                    }}>📱🔄</div>
+                    <h2 style={{ fontSize: '24px', marginBottom: '10px', color: '#80e0ff' }}>PLEASE ROTATE DEVICE</h2>
+                    <p style={{ fontSize: '14px', opacity: 0.8, maxWidth: '300px', lineHeight: '1.6' }}>
+                        This game is designed to be played in Portrait mode for the best experience.
+                    </p>
+                    <style>{`
+                        @keyframes rotateDevice {
+                            0% { transform: rotate(0deg); }
+                            25% { transform: rotate(90deg); }
+                            50% { transform: rotate(90deg); }
+                            75% { transform: rotate(0deg); }
+                            100% { transform: rotate(0deg); }
+                        }
+                    `}</style>
+                </div>
+            )}
         </div>
     );
 }
