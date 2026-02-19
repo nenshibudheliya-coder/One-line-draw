@@ -927,7 +927,7 @@ export default function OneLineDraw() {
     };
 
     const handleMouseUp = () => { // 19-02 //
-        if (drawing && drawnPath.length > 0 && edgesDrawn.size < targetEdges.length) {
+        if (drawing && drawnPath.length > 0 && edgesDrawn.size > 0 && edgesDrawn.size < targetEdges.length) {
             const nl = Math.max(0, lives - 1);
             setLives(nl);
             setDrawnPath([]);
