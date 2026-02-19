@@ -926,7 +926,17 @@ export default function OneLineDraw() {
         }
     };
 
-    const handleMouseUp = () => { setDrawing(false); setCurrentPos(null); };
+    const handleMouseUp = () => { // 19-02 //
+        if (drawing && drawnPath.length > 0 && edgesDrawn.size < targetEdges.length) {
+            const nl = Math.max(0, lives - 1);
+            setLives(nl);
+            setDrawnPath([]);
+            setEdgesDrawn(new Set());
+            if (nl === 0) setTimeout(() => setMessage({ text: '💔 Game Over! Click RETRY', type: 'lose' }), 500);
+        }
+        setDrawing(false);
+        setCurrentPos(null);
+    };
     const handleUndo = () => {
         if (drawnPath.length > 1) {
             const np = drawnPath.slice(0, -1);
