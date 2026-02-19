@@ -57,7 +57,7 @@ export default function OneLineDraw() {
     const isSmallMobile = WIDTH < 400;
     const isLandscape = WIDTH > HEIGHT && HEIGHT < 500;
     const isTabletPortrait = !isMobile && HEIGHT > WIDTH && WIDTH >= 600 && WIDTH <= 1024;
-    const isTabletLandscape = !isMobile && WIDTH > HEIGHT && WIDTH <= 1280 && HEIGHT >= 500;
+    const isTabletLandscape = !isMobile && WIDTH > HEIGHT && WIDTH <= 1440 && HEIGHT >= 500;
     const isTablet = isTabletPortrait || isTabletLandscape;
     const G_SCALE = isMobile ? Math.min(1, (isLandscape ? HEIGHT / 400 : WIDTH / 500)) : 1;
 
@@ -444,9 +444,72 @@ export default function OneLineDraw() {
             ]
         },
 
+        {
+            name: 'LEVEL 17',
+            nodes: [
+                { id: 0, x: WIDTH / 2, y: HEIGHT * 0.25 },
+                { id: 1, x: WIDTH / 2 - 130 * G_SCALE, y: HEIGHT * 0.45 },
+                { id: 2, x: WIDTH / 2 + 130 * G_SCALE, y: HEIGHT * 0.45 },
+                { id: 3, x: WIDTH / 2 - 130 * G_SCALE, y: HEIGHT * 0.65 },
+                { id: 4, x: WIDTH / 2 + 130 * G_SCALE, y: HEIGHT * 0.65 },
+                { id: 5, x: WIDTH / 2, y: HEIGHT * 0.85 },
+                { id: 6, x: WIDTH / 2, y: HEIGHT * 0.55 },
+            ],
+            targetEdges: [
+                [0, 1], [0, 2], [1, 3], [2, 4], [3, 5], [4, 5], [1, 2], [3, 4], [0, 6], [5, 6], [1, 6], [2, 6], [3, 6], [4, 6]
+            ]
+        },
 
+        {
+            name: 'LEVEL 18',
+            nodes: [
+                { id: 0, x: WIDTH / 2 - 100 * G_SCALE, y: HEIGHT * 0.25 },
+                { id: 1, x: WIDTH / 2 + 100 * G_SCALE, y: HEIGHT * 0.25 },
+                { id: 2, x: WIDTH / 2 - 150 * G_SCALE, y: HEIGHT * 0.5 },
+                { id: 3, x: WIDTH / 2, y: HEIGHT * 0.5 },
+                { id: 4, x: WIDTH / 2 + 150 * G_SCALE, y: HEIGHT * 0.5 },
+                { id: 5, x: WIDTH / 2 - 100 * G_SCALE, y: HEIGHT * 0.75 },
+                { id: 6, x: WIDTH / 2 + 100 * G_SCALE, y: HEIGHT * 0.75 },
+            ],
+            targetEdges: [
+                [0, 1], [0, 2], [0, 3], [1, 3], [1, 4], [2, 5], [3, 5], [3, 6], [4, 6], [5, 6], [2, 3], [3, 4], [0, 4], [1, 2]
+            ]
+        },
+
+        {
+            name: 'LEVEL 19',
+            nodes: [
+                { id: 0, x: WIDTH / 2 - 120 * G_SCALE, y: HEIGHT * 0.25 },
+                { id: 1, x: WIDTH / 2 + 120 * G_SCALE, y: HEIGHT * 0.25 },
+                { id: 2, x: WIDTH / 2, y: HEIGHT * 0.15 },
+                { id: 3, x: WIDTH / 2 - 120 * G_SCALE, y: HEIGHT * 0.7 },
+                { id: 4, x: WIDTH / 2 + 120 * G_SCALE, y: HEIGHT * 0.7 },
+                { id: 5, x: WIDTH / 2, y: HEIGHT * 0.85 },
+                { id: 6, x: WIDTH / 2, y: HEIGHT * 0.47 }
+            ],
+            targetEdges: [
+                [2, 0], [2, 1], [0, 1], [0, 3], [1, 4], [3, 4], [3, 5], [4, 5], [2, 6], [5, 6], [0, 6], [1, 6], [3, 6], [4, 6]
+            ]
+        },
+
+        {
+            name: 'LEVEL 20',
+            nodes: [
+                { id: 0, x: WIDTH / 2 - 160 * G_SCALE, y: HEIGHT * 0.3 },
+                { id: 1, x: WIDTH / 2 + 160 * G_SCALE, y: HEIGHT * 0.3 },
+                { id: 2, x: WIDTH / 2 - 60 * G_SCALE, y: HEIGHT * 0.45 },
+                { id: 3, x: WIDTH / 2 + 60 * G_SCALE, y: HEIGHT * 0.45 },
+                { id: 4, x: WIDTH / 2 - 160 * G_SCALE, y: HEIGHT * 0.8 },
+                { id: 5, x: WIDTH / 2 + 160 * G_SCALE, y: HEIGHT * 0.8 }
+            ],
+            targetEdges: [
+                [0, 1], [0, 2], [1, 3], [2, 3], [2, 4], [3, 5], [4, 5], [0, 4], [1, 5], [2, 5], [3, 4]
+            ]
+        },
 
     ];
+
+
 
     const currentLevelData = levels[currentLevel];
     const nodes = currentLevelData.nodes;
@@ -462,9 +525,9 @@ export default function OneLineDraw() {
             // TABLET AADU (Landscape): Left side, shifted higher
             btnW = 160; btnH = 55;
             const actualW = btnW * btnScale;
-            undoX = actualW / 2 + 30;
+            undoX = actualW / 2 + 40;
             retryX = undoX + actualW + 15;
-            footY = HEIGHT - 165;
+            footY = HEIGHT - 90;
         } else if (isTabletPortrait) {
             // UBHA TABLET: Left side, shifted higher
             btnW = 160; btnH = 55;
@@ -926,7 +989,7 @@ export default function OneLineDraw() {
         }
     };
 
-    const handleMouseUp = () => { // 19-02 //
+    const handleMouseUp = () => { // 19-02 //           
         if (drawing && drawnPath.length > 0 && edgesDrawn.size > 0 && edgesDrawn.size < targetEdges.length) {
             const nl = Math.max(0, lives - 1);
             setLives(nl);
