@@ -1127,7 +1127,7 @@ export default function OneLineDraw() {
                             fontFamily: "'Outfit', sans-serif",
                             maxWidth: isMobile ? '90%' : '80%', lineHeight: '1.4'
                         }}>
-                            {message.type === 'win' ? 'Perfect solution! Keep going.' : "Don't give up, try again."}
+                            {/* {message.type === 'win' ?  : "Don't give up, try again."} */}
                         </div>
 
                         <div onClick={message.type === 'win' ? handleNextLevel : handleRetry}
