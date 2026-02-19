@@ -849,33 +849,33 @@ export default function OneLineDraw() {
             ctx.fill();
         });
 
-        // Footer buttons
-        const { footY, undoX, retryX, btnW, btnH, btnScale } = getFooterButtons();
-        const drawBtn = (x, y, w, h, text, isUndo) => {
-            const aw = w * btnScale, ah = h * btnScale;
-            ctx.save();
-            ctx.shadowBlur = 15;
-            ctx.shadowColor = isUndo ? 'rgba(80,160,255,0.4)' : 'rgba(80,255,160,0.4)';
-            ctx.beginPath();
-            ctx.roundRect(x - aw / 2, y - ah / 2, aw, ah, ah / 2);
-            const bg = ctx.createLinearGradient(x - aw / 2, y - ah / 2, x + aw / 2, y + ah / 2);
-            if (isUndo) { bg.addColorStop(0, 'rgba(60,120,220,0.7)'); bg.addColorStop(1, 'rgba(80,60,200,0.7)'); }
-            else { bg.addColorStop(0, 'rgba(60,200,120,0.7)'); bg.addColorStop(1, 'rgba(20,160,100,0.7)'); }
-            ctx.fillStyle = bg;
-            ctx.fill();
-            ctx.strokeStyle = isUndo ? 'rgba(100,180,255,0.6)' : 'rgba(80,255,160,0.6)';
-            ctx.lineWidth = 1.5;
-            ctx.stroke();
-            ctx.fillStyle = '#fff';
-            ctx.font = `700 ${isLandscape ? '26px' : (isMobile ? '22px' : '22px')} Outfit`;
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            const showIconOnly = (isMobile && !isLandscape) || isLandscape;
-            ctx.fillText(showIconOnly ? (isUndo ? '↶' : '↻') : (isUndo ? '↶ UNDO' : '↻ RETRY'), x, y + 2);
-            ctx.restore();
-        };
-        drawBtn(undoX, footY, btnW, btnH, 'UNDO', true);
-        drawBtn(retryX, footY, btnW, btnH, 'RETRY', false);
+        // // Footer buttons
+        // const { footY, undoX, retryX, btnW, btnH, btnScale } = getFooterButtons();
+        // const drawBtn = (x, y, w, h, text, isUndo) => {
+        //     const aw = w * btnScale, ah = h * btnScale;
+        //     ctx.save();
+        //     ctx.shadowBlur = 15;
+        //     ctx.shadowColor = isUndo ? 'rgba(80,160,255,0.4)' : 'rgba(80,255,160,0.4)';
+        //     ctx.beginPath();
+        //     ctx.roundRect(x - aw / 2, y - ah / 2, aw, ah, ah / 2);
+        //     const bg = ctx.createLinearGradient(x - aw / 2, y - ah / 2, x + aw / 2, y + ah / 2);
+        //     if (isUndo) { bg.addColorStop(0, 'rgba(60,120,220,0.7)'); bg.addColorStop(1, 'rgba(80,60,200,0.7)'); }
+        //     else { bg.addColorStop(0, 'rgba(60,200,120,0.7)'); bg.addColorStop(1, 'rgba(20,160,100,0.7)'); }
+        //     ctx.fillStyle = bg;
+        //     ctx.fill();
+        //     ctx.strokeStyle = isUndo ? 'rgba(100,180,255,0.6)' : 'rgba(80,255,160,0.6)';
+        //     ctx.lineWidth = 1.5;
+        //     ctx.stroke();
+        //     ctx.fillStyle = '#fff';
+        //     ctx.font = `700 ${isLandscape ? '26px' : (isMobile ? '22px' : '22px')} Outfit`;
+        //     ctx.textAlign = 'center';
+        //     ctx.textBaseline = 'middle';
+        //     const showIconOnly = (isMobile && !isLandscape) || isLandscape;
+        //     ctx.fillText(showIconOnly ? (isUndo ? '↶' : '↻') : (isUndo ? '↶ UNDO' : '↻ RETRY'), x, y + 2);
+        //     ctx.restore();
+        // };
+        // drawBtn(undoX, footY, btnW, btnH, 'UNDO', true);
+        // drawBtn(retryX, footY, btnW, btnH, 'RETRY', false);
     };
 
     const getMousePos = (e) => {
