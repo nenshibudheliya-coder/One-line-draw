@@ -53,6 +53,7 @@ export default function OneLineDraw() {
 
     const { width: WIDTH, height: HEIGHT } = dimensions;
     const isMobile = WIDTH < 600;
+    const isMobileDevice = Math.min(WIDTH, HEIGHT) < 600;
     const isSmallMobile = WIDTH < 400;
     const isLandscape = WIDTH > HEIGHT && HEIGHT < 500;
     const isTablet = !isMobile && !isLandscape && WIDTH >= 600 && WIDTH <= 1024;
@@ -1145,7 +1146,7 @@ export default function OneLineDraw() {
             )}
 
             {/* 19-02 -- Mobile Landscape Error Overlay */}
-            {isMobile && isLandscape && (
+            {isMobileDevice && isLandscape && (
                 <div style={{
                     position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh',
                     background: 'linear-gradient(135deg, #060610 0%, #101030 100%)',
