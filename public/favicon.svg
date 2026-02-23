@@ -1,0 +1,18 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="100" fill="#060610"/>
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="10" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <!-- Main drawing line -->
+  <path d="M 160 352 L 352 352 L 352 160 L 160 160 L 160 352" stroke="#0088ff" stroke-width="24" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+  <!-- Highlight core -->
+  <path d="M 160 352 L 352 352 L 352 160 L 160 160 L 160 352" stroke="#80ccff" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Active Node -->
+  <circle cx="160" cy="352" r="22" fill="#0088ff" filter="url(#glow)"/>
+  <circle cx="160" cy="352" r="10" fill="#ffffff"/>
+  <!-- Target Node -->
+  <circle cx="352" cy="160" r="18" fill="rgba(255,255,255,0.2)" stroke="#0088ff" stroke-width="4"/>
+</svg>

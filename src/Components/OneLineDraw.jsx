@@ -123,8 +123,18 @@ export default function OneLineDraw() {
 
             ctx.strokeStyle = 'rgba(100,120,180,0.06)';
             ctx.lineWidth = 0.5;
-            for (let x = 0; x <= WIDTH; x += 50) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, HEIGHT); ctx.stroke(); }
-            for (let y = 0; y <= HEIGHT; y += 50) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(WIDTH, y); ctx.stroke(); }
+            for (let x = 0; x <= WIDTH; x += 50) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, HEIGHT);
+                ctx.stroke();
+            }
+            for (let y = 0; y <= HEIGHT; y += 50) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(WIDTH, y);
+                ctx.stroke();
+            }
 
             const parts = particlesRef.current;
             parts.forEach(p => {
@@ -141,7 +151,10 @@ export default function OneLineDraw() {
                     if (dist < maxDist) {
                         ctx.strokeStyle = `rgba(150,180,255,${(1 - dist / maxDist) * 0.25})`;
                         ctx.lineWidth = 0.8;
-                        ctx.beginPath(); ctx.moveTo(parts[i].x, parts[i].y); ctx.lineTo(parts[j].x, parts[j].y); ctx.stroke();
+                        ctx.beginPath();
+                        ctx.moveTo(parts[i].x, parts[i].y);
+                        ctx.lineTo(parts[j].x, parts[j].y);
+                        ctx.stroke();
                     }
                 }
             }
@@ -500,7 +513,13 @@ export default function OneLineDraw() {
         const btnScale = isLandscape ? 0.7 : (isMobile ? 0.75 : 1);
         let footY = isLandscape ? HEIGHT - 22 : HEIGHT - (isMobile ? 50 : 60);
         let undoX, retryX, btnW, btnH;
-        if (isTabletLandscape) { btnW = 160; btnH = 55; const aw = btnW * btnScale; undoX = aw / 2 + 40; retryX = undoX + aw + 15; footY = HEIGHT - 90; }
+        if (isTabletLandscape) {
+            btnW = 160;
+            btnH = 55;
+            const aw = btnW * btnScale;
+            undoX = aw / 2 + 40;
+            retryX = undoX + aw + 15; footY = HEIGHT - 90;
+        }
         else if (isTabletPortrait) { btnW = 160; btnH = 55; const aw = btnW * btnScale; undoX = aw / 2 + 40; retryX = undoX + aw + 15; footY = HEIGHT - 135; }
         else if (isMobile && !isLandscape) { btnW = 50; btnH = 50; undoX = 30; retryX = 75; footY = HEIGHT - 65; }
         else if (isLandscape) { btnW = 60; btnH = 60; const aw = btnW * btnScale; undoX = aw / 2 + 10; retryX = undoX + aw + 5; footY = HEIGHT - 55; }
