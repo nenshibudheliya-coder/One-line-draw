@@ -639,82 +639,116 @@ export default function OneLineDraw() {
             ctx.shadowBlur = 15; ctx.shadowColor = 'rgba(255,85,85,0.4)'; ctx.fillText('DRAW', 0, 0);
             ctx.restore();
 
-            // --- ANIMATED BOX SECTION (BELOW TEXT) --- 23-02 --onelinebanner//
-            const boxY = isMobile ? 130 : 170;
-            const logoSize = isMobile ? 150 : 200;
-            const boxW = logoSize * 0.7, boxH = boxW * 0.7;
+            // --- UNIQUE ANIMATED GAME LOGO ---
+            const boxY = isMobile ? 120 : 160;
+            const logoScale = isMobile ? 0.8 : 1.2;
             ctx.save();
             ctx.translate(0, boxY);
 
-            // Floating & Gentle Rotation
-            ctx.translate(0, Math.sin(time * 2) * 12);
-            ctx.rotate(Math.sin(time * 0.5) * 0.05);
-            const bX = -boxW / 2, bY = -boxH / 2;
+            // Kinetic movement
+            ctx.translate(0, Math.sin(time * 1.5) * 15);
+            ctx.rotate(time * 0.2); // Slow continuous rotation
 
-            // Define edges for animated drawing
-            const logoEdges = [
-                { f: { x: bX, y: bY }, t: { x: bX + boxW, y: bY }, color: '#ff9900', width: 6 },
-                { f: { x: bX + boxW, y: bY }, t: { x: bX + boxW, y: bY + boxH }, color: '#fff', width: 4 },
-                { f: { x: bX + boxW, y: bY + boxH }, t: { x: bX, y: bY + boxH }, color: '#fff', width: 4 },
-                { f: { x: bX, y: bY + boxH }, t: { x: bX, y: bY }, color: '#fff', width: 4 },
-                { f: { x: bX, y: bY }, t: { x: 0, y: 0 }, color: '#fff', width: 4 },
-                { f: { x: bX + boxW, y: bY }, t: { x: 0, y: 0 }, color: '#fff', width: 4 },
-                { f: { x: bX + boxW, y: bY + boxH }, t: { x: 0, y: 0 }, color: '#fff', width: 4 },
-                { f: { x: bX, y: bY + boxH }, t: { x: 0, y: 0 }, color: '#fff', width: 4 }
-            ];
-            const drawProgress = (time * 1.5) % (logoEdges.length + 2);
-            logoEdges.forEach((edge, idx) => {
-                const segmentProgress = Math.max(0, Math.min(1, drawProgress - idx));
-                if (segmentProgress <= 0) return;
-                ctx.strokeStyle = edge.color === '#ff9900' ? `rgba(255,153,0,${0.7 + Math.sin(time * 4) * 0.3})` : 'rgba(255,255,255,0.8)';
-                ctx.lineWidth = edge.width * G_SCALE; ctx.lineCap = 'round';
-                ctx.beginPath(); ctx.moveTo(edge.f.x, edge.f.y);
-                ctx.lineTo(edge.f.x + (edge.t.x - edge.f.x) * segmentProgress, edge.f.y + (edge.t.y - edge.f.y) * segmentProgress);
-                ctx.stroke();
+            // Draw a complex Star shape in one line
+            const points = 5;
+            const outerR = 80 * logoScale;
+            const innerR = 35 * logoScale;
+            const logoPath = [];
+            for (let i = 0; i <= points * 2; i++) {
+                const angle = (i * Math.PI) / points - Math.PI / 2;
+                const r = i % 2 === 0 ? outerR : innerR;
+                logoPath.push({ x: Math.cos(angle) * r, y: Math.sin(angle) * r });
+            }
+
+            const drawProgress = (time * 1.2) % (logoPath.length + 3);
+
+            // Outer silhouette glow
+            ctx.shadowBlur = 30;
+            ctx.shadowColor = 'rgba(0, 212, 255, 0.4)';
+            ctx.strokeStyle = 'rgba(0, 212, 255, 0.15)';
+            ctx.lineWidth = 12 * G_SCALE;
+            ctx.beginPath();
+            logoPath.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
+            ctx.stroke();
+
+            // Animated drawing path
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = '#00d4ff';
+            ctx.strokeStyle = '#00d4ff';
+            ctx.lineWidth = 4 * G_SCALE;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.beginPath();
+            logoPath.forEach((p, i) => {
+                const segmentProgress = Math.max(0, Math.min(1, drawProgress - i));
+                if (i === 0) ctx.moveTo(p.x, p.y);
+                else if (segmentProgress > 0) {
+                    const prev = logoPath[i - 1];
+                    ctx.lineTo(prev.x + (p.x - prev.x) * segmentProgress, prev.y + (p.y - prev.y) * segmentProgress);
+                }
             });
-            const nodePulse = 1 + Math.sin(time * 5) * 0.15;
-            const drawLogoNode = (nx, ny, isVisible) => {
-                if (!isVisible) return;
+            ctx.stroke();
+
+            // Draw nodes at the peaks
+            logoPath.forEach((p, i) => {
+                if (i >= logoPath.length - 1) return;
+                const nodeVisibility = Math.max(0, Math.min(1, drawProgress - i));
+                if (nodeVisibility <= 0) return;
+
                 ctx.save();
-                ctx.translate(nx, ny);
-                ctx.scale(nodePulse, nodePulse);
-                ctx.fillStyle = '#00aaff';
+                ctx.translate(p.x, p.y);
+                ctx.scale(nodeVisibility, nodeVisibility);
+                ctx.fillStyle = i % 2 === 0 ? '#fff' : '#00d4ff';
                 ctx.beginPath();
-                ctx.arc(0, 0, 7 * G_SCALE, 0, Math.PI * 2);
+                ctx.arc(0, 0, (i % 2 === 0 ? 6 : 4) * G_SCALE, 0, Math.PI * 2);
                 ctx.fill();
-                ctx.strokeStyle = '#fff';
-                ctx.lineWidth = 2 * G_SCALE;
-                ctx.stroke();
-                ctx.shadowBlur = 15;
-                ctx.shadowColor = '#00aaff';
-                ctx.stroke();
+                if (i % 2 === 0) {
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = '#fff';
+                    ctx.stroke();
+                }
                 ctx.restore();
-            };
-            drawLogoNode(bX, bY, drawProgress > 0);
-            drawLogoNode(bX + boxW, bY, drawProgress > 1);
-            drawLogoNode(bX + boxW, bY + boxH, drawProgress > 2);
-            drawLogoNode(bX, bY + boxH, drawProgress > 3);
-            drawLogoNode(0, 0, drawProgress > 4);
+            });
             ctx.restore();
             ctx.restore();
 
-            const btnW = isMobile ? 140 : 180, btnH = isMobile ? 50 : 65;
+            // --- PREMIUM START BUTTON ---
+            const btnW = isMobile ? 160 : 200, btnH = isMobile ? 55 : 70;
             const btnY = HEIGHT * 0.78;
             ctx.save();
-            ctx.shadowBlur = 20;
-            ctx.shadowColor = 'rgba(80, 160, 255, 0.3)';
+            ctx.translate(WIDTH / 2, btnY);
+
+            // Hover-like pulsing glow
+            const pulse = Math.sin(time * 3) * 0.1 + 1;
+            ctx.shadowBlur = 25 * pulse;
+            ctx.shadowColor = 'rgba(0, 212, 255, 0.5)';
+
             ctx.beginPath();
-            ctx.roundRect(WIDTH / 2 - btnW / 2, btnY - btnH / 2, btnW, btnH, btnH / 2);
-            const bg = ctx.createLinearGradient(WIDTH / 2 - btnW / 2, btnY - btnH / 2, WIDTH / 2 + btnW / 2, btnY + btnH / 2);
-            bg.addColorStop(0, 'rgba(15, 15, 45, 0.9)');
-            bg.addColorStop(1, 'rgba(30, 30, 70, 0.9)');
-            ctx.fillStyle = bg; ctx.fill();
-            ctx.strokeStyle = 'rgba(100, 180, 255, 0.6)';
-            ctx.lineWidth = 2; ctx.stroke();
+            ctx.roundRect(-btnW / 2, -btnH / 2, btnW, btnH, btnH / 2);
+            const bg = ctx.createLinearGradient(-btnW / 2, -btnH / 2, btnW / 2, btnH / 2);
+            bg.addColorStop(0, '#0088ff');
+            bg.addColorStop(1, '#00d4ff');
+            ctx.fillStyle = bg;
+            ctx.fill();
+
+            // Glossy highlight
+            const gloss = ctx.createLinearGradient(0, -btnH / 2, 0, 0);
+            gloss.addColorStop(0, 'rgba(255,255,255,0.3)');
+            gloss.addColorStop(1, 'rgba(255,255,255,0)');
+            ctx.fillStyle = gloss;
+            ctx.fill();
+
+            ctx.strokeStyle = 'rgba(255, 220, 100, 0.8)'; // Golden border accent
+            ctx.lineWidth = 2.5;
+            ctx.stroke();
+
             ctx.fillStyle = '#fff';
-            ctx.font = `900 ${isMobile ? '20px' : '28px'} 'Orbitron', monospace`;
-            ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-            ctx.fillText('START', WIDTH / 2, btnY);
+            ctx.font = `900 ${isMobile ? '22px' : '28px'} 'Orbitron', monospace`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = 'rgba(0,0,0,0.5)';
+            ctx.fillText('START', 0, 0);
             ctx.restore();
             return;
         }
@@ -977,7 +1011,7 @@ export default function OneLineDraw() {
             return;
         }
         if (gameState === 'home') {
-            const btnW = isMobile ? 140 : 180, btnH = isMobile ? 50 : 65, btnY = HEIGHT * 0.78;
+            const btnW = isMobile ? 160 : 200, btnH = isMobile ? 55 : 70, btnY = HEIGHT * 0.78;
             if (pos.x >= WIDTH / 2 - btnW / 2 && pos.x <= WIDTH / 2 + btnW / 2 && pos.y >= btnY - btnH / 2 && pos.y <= btnY + btnH / 2) {
                 setGameState('levelSelect');
             }

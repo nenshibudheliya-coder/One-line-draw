@@ -1,18 +1,52 @@
 <svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-  <rect width="512" height="512" rx="100" fill="#060610"/>
   <defs>
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="10" result="blur" />
-      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    <!-- Deep space background gradient -->
+    <radialGradient id="bgGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1a1a3a" />
+      <stop offset="100%" stop-color="#060610" />
+    </radialGradient>
+    
+    <!-- Neon cyan glow filter -->
+    <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="15" result="blur" />
+      <feFlood flood-color="#00d4ff" flood-opacity="0.8" result="color" />
+      <feComposite in="color" in2="blur" operator="in" result="glow" />
+      <feMerge>
+        <feMergeNode in="glow" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    
+    <!-- Gold glow for accents -->
+    <filter id="goldGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feFlood flood-color="#ffcc00" flood-opacity="0.6" result="color" />
+      <feComposite in="color" in2="blur" operator="in" />
+      <feMerge>
+        <feMergeNode />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
     </filter>
   </defs>
-  <!-- Main drawing line -->
-  <path d="M 160 352 L 352 352 L 352 160 L 160 160 L 160 352" stroke="#0088ff" stroke-width="24" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
-  <!-- Highlight core -->
-  <path d="M 160 352 L 352 352 L 352 160 L 160 160 L 160 352" stroke="#80ccff" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Active Node -->
-  <circle cx="160" cy="352" r="22" fill="#0088ff" filter="url(#glow)"/>
-  <circle cx="160" cy="352" r="10" fill="#ffffff"/>
-  <!-- Target Node -->
-  <circle cx="352" cy="160" r="18" fill="rgba(255,255,255,0.2)" stroke="#0088ff" stroke-width="4"/>
+
+  <!-- Background with rounded corners -->
+  <rect width="512" height="512" rx="120" fill="url(#bgGrad)" />
+  
+  <!-- Stylized Geometric Path -->
+  <path d="M 256 80 L 432 256 L 256 432 L 80 256 Z" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="4" />
+  
+  <!-- One Line Path -->
+  <path d="M 256 80 L 432 256 L 256 432 L 80 256 L 256 256 L 432 256" stroke="#00d4ff" stroke-width="16" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#neonGlow)" />
+  
+  <!-- Vivid Nodes -->
+  <circle cx="256" cy="80" r="18" fill="#ffffff" filter="url(#goldGlow)" />
+  <circle cx="432" cy="256" r="18" fill="#ffffff" filter="url(#goldGlow)" />
+  <circle cx="256" cy="432" r="18" fill="#ffffff" filter="url(#goldGlow)" />
+  <circle cx="80" cy="256" r="18" fill="#ffffff" filter="url(#goldGlow)" />
+  <circle cx="256" cy="256" r="22" fill="#00d4ff" filter="url(#neonGlow)" />
+  <circle cx="256" cy="256" r="10" fill="#ffffff" />
+
+  <!-- Abstract Line Accents -->
+  <line x1="120" y1="120" x2="180" y2="180" stroke="rgba(0,212,255,0.3)" stroke-width="2" stroke-dasharray="10,10" />
+  <line x1="392" y1="392" x2="332" y2="332" stroke="rgba(0,212,255,0.3)" stroke-width="2" stroke-dasharray="10,10" />
 </svg>
