@@ -568,12 +568,7 @@ export default function OneLineDraw() {
             ctx.textAlign = 'center';
             ctx.fillText('SELECT LEVEL', WIDTH / 2, isLandscape ? 38 : (isMobile ? 65 : 85));
 
-            // Subtitle
-            if (!isLandscape) {
-                ctx.font = `400 ${isMobile ? '11px' : '14px'} 'Orbitron', monospace`;
-                ctx.fillStyle = 'rgba(150,200,255,0.7)';
-                ctx.fillText('— ONE LINE DRAW —', WIDTH / 2, isMobile ? 85 : 115);
-            }
+
 
             const cardW = isLandscape ? 40 : (isMobile ? Math.min(52, WIDTH / (cols + 1.5)) : 80);
             const cardH = cardW;
