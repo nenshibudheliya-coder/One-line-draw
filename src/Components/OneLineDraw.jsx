@@ -500,7 +500,44 @@ export default function OneLineDraw() {
                 [0, 1], [0, 2], [1, 3], [2, 3], [2, 4], [3, 5], [4, 5], [0, 4], [1, 5], [2, 5], [3, 4]
             ]
         },
-
+        // {
+        //     name: 'LEVEL 21',
+        //     nodes: [
+        //         { id: 0, x: WIDTH / 2 - 100 * G_SCALE, y: HEIGHT * 0.25 }, // Top-Left Peak
+        //         { id: 1, x: WIDTH / 2 + 100 * G_SCALE, y: HEIGHT * 0.25 }, // Top-Right Peak
+        //         { id: 2, x: WIDTH / 2, y: HEIGHT * 0.38 },                 // Upper Center
+        //         { id: 3, x: WIDTH / 2 - 160 * G_SCALE, y: HEIGHT * 0.45 }, // Mid-Left Side
+        //         { id: 4, x: WIDTH / 2 + 160 * G_SCALE, y: HEIGHT * 0.45 }, // Mid-Right Side
+        //         { id: 5, x: WIDTH / 2, y: HEIGHT * 0.58 },                 // Middle Center
+        //         { id: 6, x: WIDTH / 2 - 140 * G_SCALE, y: HEIGHT * 0.72 }, // Bottom-Left Side
+        //         { id: 7, x: WIDTH / 2 + 140 * G_SCALE, y: HEIGHT * 0.72 }, // Bottom-Right Side
+        //         { id: 8, x: WIDTH / 2, y: HEIGHT * 0.82 }                  // Very Bottom Peak
+        //     ],
+        //     targetEdges: [
+        //         [0, 2], [1, 2], [0, 3], [1, 4], [2, 6], [2, 7],
+        //         [3, 5], [4, 5], [5, 6], [5, 7], [6, 8], [7, 8], [6, 7]
+        //     ]
+        // },
+        // {
+        //     name: 'LEVEL 22',
+        //     nodes: [
+        //         { id: 0, x: WIDTH / 2 - 150 * G_SCALE, y: HEIGHT * 0.25 }, // Top Left
+        //         { id: 1, x: WIDTH / 2, y: HEIGHT * 0.25 },                 // Top Center
+        //         { id: 2, x: WIDTH / 2 + 150 * G_SCALE, y: HEIGHT * 0.25 }, // Top Right
+        //         { id: 3, x: WIDTH / 2 - 100 * G_SCALE, y: HEIGHT * 0.48 }, // Mid Left
+        //         { id: 4, x: WIDTH / 2, y: HEIGHT * 0.42 },                 // Mid Center Peak
+        //         { id: 5, x: WIDTH / 2 + 100 * G_SCALE, y: HEIGHT * 0.48 }, // Mid Right
+        //         { id: 6, x: WIDTH / 2 - 100 * G_SCALE, y: HEIGHT * 0.78 }, // Bottom Left
+        //         { id: 7, x: WIDTH / 2, y: HEIGHT * 0.70 },                 // Bottom Center Peak (^)
+        //         { id: 8, x: WIDTH / 2 + 100 * G_SCALE, y: HEIGHT * 0.78 }  // Bottom Right
+        //     ],
+        //     targetEdges: [
+        //         [0, 3], [0, 4], [1, 3], [1, 5], [2, 4], [2, 5], // Top to Mid connections
+        //         [3, 4], [4, 5],                                 // Mid horizontal connections
+        //         [3, 6], [5, 8],                                 // Side vertical stems
+        //         [6, 7], [7, 8]                                  // Bottom triangle shape
+        //     ]
+        // },
     ];
 
 
@@ -518,12 +555,39 @@ export default function OneLineDraw() {
             btnH = 55;
             const aw = btnW * btnScale;
             undoX = aw / 2 + 40;
-            retryX = undoX + aw + 15; footY = HEIGHT - 90;
+            retryX = undoX + aw + 15;
+            footY = HEIGHT - 90;
         }
-        else if (isTabletPortrait) { btnW = 160; btnH = 55; const aw = btnW * btnScale; undoX = aw / 2 + 40; retryX = undoX + aw + 15; footY = HEIGHT - 135; }
-        else if (isMobile && !isLandscape) { btnW = 50; btnH = 50; undoX = 30; retryX = 75; footY = HEIGHT - 65; }
-        else if (isLandscape) { btnW = 60; btnH = 60; const aw = btnW * btnScale; undoX = aw / 2 + 10; retryX = undoX + aw + 5; footY = HEIGHT - 55; }
-        else { btnW = 180; btnH = 60; undoX = 120; retryX = 310; footY = HEIGHT - 40; }
+        else if (isTabletPortrait) {
+            btnW = 160;
+            btnH = 55;
+            const aw = btnW * btnScale;
+            undoX = aw / 2 + 40;
+            retryX = undoX + aw + 15;
+            footY = HEIGHT - 135;
+        }
+        else if (isMobile && !isLandscape) {
+            btnW = 50;
+            btnH = 50;
+            undoX = 30;
+            retryX = 75;
+            footY = HEIGHT - 65;
+        }
+        else if (isLandscape) {
+            btnW = 60;
+            btnH = 60;
+            const aw = btnW * btnScale;
+            undoX = aw / 2 + 10;
+            retryX = undoX + aw + 5;
+            footY = HEIGHT - 55;
+        }
+        else {
+            btnW = 180;
+            btnH = 60;
+            undoX = 120;
+            retryX = 310;
+            footY = HEIGHT - 40;
+        }
         const actualW = btnW * btnScale, actualH = btnH * btnScale;
         return { footY, undoX, retryX, btnW, btnH, actualW, actualH, btnScale };
     };
@@ -558,12 +622,17 @@ export default function OneLineDraw() {
             // Text "ONE LINE"
             ctx.font = `900 ${isMobile ? '42px' : '56px'} 'Orbitron', monospace`;
             ctx.textAlign = 'center';
-            ctx.strokeStyle = '#333'; ctx.lineWidth = 6; ctx.strokeText('ONE LINE', 0, 0);
-            ctx.fillStyle = '#ffcc00'; ctx.fillText('ONE LINE', 0, 0);
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 6;
+            ctx.strokeText('ONE LINE', 0, 0);
+            ctx.fillStyle = '#ffcc00';
+            ctx.fillText('ONE LINE', 0, 0);
 
             // Text "DRAW"
             ctx.translate(0, isMobile ? 50 : 65);
-            ctx.strokeStyle = '#333'; ctx.lineWidth = 8; ctx.strokeText('DRAW', 0, 0);
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 8;
+            ctx.strokeText('DRAW', 0, 0);
 
             // Static Glow for "DRAW"
             ctx.fillStyle = '#ff5555'; ctx.fillText('DRAW', 0, 0);
@@ -606,14 +675,25 @@ export default function OneLineDraw() {
             const nodePulse = 1 + Math.sin(time * 5) * 0.15;
             const drawLogoNode = (nx, ny, isVisible) => {
                 if (!isVisible) return;
-                ctx.save(); ctx.translate(nx, ny); ctx.scale(nodePulse, nodePulse);
-                ctx.fillStyle = '#00aaff'; ctx.beginPath(); ctx.arc(0, 0, 7 * G_SCALE, 0, Math.PI * 2); ctx.fill();
-                ctx.strokeStyle = '#fff'; ctx.lineWidth = 2 * G_SCALE; ctx.stroke();
-                ctx.shadowBlur = 15; ctx.shadowColor = '#00aaff'; ctx.stroke();
+                ctx.save();
+                ctx.translate(nx, ny);
+                ctx.scale(nodePulse, nodePulse);
+                ctx.fillStyle = '#00aaff';
+                ctx.beginPath();
+                ctx.arc(0, 0, 7 * G_SCALE, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.strokeStyle = '#fff';
+                ctx.lineWidth = 2 * G_SCALE;
+                ctx.stroke();
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = '#00aaff';
+                ctx.stroke();
                 ctx.restore();
             };
-            drawLogoNode(bX, bY, drawProgress > 0); drawLogoNode(bX + boxW, bY, drawProgress > 1);
-            drawLogoNode(bX + boxW, bY + boxH, drawProgress > 2); drawLogoNode(bX, bY + boxH, drawProgress > 3);
+            drawLogoNode(bX, bY, drawProgress > 0);
+            drawLogoNode(bX + boxW, bY, drawProgress > 1);
+            drawLogoNode(bX + boxW, bY + boxH, drawProgress > 2);
+            drawLogoNode(bX, bY + boxH, drawProgress > 3);
             drawLogoNode(0, 0, drawProgress > 4);
             ctx.restore();
             ctx.restore();
@@ -621,14 +701,18 @@ export default function OneLineDraw() {
             const btnW = isMobile ? 140 : 180, btnH = isMobile ? 50 : 65;
             const btnY = HEIGHT * 0.78;
             ctx.save();
-            ctx.shadowBlur = 20; ctx.shadowColor = 'rgba(80, 160, 255, 0.3)';
+            ctx.shadowBlur = 20;
+            ctx.shadowColor = 'rgba(80, 160, 255, 0.3)';
             ctx.beginPath();
             ctx.roundRect(WIDTH / 2 - btnW / 2, btnY - btnH / 2, btnW, btnH, btnH / 2);
             const bg = ctx.createLinearGradient(WIDTH / 2 - btnW / 2, btnY - btnH / 2, WIDTH / 2 + btnW / 2, btnY + btnH / 2);
-            bg.addColorStop(0, 'rgba(15, 15, 45, 0.9)'); bg.addColorStop(1, 'rgba(30, 30, 70, 0.9)');
+            bg.addColorStop(0, 'rgba(15, 15, 45, 0.9)');
+            bg.addColorStop(1, 'rgba(30, 30, 70, 0.9)');
             ctx.fillStyle = bg; ctx.fill();
-            ctx.strokeStyle = 'rgba(100, 180, 255, 0.6)'; ctx.lineWidth = 2; ctx.stroke();
-            ctx.fillStyle = '#fff'; ctx.font = `900 ${isMobile ? '20px' : '28px'} 'Orbitron', monospace`;
+            ctx.strokeStyle = 'rgba(100, 180, 255, 0.6)';
+            ctx.lineWidth = 2; ctx.stroke();
+            ctx.fillStyle = '#fff';
+            ctx.font = `900 ${isMobile ? '20px' : '28px'} 'Orbitron', monospace`;
             ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
             ctx.fillText('START', WIDTH / 2, btnY);
             ctx.restore();
@@ -686,11 +770,16 @@ export default function OneLineDraw() {
                         cg2.addColorStop(1, '#00cc88');
                         ctx.fillStyle = cg2; ctx.fill();
                         ctx.strokeStyle = 'rgba(0,255,170,0.5)';
-                        ctx.lineWidth = 1.5; ctx.stroke();
-                        ctx.beginPath(); ctx.strokeStyle = '#fff';
-                        ctx.lineWidth = 2; ctx.lineCap = 'round';
-                        ctx.moveTo(x + off - ck * 0.4, y + off); ctx.lineTo(x + off - ck * 0.1, y + off + ck * 0.45);
-                        ctx.lineTo(x + off + ck * 0.5, y + off - ck * 0.35); ctx.stroke();
+                        ctx.lineWidth = 1.5;
+                        ctx.stroke();
+                        ctx.beginPath();
+                        ctx.strokeStyle = '#fff';
+                        ctx.lineWidth = 2;
+                        ctx.lineCap = 'round';
+                        ctx.moveTo(x + off - ck * 0.4, y + off);
+                        ctx.lineTo(x + off - ck * 0.1, y + off + ck * 0.45);
+                        ctx.lineTo(x + off + ck * 0.5, y + off - ck * 0.35);
+                        ctx.stroke();
                     }
                 }
                 ctx.restore();
@@ -703,30 +792,54 @@ export default function OneLineDraw() {
         const hudScale = isSmallMobile ? 0.65 : (isMobile ? 0.78 : 1);
         const homeX = isMobile ? (isSmallMobile ? 25 : 35) : 50;
 
-        ctx.save(); ctx.translate(homeX, hudY); ctx.scale(hudScale, hudScale);
-        ctx.beginPath(); ctx.arc(0, 0, 26, 0, Math.PI * 2);
+        ctx.save();
+        ctx.translate(homeX, hudY);
+        ctx.scale(hudScale, hudScale);
+        ctx.beginPath();
+        ctx.arc(0, 0, 26, 0, Math.PI * 2);
         const hg = ctx.createRadialGradient(-5, -5, 0, 0, 0, 26);
-        hg.addColorStop(0, 'rgba(80,140,220,0.5)'); hg.addColorStop(1, 'rgba(40,60,120,0.3)');
-        ctx.fillStyle = hg; ctx.fill();
-        ctx.strokeStyle = 'rgba(100,180,255,0.7)'; ctx.lineWidth = 2; ctx.stroke();
-        ctx.fillStyle = '#fff'; ctx.beginPath();
-        ctx.moveTo(-10, 5); ctx.lineTo(-10, -5); ctx.lineTo(0, -15); ctx.lineTo(10, -5); ctx.lineTo(10, 5); ctx.closePath(); ctx.fill();
-        ctx.fillStyle = 'rgba(100,180,255,0.4)'; ctx.fillRect(-3, -2, 6, 7);
+        hg.addColorStop(0, 'rgba(80,140,220,0.5)');
+        hg.addColorStop(1, 'rgba(40,60,120,0.3)');
+        ctx.fillStyle = hg;
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(100,180,255,0.7)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.fillStyle = '#fff';
+        ctx.beginPath();
+        ctx.moveTo(-10, 5);
+        ctx.lineTo(-10, -5);
+        ctx.lineTo(0, -15);
+        ctx.lineTo(10, -5);
+        ctx.lineTo(10, 5);
+        ctx.closePath();
+        ctx.fill();
+        ctx.fillStyle = 'rgba(100,180,255,0.4)';
+        ctx.fillRect(-3, -2, 6, 7);
         ctx.restore();
 
         const progressX = isMobile ? (WIDTH / 2 - 105 * hudScale) : (isTablet ? WIDTH * 0.22 : WIDTH * 0.35);
         const livesX = isMobile ? (WIDTH / 2 + 130 * hudScale) : (isTablet ? WIDTH * 0.82 : WIDTH * 0.75);
 
         const drawPill = (x, y, w, h, text) => {
-            ctx.save(); ctx.translate(x, y); ctx.scale(hudScale, hudScale);
-            ctx.beginPath(); ctx.roundRect(-w / 2, -h / 2, w, h, h / 2);
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.scale(hudScale, hudScale);
+            ctx.beginPath();
+            ctx.roundRect(-w / 2, -h / 2, w, h, h / 2);
             const pg = ctx.createLinearGradient(-w / 2, -h / 2, w / 2, h / 2);
-            pg.addColorStop(0, 'rgba(40,80,160,0.6)'); pg.addColorStop(1, 'rgba(80,40,160,0.6)');
+            pg.addColorStop(0, 'rgba(40,80,160,0.6)');
+            pg.addColorStop(1, 'rgba(80,40,160,0.6)');
             ctx.fillStyle = pg; ctx.fill();
-            ctx.strokeStyle = 'rgba(100,160,255,0.5)'; ctx.lineWidth = 1.5; ctx.stroke();
+            ctx.strokeStyle = 'rgba(100,160,255,0.5)';
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
             if (text) {
-                ctx.fillStyle = '#fff'; ctx.font = `700 ${isMobile ? 20 : 20}px 'Orbitron', monospace`;
-                ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(text, 0, 2);
+                ctx.fillStyle = '#fff';
+                ctx.font = `700 ${isMobile ? 20 : 20}px 'Orbitron', monospace`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(text, 0, 2);
             }
             ctx.restore();
         };
@@ -737,14 +850,20 @@ export default function OneLineDraw() {
         ctx.textAlign = 'center';
         ctx.fillText(currentLevelData.name, WIDTH / 2, isMobile ? hudY + 70 * hudScale : hudY + 10);
         drawPill(livesX, hudY, 160, 50, '');
-        ctx.save(); ctx.translate(livesX, hudY); ctx.scale(hudScale, hudScale);
+        ctx.save();
+        ctx.translate(livesX, hudY);
+        ctx.scale(hudScale, hudScale);
         for (let i = 0; i < 3; i++) {
             const px = -40 + i * 40, isFilled = i < lives;
             ctx.beginPath(); ctx.arc(px, 0, 13, 0, Math.PI * 2);
             if (isFilled) {
                 const dg = ctx.createRadialGradient(px - 3, -3, 0, px, 0, 13);
-                dg.addColorStop(0, '#ffffa0'); dg.addColorStop(1, '#ffcc00'); ctx.fillStyle = dg;
-            } else { ctx.fillStyle = 'rgba(255,255,255,0.1)'; }
+                dg.addColorStop(0, '#ffffa0');
+                dg.addColorStop(1, '#ffcc00');
+                ctx.fillStyle = dg;
+            } else {
+                ctx.fillStyle = 'rgba(255,255,255,0.1)';
+            }
             ctx.fill();
             ctx.strokeStyle = isFilled ? 'rgba(255,220,0,0.8)' : 'rgba(255,255,255,0.2)'; ctx.lineWidth = 2; ctx.stroke();
         }
@@ -754,24 +873,35 @@ export default function OneLineDraw() {
             const edgeKey = `${Math.min(from, to)}-${Math.max(from, to)}`;
             if (!edgesDrawn.has(edgeKey)) {
                 ctx.strokeStyle = 'rgba(150,170,220,0.2)'; ctx.lineWidth = 14 * G_SCALE; ctx.lineCap = 'round';
-                ctx.beginPath(); ctx.moveTo(nodes[from].x, nodes[from].y); ctx.lineTo(nodes[to].x, nodes[to].y); ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(nodes[from].x, nodes[from].y);
+                ctx.lineTo(nodes[to].x, nodes[to].y);
+                ctx.stroke();
             }
         });
 
         if (drawnPath.length > 0) {
             if (isWinAnimating) {
-                ctx.save(); ctx.shadowBlur = 40 * G_SCALE; ctx.shadowColor = '#00ffaa';
-                ctx.strokeStyle = '#00ffaa'; ctx.lineWidth = 22 * G_SCALE; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-                ctx.beginPath(); ctx.moveTo(drawnPath[0].x, drawnPath[0].y);
+                ctx.save();
+                ctx.shadowBlur = 40 * G_SCALE;
+                ctx.shadowColor = '#00ffaa';
+                ctx.strokeStyle = '#00ffaa';
+                ctx.lineWidth = 22 * G_SCALE;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+                ctx.beginPath();
+                ctx.moveTo(drawnPath[0].x, drawnPath[0].y);
                 for (let i = 1; i < drawnPath.length; i++) ctx.lineTo(drawnPath[i].x, drawnPath[i].y);
-                ctx.stroke(); ctx.restore();
+                ctx.stroke();
+                ctx.restore();
             }
             ctx.save();
             ctx.shadowBlur = isWinAnimating ? 0 : 18 * G_SCALE;
             ctx.shadowColor = 'rgba(100,180,255,0.6)';
             ctx.strokeStyle = isWinAnimating ? '#00ffaa' : 'rgba(100,180,255,0.9)';
             ctx.lineWidth = 14 * G_SCALE; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-            ctx.beginPath(); ctx.moveTo(drawnPath[0].x, drawnPath[0].y);
+            ctx.beginPath();
+            ctx.moveTo(drawnPath[0].x, drawnPath[0].y);
             for (let i = 1; i < drawnPath.length; i++) ctx.lineTo(drawnPath[i].x, drawnPath[i].y);
             if (currentPos && drawing) ctx.lineTo(currentPos.x, currentPos.y);
             ctx.stroke(); ctx.restore();
@@ -787,22 +917,35 @@ export default function OneLineDraw() {
             const isVisited = drawnPath.some(p => p.nodeId === idx);
             const isCurrent = drawnPath.length > 0 && drawnPath[drawnPath.length - 1].nodeId === idx;
             if (isCurrent) {
-                ctx.beginPath(); ctx.arc(node.x, node.y, 38 * G_SCALE, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(100,180,255,0.15)'; ctx.fill();
+                ctx.beginPath();
+                ctx.arc(node.x, node.y, 38 * G_SCALE, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(100,180,255,0.15)';
+                ctx.fill();
             }
             ctx.save();
             ctx.shadowBlur = isVisited ? 20 * G_SCALE : 10 * G_SCALE;
             ctx.shadowColor = isVisited ? 'rgba(100,220,180,0.8)' : 'rgba(100,160,255,0.5)';
-            ctx.beginPath(); ctx.arc(node.x, node.y, 22 * G_SCALE, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(10,20,50,0.8)'; ctx.fill();
+            ctx.beginPath();
+            ctx.arc(node.x, node.y, 22 * G_SCALE, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(10,20,50,0.8)';
+            ctx.fill();
             ctx.strokeStyle = isVisited ? 'rgba(100,220,180,0.9)' : 'rgba(100,160,255,0.7)';
-            ctx.lineWidth = 2.5 * G_SCALE; ctx.stroke(); ctx.restore();
+            ctx.lineWidth = 2.5 * G_SCALE;
+            ctx.stroke(); ctx.restore();
             const innerR = 16 * G_SCALE;
             const ng = ctx.createRadialGradient(node.x - 4 * G_SCALE, node.y - 4 * G_SCALE, 1, node.x, node.y, innerR);
-            if (isVisited) { ng.addColorStop(0, '#80ffcc'); ng.addColorStop(1, '#00aa77'); }
-            else { ng.addColorStop(0, '#80b4ff'); ng.addColorStop(1, '#2255cc'); }
-            ctx.beginPath(); ctx.arc(node.x, node.y, innerR, 0, Math.PI * 2);
-            ctx.fillStyle = ng; ctx.fill();
+            if (isVisited) {
+                ng.addColorStop(0, '#80ffcc');
+                ng.addColorStop(1, '#00aa77');
+            }
+            else {
+                ng.addColorStop(0, '#80b4ff');
+                ng.addColorStop(1, '#2255cc');
+            }
+            ctx.beginPath();
+            ctx.arc(node.x, node.y, innerR, 0, Math.PI * 2);
+            ctx.fillStyle = ng;
+            ctx.fill();
         });
     };
 
