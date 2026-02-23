@@ -575,13 +575,13 @@ export default function OneLineDraw() {
                 ctx.fillText('— ONE LINE DRAW —', WIDTH / 2, isMobile ? 85 : 115);
             }
 
-            const cardW = isLandscape ? 45 : (isMobile ? Math.min(62, WIDTH / (cols + 1)) : 95);
+            const cardW = isLandscape ? 40 : (isMobile ? Math.min(52, WIDTH / (cols + 1.5)) : 80);
             const cardH = cardW;
-            const gapX = isLandscape ? 10 : (isMobile ? 14 : 22);
+            const gapX = isLandscape ? 12 : (isMobile ? 15 : 28);
             const gapY = gapX;
             const totalW = (cardW * cols) + (gapX * (cols - 1));
             const startX = WIDTH / 2 - totalW / 2 + cardW / 2;
-            const startY = isLandscape ? 85 : (isMobile ? 130 : 190);
+            const startY = isLandscape ? 80 : (isMobile ? 140 : 200);
 
             levels.forEach((lvl, idx) => {
                 const ix = idx % cols;
@@ -621,10 +621,11 @@ export default function OneLineDraw() {
                     ctx.textBaseline = 'middle';
                     ctx.fillText(idx + 1, x, y);
                     if (isCompleted) {
-                        const ck = isMobile ? 8 : 12;
+                        const ck = isMobile ? 7 : 10;
+                        const off = cardW / 2 - ck - 4;
                         ctx.beginPath();
-                        ctx.arc(x + cardW / 2 - 2, y + cardH / 2 - 2, ck, 0, Math.PI * 2);
-                        const cg2 = ctx.createRadialGradient(x + cardW / 2 - 2, y + cardH / 2 - 2, 0, x + cardW / 2 - 2, y + cardH / 2 - 2, ck);
+                        ctx.arc(x + off, y + off, ck, 0, Math.PI * 2);
+                        const cg2 = ctx.createRadialGradient(x + off, y + off, 0, x + off, y + off, ck);
                         cg2.addColorStop(0, '#00ffaa');
                         cg2.addColorStop(1, '#00cc88');
                         ctx.fillStyle = cg2;
@@ -636,9 +637,9 @@ export default function OneLineDraw() {
                         ctx.strokeStyle = '#fff';
                         ctx.lineWidth = 2;
                         ctx.lineCap = 'round';
-                        ctx.moveTo(x + cardW / 2 - 2 - ck * 0.4, y + cardH / 2 - 2);
-                        ctx.lineTo(x + cardW / 2 - 2 - ck * 0.1, y + cardH / 2 - 2 + ck * 0.45);
-                        ctx.lineTo(x + cardW / 2 - 2 + ck * 0.5, y + cardH / 2 - 2 - ck * 0.35);
+                        ctx.moveTo(x + off - ck * 0.4, y + off);
+                        ctx.lineTo(x + off - ck * 0.1, y + off + ck * 0.45);
+                        ctx.lineTo(x + off + ck * 0.5, y + off - ck * 0.35);
                         ctx.stroke();
                     }
                 }
