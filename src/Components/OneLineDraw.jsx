@@ -10,7 +10,7 @@ export default function OneLineDraw() {
         }
         return 0;
     });
-    const [gameState, setGameState] = useState('playing'); // 'playing' or 'levelSelect'
+    const [gameState, setGameState] = useState('levelSelect'); // 'playing' or 'levelSelect' 23-02//
     const [drawnPath, setDrawnPath] = useState([]);
     const [currentPos, setCurrentPos] = useState(null);
     const [drawing, setDrawing] = useState(false);
