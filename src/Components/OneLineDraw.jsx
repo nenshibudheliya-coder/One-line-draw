@@ -21,33 +21,28 @@ export default function OneLineDraw() {
     const particlesRef = useRef([]);
     const timeRef = useRef(0);
 
-    // ✅ FIX 2: window.storage થી progress load કરો
+    // ✅ FIX 2: localStorage થી progress load કરો // 24-02 //
     useEffect(() => {
-        const loadProgress = async () => {
-            try {
-                const maxResult = await window.storage.get('oneline_maxLevel');
-                const curResult = await window.storage.get('oneline_currentLevel');
-                if (maxResult) setMaxUnlockedLevel(parseInt(maxResult.value) || 0);
-                if (curResult) setCurrentLevel(parseInt(curResult.value) || 0);
-            } catch (e) {
-                // Fresh start - key doesn't exist yet
-            }
-            setStorageLoaded(true);
-        };
-        if (window.storage) loadProgress();
-        else setStorageLoaded(true);
+        try { // 24-02 //
+            const maxVal = localStorage.getItem('oneline_maxLevel');
+            const curVal = localStorage.getItem('oneline_currentLevel');
+            if (maxVal !== null) setMaxUnlockedLevel(parseInt(maxVal) || 0);
+            if (curVal !== null) setCurrentLevel(parseInt(curVal) || 0);
+        } catch (e) {
+            console.error("Error loading progress:", e);
+        }
+        setStorageLoaded(true);
     }, []);
 
-    // ✅ FIX 3: Progress save with window.storage
+    // ✅ FIX 3: Progress save with localStorage
     useEffect(() => {
         if (!storageLoaded) return;
-        const saveProgress = async () => {
-            try {
-                await window.storage.set('oneline_maxLevel', maxUnlockedLevel.toString());
-                await window.storage.set('oneline_currentLevel', currentLevel.toString());
-            } catch (e) { }
-        };
-        if (window.storage) saveProgress();
+        try { // 24-02 //
+            localStorage.setItem('oneline_maxLevel', maxUnlockedLevel.toString());
+            localStorage.setItem('oneline_currentLevel', currentLevel.toString());
+        } catch (e) {
+            console.error("Error saving progress:", e);
+        }
     }, [maxUnlockedLevel, currentLevel, storageLoaded]);
 
     // ✅ FIX 4: Responsive dimensions - window resize handle
@@ -594,14 +589,19 @@ export default function OneLineDraw() {
 
     useEffect(() => { drawGame(); }, [drawnPath, currentPos, drawing, edgesDrawn, currentLevel, lives, gameState, dimensions, isWinAnimating]);
 
-    // Animation loop for home screen 23-02 --onelinebanner//
+    //Animation loop for home screen 23-02 --onelinebanner//
     useEffect(() => {
         if (gameState !== 'home') return;
         let frameId;
-        const animate = () => { drawGame(); frameId = requestAnimationFrame(animate); };
+        const animate = () => {
+            drawGame();
+            frameId = requestAnimationFrame(animate);
+        };
         frameId = requestAnimationFrame(animate);
         return () => cancelAnimationFrame(frameId);
     }, [gameState, dimensions]);
+
+
 
     const drawGame = () => {
         const canvas = canvasRef.current;
@@ -636,122 +636,122 @@ export default function OneLineDraw() {
 
             // Static Glow for "DRAW"
             ctx.fillStyle = '#ff5555'; ctx.fillText('DRAW', 0, 0);
-            ctx.shadowBlur = 15; ctx.shadowColor = 'rgba(255,85,85,0.4)'; ctx.fillText('DRAW', 0, 0);
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = 'rgba(255,85,85,0.4)';
+            ctx.fillText('DRAW', 0, 0);
             ctx.restore();
 
-            // --- UNIQUE ANIMATED GAME LOGO ---
+            // --- UNIQUE ANIMATED BOX LOGO ---
             const boxY = isMobile ? 120 : 160;
-            const logoScale = isMobile ? 0.8 : 1.2;
+            const logoScale = isMobile ? 0.9 : 1.3;
             ctx.save();
             ctx.translate(0, boxY);
 
             // Kinetic movement
-            ctx.translate(0, Math.sin(time * 1.5) * 15);
-            ctx.rotate(time * 0.2); // Slow continuous rotation
+            ctx.translate(0, Math.sin(time * 1.5) * 12);
+            ctx.rotate(Math.sin(time * 0.5) * 0.05);
 
-            // Draw a complex Star shape in one line
-            const points = 5;
-            const outerR = 80 * logoScale;
-            const innerR = 35 * logoScale;
-            const logoPath = [];
-            for (let i = 0; i <= points * 2; i++) {
-                const angle = (i * Math.PI) / points - Math.PI / 2;
-                const r = i % 2 === 0 ? outerR : innerR;
-                logoPath.push({ x: Math.cos(angle) * r, y: Math.sin(angle) * r });
-            }
+            // Box dimensions
+            const bw = 140 * logoScale, bh = 100 * logoScale;
+            const bX = -bw / 2, bY = -bh / 2;
 
-            const drawProgress = (time * 1.2) % (logoPath.length + 3);
+            // Define point positions
+            const TL = { x: bX, y: bY };
+            const TR = { x: bX + bw, y: bY };
+            const BR = { x: bX + bw, y: bY + bh };
+            const BL = { x: bX, y: bY + bh };
+            const CTR = { x: 0, y: 0 };
 
-            // Outer silhouette glow
-            ctx.shadowBlur = 30;
-            ctx.shadowColor = 'rgba(0, 212, 255, 0.4)';
-            ctx.strokeStyle = 'rgba(0, 212, 255, 0.15)';
-            ctx.lineWidth = 12 * G_SCALE;
+            // Eulerian path for the box with X (repeating as needed for visual)
+            const logoPath = [TL, BL, BR, TR, TL, BR, CTR, BL, TR];
+            const drawProgress = (time * 1.5) % (logoPath.length + 2);
+
+            // Silhouette / Background Glow
+            ctx.shadowBlur = 20;
+            ctx.shadowColor = 'rgba(100, 180, 255, 0.3)';
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+            ctx.lineWidth = 8 * G_SCALE;
             ctx.beginPath();
             logoPath.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
             ctx.stroke();
 
             // Animated drawing path
-            ctx.shadowBlur = 15;
-            ctx.shadowColor = '#00d4ff';
-            ctx.strokeStyle = '#00d4ff';
-            ctx.lineWidth = 4 * G_SCALE;
-            ctx.lineCap = 'round';
-            ctx.lineJoin = 'round';
-            ctx.beginPath();
             logoPath.forEach((p, i) => {
+                if (i === 0) return;
                 const segmentProgress = Math.max(0, Math.min(1, drawProgress - i));
-                if (i === 0) ctx.moveTo(p.x, p.y);
-                else if (segmentProgress > 0) {
-                    const prev = logoPath[i - 1];
-                    ctx.lineTo(prev.x + (p.x - prev.x) * segmentProgress, prev.y + (p.y - prev.y) * segmentProgress);
-                }
-            });
-            ctx.stroke();
+                if (segmentProgress <= 0) return;
 
-            // Draw nodes at the peaks
-            logoPath.forEach((p, i) => {
-                if (i >= logoPath.length - 1) return;
-                const nodeVisibility = Math.max(0, Math.min(1, drawProgress - i));
+                const prev = logoPath[i - 1];
+                ctx.beginPath();
+                ctx.moveTo(prev.x, prev.y);
+
+                // Color logic: Highlight the top edge (TR-TL or TL-TR)
+                const isTopEdge = (prev === TR && p === TL) || (prev === TL && p === TR);
+                ctx.strokeStyle = isTopEdge ? '#ff9900' : '#ffffff';
+                ctx.lineWidth = (isTopEdge ? 5 : 4) * G_SCALE;
+                ctx.lineCap = 'round';
+                ctx.shadowBlur = isTopEdge ? 15 : 10;
+                ctx.shadowColor = isTopEdge ? '#ff9900' : '#ffffff';
+
+                ctx.lineTo(prev.x + (p.x - prev.x) * segmentProgress, prev.y + (p.y - prev.y) * segmentProgress);
+                ctx.stroke();
+            });
+
+            // Draw nodes at corner points
+            [TL, TR, BR, BL, CTR].forEach((p, idx) => {
+                const nodeVisibility = Math.max(0, Math.min(1, drawProgress - (idx < 4 ? idx + 1 : 6)));
                 if (nodeVisibility <= 0) return;
 
                 ctx.save();
                 ctx.translate(p.x, p.y);
                 ctx.scale(nodeVisibility, nodeVisibility);
-                ctx.fillStyle = i % 2 === 0 ? '#fff' : '#00d4ff';
+                ctx.fillStyle = '#00d4ff';
                 ctx.beginPath();
-                ctx.arc(0, 0, (i % 2 === 0 ? 6 : 4) * G_SCALE, 0, Math.PI * 2);
+                ctx.arc(0, 0, 6 * G_SCALE, 0, Math.PI * 2);
                 ctx.fill();
-                if (i % 2 === 0) {
-                    ctx.shadowBlur = 10;
-                    ctx.shadowColor = '#fff';
-                    ctx.stroke();
-                }
+                ctx.strokeStyle = '#fff';
+                ctx.lineWidth = 2 * G_SCALE;
+                ctx.stroke();
                 ctx.restore();
             });
+
             ctx.restore();
             ctx.restore();
 
             // --- PREMIUM START BUTTON ---
-            const btnW = isMobile ? 160 : 200, btnH = isMobile ? 55 : 70;
+            const btnW = isMobile ? 120 : 160, btnH = isMobile ? 45 : 60;
             const btnY = HEIGHT * 0.78;
             ctx.save();
             ctx.translate(WIDTH / 2, btnY);
 
-            // Hover-like pulsing glow
-            const pulse = Math.sin(time * 3) * 0.1 + 1;
-            ctx.shadowBlur = 25 * pulse;
-            ctx.shadowColor = 'rgba(0, 212, 255, 0.5)';
+            const pulse = Math.sin(time * 3) * 0.03 + 1;
+            ctx.shadowBlur = 15 * pulse;
+            ctx.shadowColor = 'rgba(100, 180, 255, 0.3)';
 
             ctx.beginPath();
             ctx.roundRect(-btnW / 2, -btnH / 2, btnW, btnH, btnH / 2);
-            const bg = ctx.createLinearGradient(-btnW / 2, -btnH / 2, btnW / 2, btnH / 2);
-            bg.addColorStop(0, '#0088ff');
-            bg.addColorStop(1, '#00d4ff');
+
+            // Background matching: subtle dark gradient
+            const bg = ctx.createLinearGradient(0, -btnH / 2, 0, btnH / 2);
+            bg.addColorStop(0, 'rgba(20, 30, 60, 0.4)');
+            bg.addColorStop(1, 'rgba(6, 6, 16, 0.6)');
             ctx.fillStyle = bg;
             ctx.fill();
 
-            // Glossy highlight
-            const gloss = ctx.createLinearGradient(0, -btnH / 2, 0, 0);
-            gloss.addColorStop(0, 'rgba(255,255,255,0.3)');
-            gloss.addColorStop(1, 'rgba(255,255,255,0)');
-            ctx.fillStyle = gloss;
-            ctx.fill();
-
-            ctx.strokeStyle = 'rgba(255, 220, 100, 0.8)'; // Golden border accent
-            ctx.lineWidth = 2.5;
+            // Border for visibility
+            ctx.strokeStyle = 'rgba(100, 180, 255, 0.4)';
+            ctx.lineWidth = 1.5;
             ctx.stroke();
 
             ctx.fillStyle = '#fff';
-            ctx.font = `900 ${isMobile ? '22px' : '28px'} 'Orbitron', monospace`;
+            ctx.font = `700 ${isMobile ? '16px' : '22px'} 'Orbitron', monospace`;
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
-            ctx.shadowBlur = 10;
-            ctx.shadowColor = 'rgba(0,0,0,0.5)';
             ctx.fillText('START', 0, 0);
             ctx.restore();
             return;
         }
+
 
         if (gameState === 'levelSelect') {
             const cols = isMobile ? 4 : 5;
@@ -788,12 +788,14 @@ export default function OneLineDraw() {
                 if (!isUnlocked) {
                     ctx.fillStyle = 'rgba(255,255,255,0.2)';
                     ctx.font = isMobile ? '22px Arial' : '30px Arial';
-                    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
                     ctx.fillText('🔒', x, y);
                 } else {
                     ctx.fillStyle = '#fff';
                     ctx.font = `900 ${isMobile ? '22px' : '28px'} 'Orbitron', monospace`;
-                    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
                     ctx.fillText(idx + 1, x, y);
                     if (isCompleted) {
                         const ck = isMobile ? 7 : 10, off = cardW / 2 - ck - 4;
@@ -802,7 +804,8 @@ export default function OneLineDraw() {
                         const cg2 = ctx.createRadialGradient(x + off, y + off, 0, x + off, y + off, ck);
                         cg2.addColorStop(0, '#00ffaa');
                         cg2.addColorStop(1, '#00cc88');
-                        ctx.fillStyle = cg2; ctx.fill();
+                        ctx.fillStyle = cg2;
+                        ctx.fill();
                         ctx.strokeStyle = 'rgba(0,255,170,0.5)';
                         ctx.lineWidth = 1.5;
                         ctx.stroke();
@@ -864,7 +867,8 @@ export default function OneLineDraw() {
             const pg = ctx.createLinearGradient(-w / 2, -h / 2, w / 2, h / 2);
             pg.addColorStop(0, 'rgba(40,80,160,0.6)');
             pg.addColorStop(1, 'rgba(80,40,160,0.6)');
-            ctx.fillStyle = pg; ctx.fill();
+            ctx.fillStyle = pg;
+            ctx.fill();
             ctx.strokeStyle = 'rgba(100,160,255,0.5)';
             ctx.lineWidth = 1.5;
             ctx.stroke();
@@ -899,14 +903,18 @@ export default function OneLineDraw() {
                 ctx.fillStyle = 'rgba(255,255,255,0.1)';
             }
             ctx.fill();
-            ctx.strokeStyle = isFilled ? 'rgba(255,220,0,0.8)' : 'rgba(255,255,255,0.2)'; ctx.lineWidth = 2; ctx.stroke();
+            ctx.strokeStyle = isFilled ? 'rgba(255,220,0,0.8)' : 'rgba(255,255,255,0.2)';
+            ctx.lineWidth = 2;
+            ctx.stroke();
         }
         ctx.restore();
 
         targetEdges.forEach(([from, to]) => {
             const edgeKey = `${Math.min(from, to)}-${Math.max(from, to)}`;
             if (!edgesDrawn.has(edgeKey)) {
-                ctx.strokeStyle = 'rgba(150,170,220,0.2)'; ctx.lineWidth = 14 * G_SCALE; ctx.lineCap = 'round';
+                ctx.strokeStyle = 'rgba(150,170,220,0.2)';
+                ctx.lineWidth = 14 * G_SCALE;
+                ctx.lineCap = 'round';
                 ctx.beginPath();
                 ctx.moveTo(nodes[from].x, nodes[from].y);
                 ctx.lineTo(nodes[to].x, nodes[to].y);
@@ -933,7 +941,8 @@ export default function OneLineDraw() {
             ctx.shadowBlur = isWinAnimating ? 0 : 18 * G_SCALE;
             ctx.shadowColor = 'rgba(100,180,255,0.6)';
             ctx.strokeStyle = isWinAnimating ? '#00ffaa' : 'rgba(100,180,255,0.9)';
-            ctx.lineWidth = 14 * G_SCALE; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+            ctx.lineWidth = 14 * G_SCALE; ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
             ctx.beginPath();
             ctx.moveTo(drawnPath[0].x, drawnPath[0].y);
             for (let i = 1; i < drawnPath.length; i++) ctx.lineTo(drawnPath[i].x, drawnPath[i].y);
@@ -1011,7 +1020,7 @@ export default function OneLineDraw() {
             return;
         }
         if (gameState === 'home') {
-            const btnW = isMobile ? 160 : 200, btnH = isMobile ? 55 : 70, btnY = HEIGHT * 0.78;
+            const btnW = isMobile ? 120 : 160, btnH = isMobile ? 45 : 60, btnY = HEIGHT * 0.78;
             if (pos.x >= WIDTH / 2 - btnW / 2 && pos.x <= WIDTH / 2 + btnW / 2 && pos.y >= btnY - btnH / 2 && pos.y <= btnY + btnH / 2) {
                 setGameState('levelSelect');
             }
@@ -1029,8 +1038,12 @@ export default function OneLineDraw() {
                 const x = startX + ix * (cardW + gapX), y = startY + iy * (cardH + gapX);
                 if (pos.x >= (x - cardW / 2) && pos.x <= (x + cardW / 2) && pos.y >= (y - cardH / 2) && pos.y <= (y + cardH / 2)) {
                     if (idx <= maxUnlockedLevel) {
-                        setCurrentLevel(idx); setGameState('playing');
-                        setDrawnPath([]); setEdgesDrawn(new Set()); setLives(3); setMessage({ text: '', type: '' });
+                        setCurrentLevel(idx);
+                        setGameState('playing');
+                        setDrawnPath([]);
+                        setEdgesDrawn(new Set());
+                        setLives(3);
+                        setMessage({ text: '', type: '' });
                     }
                 }
             });
@@ -1071,13 +1084,13 @@ export default function OneLineDraw() {
             const newPath = [...drawnPath, { x: nodes[nodeIdx].x, y: nodes[nodeIdx].y, nodeId: nodeIdx }];
             const newEdges = new Set(edgesDrawn); newEdges.add(edgeKey);
             setDrawnPath(newPath); setEdgesDrawn(newEdges);
-            if (newEdges.size === targetEdges.length) {
+            if (newEdges.size === targetEdges.length) { // 24-02 //
                 setDrawing(false); setIsWinAnimating(true);
                 setTimeout(() => {
                     setIsWinAnimating(false);
                     setMessage({ text: '🎉 PERFECT! NEXT LEVEL...', type: 'win' });
                     const nextLevel = currentLevel + 1;
-                    if (nextLevel < levels.length && nextLevel > maxUnlockedLevel) setMaxUnlockedLevel(nextLevel);
+                    if (nextLevel <= levels.length && nextLevel > maxUnlockedLevel) setMaxUnlockedLevel(nextLevel); // 24-02 //
                 }, 1000);
             }
         }
