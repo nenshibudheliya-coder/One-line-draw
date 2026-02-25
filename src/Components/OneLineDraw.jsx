@@ -1231,8 +1231,12 @@ export default function OneLineDraw() {
                 ctx.lineCap = 'round';
                 ctx.lineJoin = 'round';
                 ctx.beginPath();
-                ctx.moveTo(drawnPath[0].x, drawnPath[0].y);
-                for (let i = 1; i < drawnPath.length; i++) ctx.lineTo(drawnPath[i].x, drawnPath[i].y);
+                const p0 = nodes[drawnPath[0].nodeId]; // 25-02 --fixdesign//
+                ctx.moveTo(p0.x, p0.y);
+                for (let i = 1; i < drawnPath.length; i++) {
+                    const pi = nodes[drawnPath[i].nodeId];
+                    ctx.lineTo(pi.x, pi.y);
+                }
                 ctx.stroke();
                 ctx.restore();
             }
@@ -1243,14 +1247,25 @@ export default function OneLineDraw() {
             ctx.lineWidth = 14 * G_SCALE; ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
             ctx.beginPath();
-            ctx.moveTo(drawnPath[0].x, drawnPath[0].y);
-            for (let i = 1; i < drawnPath.length; i++) ctx.lineTo(drawnPath[i].x, drawnPath[i].y);
+            // 25-02 --fixdesign //
+            const startNode = nodes[drawnPath[0].nodeId];
+            ctx.moveTo(startNode.x, startNode.y);
+            for (let i = 1; i < drawnPath.length; i++) {
+                const nodePos = nodes[drawnPath[i].nodeId];
+                ctx.lineTo(nodePos.x, nodePos.y);
+            }
             if (currentPos && drawing) ctx.lineTo(currentPos.x, currentPos.y);
             ctx.stroke(); ctx.restore();
             ctx.strokeStyle = isWinAnimating ? 'rgba(200,255,230,0.9)' : 'rgba(220,240,255,0.6)';
             ctx.lineWidth = 4 * G_SCALE; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-            ctx.beginPath(); ctx.moveTo(drawnPath[0].x, drawnPath[0].y);
-            for (let i = 1; i < drawnPath.length; i++) ctx.lineTo(drawnPath[i].x, drawnPath[i].y);
+            // 25-02 --fixdesign //
+            ctx.beginPath();
+            const startNodeInner = nodes[drawnPath[0].nodeId];
+            ctx.moveTo(startNodeInner.x, startNodeInner.y);
+            for (let i = 1; i < drawnPath.length; i++) {
+                const nodePosInner = nodes[drawnPath[i].nodeId];
+                ctx.lineTo(nodePosInner.x, nodePosInner.y);
+            }
             if (currentPos && drawing) ctx.lineTo(currentPos.x, currentPos.y);
             ctx.stroke();
         }
