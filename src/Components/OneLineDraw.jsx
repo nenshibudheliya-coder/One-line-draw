@@ -15,6 +15,7 @@ export default function OneLineDraw() {
     const [message, setMessage] = useState({ text: '', type: '' });
     const [isWinAnimating, setIsWinAnimating] = useState(false);
     const [maxUnlockedLevel, setMaxUnlockedLevel] = useState(0);
+    const [levelSelectPage, setLevelSelectPage] = useState(0); // 24-02 //
     const [storageLoaded, setStorageLoaded] = useState(false);
 
     const bgAnimRef = useRef(null);
@@ -183,7 +184,6 @@ export default function OneLineDraw() {
                 [0, 1], [1, 2], [2, 0]
             ]
         },
-
         {
             name: 'LEVEL 2',
             nodes: [
@@ -371,9 +371,31 @@ export default function OneLineDraw() {
                 [0, 1], [0, 4], [1, 2], [2, 3], [4, 5], [5, 6], [1, 4], [2, 5], [3, 6], [1, 5]
             ]
         },
-
         {
             name: 'LEVEL 15',
+            nodes: [
+                { id: 0, x: WIDTH / 2, y: HEIGHT * 0.12 },                 // Peak
+                { id: 1, x: WIDTH / 2 - 130 * G_SCALE, y: HEIGHT * 0.22 }, // Top Left
+                { id: 2, x: WIDTH / 2 + 130 * G_SCALE, y: HEIGHT * 0.22 }, // Top Right
+                { id: 3, x: WIDTH / 2 - 130 * G_SCALE, y: HEIGHT * 0.44 }, // Mid Left
+                { id: 4, x: WIDTH / 2 + 130 * G_SCALE, y: HEIGHT * 0.44 }, // Mid Right
+                { id: 5, x: WIDTH / 2 - 130 * G_SCALE, y: HEIGHT * 0.66 }, // Low Left
+                { id: 6, x: WIDTH / 2 + 130 * G_SCALE, y: HEIGHT * 0.66 }, // Low Right
+                { id: 7, x: WIDTH / 2, y: HEIGHT * 0.82 }                  // Bottom Tip
+            ],
+            targetEdges: [
+                [0, 1], [0, 2],         // Top to shoulders
+                [1, 3], [2, 4],         // Verticals upper
+                [1, 4],                 // Diagonal UL to MR
+                [3, 4],                 // Middle horizontal
+                [3, 5], [4, 6],         // Verticals lower
+                [3, 6],                 // Diagonal ML to LR
+                [5, 6],                 // Lower horizontal
+                [5, 7], [6, 7]          // Slants to bottom
+            ]
+        },
+        {
+            name: 'LEVEL 16',
             nodes: [
                 // Top left & right
                 { id: 0, x: WIDTH / 2 - 150 * G_SCALE, y: HEIGHT * 0.25 },
@@ -403,7 +425,7 @@ export default function OneLineDraw() {
         },
 
         {
-            name: 'LEVEL 16',
+            name: 'LEVEL 17',
             nodes: [
                 // Top
                 { id: 0, x: WIDTH / 2 - 80 * G_SCALE, y: HEIGHT * 0.22 },
@@ -434,7 +456,7 @@ export default function OneLineDraw() {
         },
 
         {
-            name: 'LEVEL 17',
+            name: 'LEVEL 18',
             nodes: [
                 { id: 0, x: WIDTH / 2, y: HEIGHT * 0.25 },
                 { id: 1, x: WIDTH / 2 - 130 * G_SCALE, y: HEIGHT * 0.45 },
@@ -450,7 +472,7 @@ export default function OneLineDraw() {
         },
 
         {
-            name: 'LEVEL 18',
+            name: 'LEVEL 19',
             nodes: [
                 { id: 0, x: WIDTH / 2 - 100 * G_SCALE, y: HEIGHT * 0.25 },
                 { id: 1, x: WIDTH / 2 + 100 * G_SCALE, y: HEIGHT * 0.25 },
@@ -466,7 +488,30 @@ export default function OneLineDraw() {
         },
 
         {
-            name: 'LEVEL 19',
+            name: 'LEVEL 20',
+            nodes: [
+                { id: 0, x: WIDTH / 2 - 160 * G_SCALE, y: HEIGHT * 0.25 }, // Top Left
+                { id: 1, x: WIDTH / 2 + 160 * G_SCALE, y: HEIGHT * 0.25 }, // Top Right
+                { id: 2, x: WIDTH / 2, y: HEIGHT * 0.33 },                 // Top Middle
+                { id: 3, x: WIDTH / 2 - 60 * G_SCALE, y: HEIGHT * 0.45 },  // Mid Left
+                { id: 4, x: WIDTH / 2 + 60 * G_SCALE, y: HEIGHT * 0.45 },  // Mid Right
+                { id: 5, x: WIDTH / 2, y: HEIGHT * 0.55 },                 // Center
+                { id: 6, x: WIDTH / 2 - 160 * G_SCALE, y: HEIGHT * 0.65 }, // Bottom Left
+                { id: 7, x: WIDTH / 2 + 160 * G_SCALE, y: HEIGHT * 0.65 }, // Bottom Right
+                { id: 8, x: WIDTH / 2, y: HEIGHT * 0.80 }                  // Bottom Tip
+            ],
+            targetEdges: [
+                [0, 2], [1, 2],         // Top "V"
+                [0, 6], [1, 7],         // Outer edges
+                [2, 3], [2, 4],         // Upper inner diagonals
+                [3, 5], [4, 5],         // Middle inner diagonals
+                [5, 6], [5, 7],         // Lower inner diagonals
+                [3, 8], [4, 8]          // Bottom "V"
+            ]
+        },
+
+        {
+            name: 'LEVEL 21',
             nodes: [
                 { id: 0, x: WIDTH / 2 - 120 * G_SCALE, y: HEIGHT * 0.25 },
                 { id: 1, x: WIDTH / 2 + 120 * G_SCALE, y: HEIGHT * 0.25 },
@@ -482,7 +527,7 @@ export default function OneLineDraw() {
         },
 
         {
-            name: 'LEVEL 20',
+            name: 'LEVEL 22',
             nodes: [
                 { id: 0, x: WIDTH / 2 - 160 * G_SCALE, y: HEIGHT * 0.3 },
                 { id: 1, x: WIDTH / 2 + 160 * G_SCALE, y: HEIGHT * 0.3 },
@@ -495,44 +540,158 @@ export default function OneLineDraw() {
                 [0, 1], [0, 2], [1, 3], [2, 3], [2, 4], [3, 5], [4, 5], [0, 4], [1, 5], [2, 5], [3, 4]
             ]
         },
-        // {
-        //     name: 'LEVEL 21',
-        //     nodes: [
-        //         { id: 0, x: WIDTH / 2 - 100 * G_SCALE, y: HEIGHT * 0.25 }, // Top-Left Peak
-        //         { id: 1, x: WIDTH / 2 + 100 * G_SCALE, y: HEIGHT * 0.25 }, // Top-Right Peak
-        //         { id: 2, x: WIDTH / 2, y: HEIGHT * 0.38 },                 // Upper Center
-        //         { id: 3, x: WIDTH / 2 - 160 * G_SCALE, y: HEIGHT * 0.45 }, // Mid-Left Side
-        //         { id: 4, x: WIDTH / 2 + 160 * G_SCALE, y: HEIGHT * 0.45 }, // Mid-Right Side
-        //         { id: 5, x: WIDTH / 2, y: HEIGHT * 0.58 },                 // Middle Center
-        //         { id: 6, x: WIDTH / 2 - 140 * G_SCALE, y: HEIGHT * 0.72 }, // Bottom-Left Side
-        //         { id: 7, x: WIDTH / 2 + 140 * G_SCALE, y: HEIGHT * 0.72 }, // Bottom-Right Side
-        //         { id: 8, x: WIDTH / 2, y: HEIGHT * 0.82 }                  // Very Bottom Peak
-        //     ],
-        //     targetEdges: [
-        //         [0, 2], [1, 2], [0, 3], [1, 4], [2, 6], [2, 7],
-        //         [3, 5], [4, 5], [5, 6], [5, 7], [6, 8], [7, 8], [6, 7]
-        //     ]
-        // },
-        // {
-        //     name: 'LEVEL 22',
-        //     nodes: [
-        //         { id: 0, x: WIDTH / 2 - 150 * G_SCALE, y: HEIGHT * 0.25 }, // Top Left
-        //         { id: 1, x: WIDTH / 2, y: HEIGHT * 0.25 },                 // Top Center
-        //         { id: 2, x: WIDTH / 2 + 150 * G_SCALE, y: HEIGHT * 0.25 }, // Top Right
-        //         { id: 3, x: WIDTH / 2 - 100 * G_SCALE, y: HEIGHT * 0.48 }, // Mid Left
-        //         { id: 4, x: WIDTH / 2, y: HEIGHT * 0.42 },                 // Mid Center Peak
-        //         { id: 5, x: WIDTH / 2 + 100 * G_SCALE, y: HEIGHT * 0.48 }, // Mid Right
-        //         { id: 6, x: WIDTH / 2 - 100 * G_SCALE, y: HEIGHT * 0.78 }, // Bottom Left
-        //         { id: 7, x: WIDTH / 2, y: HEIGHT * 0.70 },                 // Bottom Center Peak (^)
-        //         { id: 8, x: WIDTH / 2 + 100 * G_SCALE, y: HEIGHT * 0.78 }  // Bottom Right
-        //     ],
-        //     targetEdges: [
-        //         [0, 3], [0, 4], [1, 3], [1, 5], [2, 4], [2, 5], // Top to Mid connections
-        //         [3, 4], [4, 5],                                 // Mid horizontal connections
-        //         [3, 6], [5, 8],                                 // Side vertical stems
-        //         [6, 7], [7, 8]                                  // Bottom triangle shape
-        //     ]
-        // },
+        {
+            name: 'LEVEL 23',
+            nodes: [
+                { id: 0, x: WIDTH / 2 - 100 * G_SCALE, y: HEIGHT * 0.25 }, // Top-Left Peak
+                { id: 1, x: WIDTH / 2 + 100 * G_SCALE, y: HEIGHT * 0.25 }, // Top-Right Peak
+                { id: 2, x: WIDTH / 2, y: HEIGHT * 0.38 },                 // Upper Center
+                { id: 3, x: WIDTH / 2 - 160 * G_SCALE, y: HEIGHT * 0.45 }, // Mid-Left Side
+                { id: 4, x: WIDTH / 2 + 160 * G_SCALE, y: HEIGHT * 0.45 }, // Mid-Right Side
+                { id: 5, x: WIDTH / 2, y: HEIGHT * 0.58 },                 // Middle Center
+                { id: 6, x: WIDTH / 2 - 140 * G_SCALE, y: HEIGHT * 0.72 }, // Bottom-Left Side
+                { id: 7, x: WIDTH / 2 + 140 * G_SCALE, y: HEIGHT * 0.72 }, // Bottom-Right Side
+                { id: 8, x: WIDTH / 2, y: HEIGHT * 0.82 }                  // Very Bottom Peak
+            ],
+            targetEdges: [
+                [0, 2], [1, 2], [0, 3], [1, 4], [2, 6], [2, 7],
+                [3, 5], [4, 5], [5, 6], [5, 7], [6, 8], [7, 8], [6, 7]
+            ]
+        },
+        {
+            name: 'LEVEL 24',
+            nodes: [
+                { id: 0, x: WIDTH / 2 - 150 * G_SCALE, y: HEIGHT * 0.25 }, // Top Left
+                { id: 1, x: WIDTH / 2, y: HEIGHT * 0.25 },                 // Top Center
+                { id: 2, x: WIDTH / 2 + 150 * G_SCALE, y: HEIGHT * 0.25 }, // Top Right
+                { id: 3, x: WIDTH / 2 - 100 * G_SCALE, y: HEIGHT * 0.48 }, // Mid Left
+                { id: 4, x: WIDTH / 2, y: HEIGHT * 0.42 },                 // Mid Center Peak
+                { id: 5, x: WIDTH / 2 + 100 * G_SCALE, y: HEIGHT * 0.48 }, // Mid Right
+                { id: 6, x: WIDTH / 2 - 100 * G_SCALE, y: HEIGHT * 0.78 }, // Bottom Left
+                { id: 7, x: WIDTH / 2, y: HEIGHT * 0.70 },                 // Bottom Center Peak (^)
+                { id: 8, x: WIDTH / 2 + 100 * G_SCALE, y: HEIGHT * 0.78 }  // Bottom Right
+            ],
+            targetEdges: [
+                [0, 3], [0, 4], [1, 3], [1, 5], [2, 4], [2, 5],
+                [3, 4], [4, 5],
+                [3, 6], [5, 8],
+                [6, 7], [7, 8]
+            ]
+        },
+        {
+            name: 'LEVEL 25',
+            nodes: [
+                { id: 0, x: WIDTH / 2 - 150 * G_SCALE, y: HEIGHT * 0.18 }, // Top Left
+                { id: 1, x: WIDTH / 2 + 150 * G_SCALE, y: HEIGHT * 0.18 }, // Top Right
+
+                { id: 2, x: WIDTH / 2 - 230 * G_SCALE, y: HEIGHT * 0.40 }, // Left Outer
+                { id: 3, x: WIDTH / 2 + 230 * G_SCALE, y: HEIGHT * 0.40 }, // Right Outer
+
+                { id: 4, x: WIDTH / 2, y: HEIGHT * 0.48 },                 // Center
+
+                { id: 5, x: WIDTH / 2, y: HEIGHT * 0.75 },                 // Lower Middle
+
+                { id: 6, x: WIDTH / 2, y: HEIGHT * 0.95 }                  // Bottom
+            ],
+
+            targetEdges: [
+                [0, 2], [1, 3], [0, 4], [1, 4], [4, 2], [4, 3], [2, 6],
+                [3, 6], [2, 5], [3, 5], [5, 6]
+            ]
+        },
+        {
+            name: 'LEVEL 26',
+            nodes: [
+                { id: 0, x: WIDTH / 2, y: HEIGHT * 0.22 },                 // Top Peak
+                { id: 1, x: WIDTH / 2 - 130 * G_SCALE, y: HEIGHT * 0.38 }, // Upper Left
+                { id: 2, x: WIDTH / 2 + 130 * G_SCALE, y: HEIGHT * 0.38 }, // Upper Right
+                { id: 3, x: WIDTH / 2, y: HEIGHT * 0.48 },                 // Mid Center
+                { id: 4, x: WIDTH / 2 - 140 * G_SCALE, y: HEIGHT * 0.62 }, // Lower Left
+                { id: 5, x: WIDTH / 2 + 140 * G_SCALE, y: HEIGHT * 0.62 }, // Lower Right
+                { id: 6, x: WIDTH / 2 - 100 * G_SCALE, y: HEIGHT * 0.82 }, // Bottom Left
+                { id: 7, x: WIDTH / 2 + 100 * G_SCALE, y: HEIGHT * 0.82 }  // Bottom Right
+            ],
+            targetEdges: [
+                [0, 1], [0, 2], [1, 2], [1, 3], [2, 3],
+                [3, 4], [3, 5], [4, 5], [4, 6], [5, 7],
+                [6, 7], [1, 4], [2, 5]
+            ]
+        },
+        {
+            name: 'LEVEL 27',
+            nodes: [
+                { id: 0, x: WIDTH / 2, y: HEIGHT * 0.28 },                 // Center Peak
+                { id: 1, x: WIDTH / 2 - 180 * G_SCALE, y: HEIGHT * 0.25 }, // Top Wing L
+                { id: 2, x: WIDTH / 2 + 180 * G_SCALE, y: HEIGHT * 0.25 }, // Top Wing R
+                { id: 3, x: WIDTH / 2 - 100 * G_SCALE, y: HEIGHT * 0.45 }, // Mid Wing L
+                { id: 4, x: WIDTH / 2 + 100 * G_SCALE, y: HEIGHT * 0.45 }, // Mid Wing R
+                { id: 5, x: WIDTH / 2 - 160 * G_SCALE, y: HEIGHT * 0.65 }, // Low Wing L
+                { id: 6, x: WIDTH / 2 + 160 * G_SCALE, y: HEIGHT * 0.65 }, // Low Wing R
+                { id: 7, x: WIDTH / 2 - 60 * G_SCALE, y: HEIGHT * 0.85 },  // Base L
+                { id: 8, x: WIDTH / 2 + 60 * G_SCALE, y: HEIGHT * 0.85 }   // Base R
+            ],
+            targetEdges: [
+                [0, 3], [0, 4], [1, 3], [2, 4], [3, 5], [4, 6],
+                [5, 7], [6, 8], [7, 8], [3, 4], [5, 6],
+                [1, 5], [2, 6], [0, 7], [0, 8]
+            ]
+        },
+        {
+            name: 'LEVEL 28',
+            nodes: [
+                { id: 0, x: WIDTH / 2, y: HEIGHT * 0.20 },
+                { id: 1, x: WIDTH / 2 - 100 * G_SCALE, y: HEIGHT * 0.35 },
+                { id: 2, x: WIDTH / 2 + 100 * G_SCALE, y: HEIGHT * 0.35 },
+                { id: 3, x: WIDTH / 2 - 180 * G_SCALE, y: HEIGHT * 0.55 },
+                { id: 4, x: WIDTH / 2, y: HEIGHT * 0.55 },
+                { id: 5, x: WIDTH / 2 + 180 * G_SCALE, y: HEIGHT * 0.55 },
+                { id: 6, x: WIDTH / 2 - 100 * G_SCALE, y: HEIGHT * 0.75 },
+                { id: 7, x: WIDTH / 2 + 100 * G_SCALE, y: HEIGHT * 0.75 },
+                { id: 8, x: WIDTH / 2, y: HEIGHT * 0.90 }
+            ],
+            targetEdges: [
+                [0, 1], [0, 2], [1, 3], [1, 4], [2, 4], [2, 5], [3, 6], [4, 6], [4, 7], [5, 7], [6, 8], [7, 8],
+                [3, 4], [5, 4], [1, 2], [6, 7]
+            ] // 0:2, 1:4, 2:4, 3:2+1+1=4, 4:8, 5:4, 6:4, 7:4, 8:2. Yes.
+        },
+        {
+            name: 'LEVEL 29',
+            nodes: [
+                { id: 0, x: WIDTH / 2, y: HEIGHT * 0.15 },                 // Top
+                { id: 1, x: WIDTH / 2 - 180 * G_SCALE, y: HEIGHT * 0.35 }, // Upper L
+                { id: 2, x: WIDTH / 2 + 180 * G_SCALE, y: HEIGHT * 0.35 }, // Upper R
+                { id: 3, x: WIDTH / 2 - 180 * G_SCALE, y: HEIGHT * 0.65 }, // Lower L
+                { id: 4, x: WIDTH / 2 + 180 * G_SCALE, y: HEIGHT * 0.65 }, // Lower R
+                { id: 5, x: WIDTH / 2, y: HEIGHT * 0.85 },                 // Bottom
+                { id: 6, x: WIDTH / 2 - 90 * G_SCALE, y: HEIGHT * 0.40 },  // Inner U L
+                { id: 7, x: WIDTH / 2 + 90 * G_SCALE, y: HEIGHT * 0.40 },  // Inner U R
+                { id: 8, x: WIDTH / 2 - 90 * G_SCALE, y: HEIGHT * 0.60 },  // Inner L L
+                { id: 9, x: WIDTH / 2 + 90 * G_SCALE, y: HEIGHT * 0.60 }   // Inner L R
+            ],
+            targetEdges: [
+                [0, 1], [0, 2], [1, 3], [2, 4], [3, 5], [4, 5], [0, 6], [0, 7], [1, 6], [1, 8], [2, 7], [2, 9], [3, 8], [3, 6], [4, 9], [4, 7], [5, 8], [5, 9], [6, 8], [7, 9]
+            ]
+        },
+        {
+            name: 'LEVEL 30',
+            nodes: [
+                { id: 0, x: WIDTH / 2 - 150 * G_SCALE, y: HEIGHT * 0.18 }, // TL
+                { id: 1, x: WIDTH / 2, y: HEIGHT * 0.30 },                 // CT
+                { id: 2, x: WIDTH / 2 + 150 * G_SCALE, y: HEIGHT * 0.18 }, // TR
+                { id: 3, x: WIDTH / 2 - 220 * G_SCALE, y: HEIGHT * 0.50 }, // L
+                { id: 4, x: WIDTH / 2, y: HEIGHT * 0.50 },                 // Center
+                { id: 5, x: WIDTH / 2 + 220 * G_SCALE, y: HEIGHT * 0.50 }, // R
+                { id: 6, x: WIDTH / 2 - 150 * G_SCALE, y: HEIGHT * 0.82 }, // BL
+                { id: 7, x: WIDTH / 2, y: HEIGHT * 0.70 },                 // CB
+                { id: 8, x: WIDTH / 2 + 150 * G_SCALE, y: HEIGHT * 0.82 }  // BR
+            ],
+            targetEdges: [
+                [0, 1], [1, 2], [2, 5], [5, 8], [8, 7], [7, 6], [6, 3], [3, 0], // Outer Star
+                [0, 2], [6, 8],                                                 // Stabilizers
+                [0, 4], [2, 4], [6, 4], [8, 4],                                 // Ordinal Hub
+                [1, 3], [3, 7], [7, 5], [5, 1]                                  // Diamond
+            ]
+        }
     ];
 
 
@@ -541,6 +700,7 @@ export default function OneLineDraw() {
     const nodes = currentLevelData.nodes;
     const targetEdges = currentLevelData.targetEdges;
 
+    {/* Undo ane Retry Button */ }
     const getFooterButtons = () => {
         const btnScale = isLandscape ? 0.7 : (isMobile ? 0.75 : 1);
         let footY = isLandscape ? HEIGHT - 22 : HEIGHT - (isMobile ? 50 : 60);
@@ -587,7 +747,7 @@ export default function OneLineDraw() {
         return { footY, undoX, retryX, btnW, btnH, actualW, actualH, btnScale };
     };
 
-    useEffect(() => { drawGame(); }, [drawnPath, currentPos, drawing, edgesDrawn, currentLevel, lives, gameState, dimensions, isWinAnimating]);
+    useEffect(() => { drawGame(); }, [drawnPath, currentPos, drawing, edgesDrawn, currentLevel, lives, gameState, dimensions, isWinAnimating, levelSelectPage]);
 
     //Animation loop for home screen 23-02 --onelinebanner//
     useEffect(() => {
@@ -602,7 +762,7 @@ export default function OneLineDraw() {
     }, [gameState, dimensions]);
 
 
-
+    {/* Draw Game */ }
     const drawGame = () => {
         const canvas = canvasRef.current;
         if (!canvas) return;
@@ -752,7 +912,7 @@ export default function OneLineDraw() {
             return;
         }
 
-
+        {/* Level Select */ }
         if (gameState === 'levelSelect') {
             const cols = isMobile ? 4 : 5;
             ctx.fillStyle = 'rgba(255,255,255,0.95)';
@@ -766,8 +926,12 @@ export default function OneLineDraw() {
             const startX = WIDTH / 2 - totalW / 2 + cardW / 2;
             const startY = isMobile ? 130 : 190;
 
-            levels.forEach((lvl, idx) => {
-                const ix = idx % cols, iy = Math.floor(idx / cols);
+            const levelsPerPage = 20;
+            const levelsToShow = levels.slice(levelSelectPage * levelsPerPage, (levelSelectPage + 1) * levelsPerPage);
+
+            levelsToShow.forEach((lvl, sIdx) => {
+                const idx = sIdx + levelSelectPage * levelsPerPage;
+                const ix = sIdx % cols, iy = Math.floor(sIdx / cols);
                 const x = startX + ix * (cardW + gapX), y = startY + iy * (cardH + gapX);
                 const isUnlocked = idx <= maxUnlockedLevel, isCompleted = idx < maxUnlockedLevel;
                 ctx.save();
@@ -821,8 +985,133 @@ export default function OneLineDraw() {
                 }
                 ctx.restore();
             });
+
+            // ---24-02  BLUE ARROW BUTTON ON THE RIGHT (TOGGLE PAGE) ---
+            const gridRight = startX + (cols - 1) * (cardW + gapX) + cardW / 2;
+            const arrowX = gridRight + (isMobile ? 31 : 55);
+            const arrowY = startY + (isMobile ? 2 : 1.5) * (cardH + gapX);
+
+            ctx.save();
+            ctx.translate(arrowX, arrowY);
+
+            const pulseTime = Date.now() / 1000;
+            const pulse = Math.sin(pulseTime * 2.5) * 0.12 + 1;
+
+            // Outer glow ring
+            const bgR = isMobile ? 24 : 34;
+            ctx.beginPath();
+            ctx.arc(0, 0, bgR * pulse + 4, 0, Math.PI * 2);
+            ctx.strokeStyle = `rgba(0, 200, 255, ${0.15 + Math.sin(pulseTime * 2.5) * 0.08})`;
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+
+            // Main circle background
+            ctx.beginPath();
+            ctx.arc(0, 0, bgR, 0, Math.PI * 2);
+            const cardBg = ctx.createRadialGradient(0, -bgR * 0.3, 0, 0, 0, bgR);
+            cardBg.addColorStop(0, 'rgba(30, 100, 200, 0.35)');
+            cardBg.addColorStop(0.6, 'rgba(10, 60, 140, 0.25)');
+            cardBg.addColorStop(1, 'rgba(5, 20, 60, 0.2)');
+            ctx.fillStyle = cardBg;
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(80, 180, 255, 0.5)';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Draw chevron arrow (always pointing right)
+            ctx.rotate(0);
+            const sz = isMobile ? 14 : 20;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+
+            // Arrow shadow/glow
+            ctx.shadowBlur = 12;
+            ctx.shadowColor = 'rgba(0, 210, 255, 0.9)';
+
+            // Double chevron for unique look
+            // First chevron (back)
+            ctx.beginPath();
+            ctx.moveTo(-sz * 0.15, -sz * 0.6);
+            ctx.lineTo(sz * 0.45, 0);
+            ctx.lineTo(-sz * 0.15, sz * 0.6);
+            ctx.strokeStyle = 'rgba(255,255,255,0.4)';
+            ctx.lineWidth = 2.5;
+            ctx.stroke();
+
+            // Second chevron (front)
+            ctx.beginPath();
+            ctx.moveTo(-sz * 0.5, -sz * 0.6);
+            ctx.lineTo(sz * 0.1, 0);
+            ctx.lineTo(-sz * 0.5, sz * 0.6);
+            const aGrad = ctx.createLinearGradient(-sz, -sz, sz, sz);
+            aGrad.addColorStop(0, '#00e5ff');
+            aGrad.addColorStop(1, '#4facfe');
+            ctx.strokeStyle = aGrad;
+            ctx.lineWidth = 3;
+            ctx.stroke();
+
+            ctx.restore();
+
+            // ---24-02  BLUE ARROW BUTTON ON THE LEFT (TOGGLE PAGE) ---
+            const gridLeft = startX - cardW / 2;
+            const leftArrowX = gridLeft - (isMobile ? 31 : 55);
+
+            ctx.save();
+            ctx.translate(leftArrowX, arrowY);
+
+            // Outer glow ring
+            ctx.beginPath();
+            ctx.arc(0, 0, bgR * pulse + 4, 0, Math.PI * 2);
+            ctx.strokeStyle = `rgba(0, 200, 255, ${0.15 + Math.sin(pulseTime * 2.5) * 0.08})`;
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+
+            // Main circle background
+            ctx.beginPath();
+            ctx.arc(0, 0, bgR, 0, Math.PI * 2);
+            const leftBg = ctx.createRadialGradient(0, -bgR * 0.3, 0, 0, 0, bgR);
+            leftBg.addColorStop(0, 'rgba(30, 100, 200, 0.35)');
+            leftBg.addColorStop(0.6, 'rgba(10, 60, 140, 0.25)');
+            leftBg.addColorStop(1, 'rgba(5, 20, 60, 0.2)');
+            ctx.fillStyle = leftBg;
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(80, 180, 255, 0.5)';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Draw left chevron (always pointing left)
+            ctx.rotate(Math.PI);
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.shadowBlur = 12;
+            ctx.shadowColor = 'rgba(0, 210, 255, 0.9)';
+
+            // Double chevron - back
+            ctx.beginPath();
+            ctx.moveTo(-sz * 0.15, -sz * 0.6);
+            ctx.lineTo(sz * 0.45, 0);
+            ctx.lineTo(-sz * 0.15, sz * 0.6);
+            ctx.strokeStyle = 'rgba(255,255,255,0.4)';
+            ctx.lineWidth = 2.5;
+            ctx.stroke();
+
+            // Double chevron - front
+            ctx.beginPath();
+            ctx.moveTo(-sz * 0.5, -sz * 0.6);
+            ctx.lineTo(sz * 0.1, 0);
+            ctx.lineTo(-sz * 0.5, sz * 0.6);
+            const lGrad = ctx.createLinearGradient(-sz, -sz, sz, sz);
+            lGrad.addColorStop(0, '#00e5ff');
+            lGrad.addColorStop(1, '#4facfe');
+            ctx.strokeStyle = lGrad;
+            ctx.lineWidth = 3;
+            ctx.stroke();
+
+            ctx.restore();
+
             return;
         }
+
 
         // HUD
         const hudY = isMobile ? 28 : 55;
@@ -1026,6 +1315,8 @@ export default function OneLineDraw() {
             }
             return;
         }
+
+        {/* Level Select */ }
         if (gameState === 'levelSelect') {
             const cols = isMobile ? 4 : 5;
             const cardW = isMobile ? Math.min(58, WIDTH / (cols + 1.2)) : 85;
@@ -1033,8 +1324,12 @@ export default function OneLineDraw() {
             const totalW = (cardW * cols) + (gapX * (cols - 1));
             const startX = WIDTH / 2 - totalW / 2 + cardW / 2;
             const startY = isMobile ? 130 : 190;
-            levels.forEach((lvl, idx) => {
-                const ix = idx % cols, iy = Math.floor(idx / cols);
+            const levelsPerPage = 20;
+            const levelsToShow = levels.slice(levelSelectPage * levelsPerPage, (levelSelectPage + 1) * levelsPerPage);
+
+            levelsToShow.forEach((lvl, sIdx) => {
+                const idx = sIdx + levelSelectPage * levelsPerPage;
+                const ix = sIdx % cols, iy = Math.floor(sIdx / cols);
                 const x = startX + ix * (cardW + gapX), y = startY + iy * (cardH + gapX);
                 if (pos.x >= (x - cardW / 2) && pos.x <= (x + cardW / 2) && pos.y >= (y - cardH / 2) && pos.y <= (y + cardH / 2)) {
                     if (idx <= maxUnlockedLevel) {
@@ -1047,6 +1342,23 @@ export default function OneLineDraw() {
                     }
                 }
             });
+
+            // --- 24-02 HIT DETECTION FOR BLUE ARROW BUTTON (TOGGLE PAGE) ---
+            const gridRight = startX + (cols - 1) * (cardW + gapX) + cardW / 2;
+            const arrowX = gridRight + (isMobile ? 31 : 55);
+            const arrowY = startY + (isMobile ? 2 : 1.5) * (cardH + gapX);
+
+            if (levelSelectPage === 0 && Math.sqrt(Math.pow(pos.x - arrowX, 2) + Math.pow(pos.y - arrowY, 2)) < 40) {
+                setLevelSelectPage(1);
+            }
+
+            // --- 24-02 HIT DETECTION FOR LEFT ARROW BUTTON ---
+            const gridLeft = startX - cardW / 2;
+            const leftArrowX = gridLeft - (isMobile ? 31 : 55);
+
+            if (levelSelectPage > 0 && Math.sqrt(Math.pow(pos.x - leftArrowX, 2) + Math.pow(pos.y - arrowY, 2)) < 40) {
+                setLevelSelectPage(levelSelectPage - 1);
+            }
             return;
         }
         if (lives <= 0) return;
@@ -1131,6 +1443,7 @@ export default function OneLineDraw() {
         );
     }
 
+
     return (
         <div style={{
             fontFamily: "'Orbitron', 'Outfit', monospace",
@@ -1150,6 +1463,8 @@ export default function OneLineDraw() {
             <style>{`
                 @keyframes bannerPop { 0% { transform: translate(-50%,-50%) scale(0.8); opacity:0; } 100% { transform: translate(-50%,-50%) scale(1); opacity:1; } }
                 @keyframes starPop { 0% { transform: scale(0) rotate(-45deg); opacity:0; } 70% { transform: scale(1.2) rotate(10deg); opacity:1; } 100% { transform: scale(1) rotate(0deg); opacity:1; } }
+                @keyframes floatWin { 0%, 100% { transform: translate(-50%, -50%); } 50% { transform: translate(-50%, -54%); } }
+                @keyframes shineBtn { 0% { left: -100%; } 100% { left: 100%; } }
                 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
                 body { margin: 0; overflow: hidden; }
             `}</style>
@@ -1162,41 +1477,82 @@ export default function OneLineDraw() {
                 style={{ background: 'transparent', display: 'block', cursor: drawing ? 'crosshair' : 'pointer', position: 'relative', zIndex: 2, touchAction: 'none', userSelect: 'none' }}
             />
 
+
+            {/* 24-02 -- Message Overlay win/lose*/}
             {message.text && (
                 <>
-                    <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,5,20,0.7)', backdropFilter: 'blur(12px)', zIndex: 9 }} />
-                    <div style={{
+                    <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,5,15,0.85)', backdropFilter: 'blur(10px)', zIndex: 9 }} />
+                    <div style={message.type === 'win' ? { // 24-02 //
+                        position: 'absolute', top: '50%', left: '50%',
+                        transform: 'translate(-50%,-50%)',
+                        width: isMobile ? '85%' : '420px',
+                        padding: isMobile ? '35px 20px' : '60px 30px',
+                        borderRadius: '35px',
+                        background: 'linear-gradient(165deg, rgba(20, 40, 80, 0.96), rgba(5, 12, 25, 0.98))',
+                        boxShadow: '0 25px 60px -15px rgba(0, 180, 255, 0.6), inset 0 0 30px rgba(255, 255, 255, 0.05)',
+                        border: '1px solid rgba(0, 200, 255, 0.4)',
+                        zIndex: 10, textAlign: 'center',
+                        animation: 'bannerPop 0.5s cubic-bezier(0.2, 0.8, 0.2, 1.15) forwards, floatWin 4s ease-in-out infinite 0.5s',
+                        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '22px',
+                        overflow: 'hidden'
+                    } : {
                         position: 'absolute', top: '50%', left: '50%',
                         transform: 'translate(-50%,-50%)',
                         width: isMobile ? '75%' : '85%', maxWidth: '420px',
                         padding: isMobile ? '20px 18px' : '44px 28px 36px',
                         borderRadius: isMobile ? '18px' : '24px',
-                        background: message.type === 'win' ? 'linear-gradient(135deg, rgba(0,30,60,0.95), rgba(0,20,50,0.98))' : 'linear-gradient(135deg, rgba(40,0,20,0.95), rgba(30,0,30,0.98))',
-                        boxShadow: message.type === 'win' ? '0 0 40px rgba(0,180,255,0.3)' : '0 0 40px rgba(255,50,50,0.2)',
-                        border: message.type === 'win' ? '1px solid rgba(0,180,255,0.3)' : '1px solid rgba(255,50,100,0.3)',
+                        background: 'linear-gradient(135deg, rgba(40,0,20,0.95), rgba(30,0,30,0.98))',
+                        boxShadow: '0 0 40px rgba(255,50,50,0.2)',
+                        border: '1px solid rgba(255,50,100,0.3)',
                         zIndex: 10, textAlign: 'center',
                         animation: 'bannerPop 0.4s cubic-bezier(0.175,0.885,0.32,1.275) forwards',
                         display: 'flex', flexDirection: 'column', alignItems: 'center', gap: isMobile ? '10px' : '16px'
                     }}>
-                        <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', width: '60%', height: '2px', background: message.type === 'win' ? 'linear-gradient(90deg, transparent, #00aaff, transparent)' : 'linear-gradient(90deg, transparent, #ff4488, transparent)', borderRadius: '2px' }} />
-                        <div style={{ width: isMobile ? '50px' : '80px', height: isMobile ? '50px' : '80px', borderRadius: '50%', background: message.type === 'win' ? 'radial-gradient(circle, rgba(0,200,255,0.2), rgba(0,100,200,0.1))' : 'radial-gradient(circle, rgba(255,50,100,0.2), rgba(200,0,50,0.1))', border: message.type === 'win' ? '2px solid rgba(0,200,255,0.4)' : '2px solid rgba(255,50,100,0.4)', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: isMobile ? '24px' : '36px' }}>
-                            {message.type === 'win' ? '⭐' : '💔'}
-                        </div>
-                        {message.type === 'win' && (
-                            <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-                                {[1, 2, 3].map(i => <div key={i} style={{ fontSize: i === 2 ? (isMobile ? '24px' : '36px') : (isMobile ? '18px' : '26px'), animation: `starPop 0.5s cubic-bezier(0.175,0.885,0.32,1.275) forwards ${i * 0.15 + 0.4}s`, opacity: 0 }}>⭐</div>)}
-                            </div>
+                        {message.type === 'win' ? ( // 24-02 //
+                            <>
+                                <div style={{
+                                    width: isMobile ? '70px' : '90px', height: isMobile ? '70px' : '90px',
+                                    borderRadius: '24px',
+                                    background: 'linear-gradient(135deg, #00f2fe 0%, #4facfe 100%)',
+                                    display: 'flex', justifyContent: 'center', alignItems: 'center',
+                                    fontSize: isMobile ? '34px' : '44px',
+                                    boxShadow: '0 10px 25px rgba(0,0,0,0.4)',
+                                    transform: 'rotate(-6deg) translateY(-4px)',
+                                    border: '3px solid rgba(255,255,255,0.3)'
+                                }}>🏆</div>
+                                <div>
+                                    <h2 style={{ fontSize: isMobile ? '24px' : '32px', margin: 0, fontWeight: '900', color: '#fff', textTransform: 'uppercase', letterSpacing: '4px', textShadow: '0 0 15px rgba(0, 200, 255, 0.7)' }}>VICTORY!</h2>
+                                    <p style={{ margin: '6px 0 0', fontSize: '14px', color: '#a0f0ff', fontWeight: '500', opacity: 0.9 }}>LEVEL COMPLETED SUCCESSFULLY</p>
+                                </div>
+                                <div style={{ display: 'flex', gap: '14px' }}>
+                                    {[1, 2, 3].map(i => (
+                                        <div key={i} style={{ animation: `starPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards ${i * 0.15 + 0.3}s`, opacity: 0, fontSize: i === 2 ? '38px' : '26px', filter: 'drop-shadow(0 0 12px rgba(255, 215, 0, 0.8))' }}>⭐</div>
+                                    ))}
+                                </div>
+                                <button onClick={handleNextLevel} style={{
+                                    position: 'relative', marginTop: '12px', padding: '16px 50px',
+                                    background: '#fff', color: '#050a14', borderRadius: '18px',
+                                    fontWeight: '900', fontSize: '16px', fontFamily: "'Orbitron', monospace",
+                                    letterSpacing: '2px', border: 'none', cursor: 'pointer', overflow: 'hidden',
+                                    boxShadow: '0 10px 30px rgba(0,200,255,0.3)', transition: 'transform 0.2s'
+                                }}>
+                                    <span style={{ position: 'relative', zIndex: 2 }}>NEXT LEVEL ➔</span>
+                                    <div style={{ position: 'absolute', top: 0, left: '-100%', width: '100%', height: '100%', background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)', animation: 'shineBtn 3s infinite', zIndex: 1 }} />
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', width: '60%', height: '2px', background: 'linear-gradient(90deg, transparent, #ff4488, transparent)', borderRadius: '2px' }} />
+                                <div style={{ width: isMobile ? '50px' : '80px', height: isMobile ? '50px' : '80px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(255,50,100,0.2), rgba(200,0,50,0.1))', border: '2px solid rgba(255,50,100,0.4)', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: isMobile ? '24px' : '36px' }}>💔</div>
+                                <div style={{ fontSize: isMobile ? '18px' : '28px', fontWeight: '900', color: '#ff88aa', fontFamily: "'Orbitron', monospace", letterSpacing: '2px', textShadow: '0 0 20px rgba(255,50,100,0.5)' }}>GAME OVER</div>
+                                <div onClick={handleRetry} style={{ padding: isMobile ? '10px 28px' : '14px 36px', background: 'linear-gradient(135deg, #ff4466, #cc0044)', color: '#fff', borderRadius: '50px', fontWeight: '700', fontSize: isMobile ? '13px' : '15px', fontFamily: "'Orbitron', monospace", letterSpacing: '1px', boxShadow: '0 4px 16px rgba(255,50,100,0.4)', cursor: 'pointer', border: 'none' }}>TRY AGAIN ↻</div>
+                            </>
                         )}
-                        <div style={{ fontSize: isMobile ? '18px' : '28px', fontWeight: '900', color: message.type === 'win' ? '#80e0ff' : '#ff88aa', fontFamily: "'Orbitron', monospace", letterSpacing: '2px', textShadow: message.type === 'win' ? '0 0 20px rgba(0,200,255,0.5)' : '0 0 20px rgba(255,50,100,0.5)' }}>
-                            {message.type === 'win' ? 'LEVEL CLEARED' : 'GAME OVER'}
-                        </div>
-                        <div onClick={message.type === 'win' ? handleNextLevel : handleRetry}
-                            style={{ padding: isMobile ? '10px 28px' : '14px 36px', background: message.type === 'win' ? 'linear-gradient(135deg, #0088ff, #0044cc)' : 'linear-gradient(135deg, #ff4466, #cc0044)', color: '#fff', borderRadius: '50px', fontWeight: '700', fontSize: isMobile ? '13px' : '15px', fontFamily: "'Orbitron', monospace", letterSpacing: '1px', boxShadow: message.type === 'win' ? '0 4px 16px rgba(0,136,255,0.4)' : '0 4px 16px rgba(255,50,100,0.4)', cursor: 'pointer', border: 'none' }}>
-                            {message.type === 'win' ? 'NEXT LEVEL ➔' : 'TRY AGAIN ↻'}
-                        </div>
                     </div>
                 </>
             )}
+
+
             {/* 19-02 -- Mobile Landscape Error Overlay */}
             {
                 isMobileDevice && isLandscape && (
