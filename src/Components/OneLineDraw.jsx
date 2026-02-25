@@ -802,7 +802,7 @@ export default function OneLineDraw() {
             ctx.restore();
 
             // --- UNIQUE ANIMATED BOX LOGO ---
-            const boxY = isMobile ? 120 : 160;
+            const boxY = isTabletPortrait ? 195 : (isMobile ? 120 : 160);
             const logoScale = isMobile ? 0.9 : 1.3;
             ctx.save();
             ctx.translate(0, boxY);
@@ -912,6 +912,7 @@ export default function OneLineDraw() {
             return;
         }
 
+
         {/* Level Select */ }
         if (gameState === 'levelSelect') {
             const cols = isMobile ? 4 : 5;
@@ -987,127 +988,136 @@ export default function OneLineDraw() {
             });
 
             // ---24-02  BLUE ARROW BUTTON ON THE RIGHT (TOGGLE PAGE) ---
-            const gridRight = startX + (cols - 1) * (cardW + gapX) + cardW / 2;
-            const arrowX = gridRight + (isMobile ? 31 : 55);
-            const arrowY = startY + (isMobile ? 2 : 1.5) * (cardH + gapX);
+            if (levels.length > levelsPerPage) { // 25-02 --icone //
+                const gridRight = startX + (cols - 1) * (cardW + gapX) + cardW / 2;
+                const arrowX = gridRight + (isMobile ? 31 : 55);
+                const arrowY = startY + (isMobile ? 2 : 1.5) * (cardH + gapX);
 
-            ctx.save();
-            ctx.translate(arrowX, arrowY);
+                ctx.save();
+                ctx.translate(arrowX, arrowY);
 
-            const pulseTime = Date.now() / 1000;
-            const pulse = Math.sin(pulseTime * 2.5) * 0.12 + 1;
+                const pulseTime = Date.now() / 1000;
+                const pulse = Math.sin(pulseTime * 2.5) * 0.12 + 1;
 
-            // Outer glow ring
-            const bgR = isMobile ? 24 : 34;
-            ctx.beginPath();
-            ctx.arc(0, 0, bgR * pulse + 4, 0, Math.PI * 2);
-            ctx.strokeStyle = `rgba(0, 200, 255, ${0.15 + Math.sin(pulseTime * 2.5) * 0.08})`;
-            ctx.lineWidth = 1.5;
-            ctx.stroke();
+                // Outer glow ring
+                const bgR = isMobile ? 24 : 34;
+                ctx.beginPath();
+                ctx.arc(0, 0, bgR * pulse + 4, 0, Math.PI * 2);
+                ctx.strokeStyle = `rgba(0, 200, 255, ${0.15 + Math.sin(pulseTime * 2.5) * 0.08})`;
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
 
-            // Main circle background
-            ctx.beginPath();
-            ctx.arc(0, 0, bgR, 0, Math.PI * 2);
-            const cardBg = ctx.createRadialGradient(0, -bgR * 0.3, 0, 0, 0, bgR);
-            cardBg.addColorStop(0, 'rgba(30, 100, 200, 0.35)');
-            cardBg.addColorStop(0.6, 'rgba(10, 60, 140, 0.25)');
-            cardBg.addColorStop(1, 'rgba(5, 20, 60, 0.2)');
-            ctx.fillStyle = cardBg;
-            ctx.fill();
-            ctx.strokeStyle = 'rgba(80, 180, 255, 0.5)';
-            ctx.lineWidth = 2;
-            ctx.stroke();
+                // Main circle background
+                ctx.beginPath();
+                ctx.arc(0, 0, bgR, 0, Math.PI * 2);
+                const cardBg = ctx.createRadialGradient(0, -bgR * 0.3, 0, 0, 0, bgR);
+                cardBg.addColorStop(0, 'rgba(30, 100, 200, 0.35)');
+                cardBg.addColorStop(0.6, 'rgba(10, 60, 140, 0.25)');
+                cardBg.addColorStop(1, 'rgba(5, 20, 60, 0.2)');
+                ctx.fillStyle = cardBg;
+                ctx.fill();
+                ctx.strokeStyle = 'rgba(80, 180, 255, 0.5)';
+                ctx.lineWidth = 2;
+                ctx.stroke();
 
-            // Draw chevron arrow (always pointing right)
-            ctx.rotate(0);
-            const sz = isMobile ? 14 : 20;
-            ctx.lineCap = 'round';
-            ctx.lineJoin = 'round';
+                // Draw chevron arrow (always pointing right)
+                ctx.rotate(0);
+                const sz = isMobile ? 14 : 20;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
 
-            // Arrow shadow/glow
-            ctx.shadowBlur = 12;
-            ctx.shadowColor = 'rgba(0, 210, 255, 0.9)';
+                // Arrow shadow/glow
+                ctx.shadowBlur = 12;
+                ctx.shadowColor = 'rgba(0, 210, 255, 0.9)';
 
-            // Double chevron for unique look
-            // First chevron (back)
-            ctx.beginPath();
-            ctx.moveTo(-sz * 0.15, -sz * 0.6);
-            ctx.lineTo(sz * 0.45, 0);
-            ctx.lineTo(-sz * 0.15, sz * 0.6);
-            ctx.strokeStyle = 'rgba(255,255,255,0.4)';
-            ctx.lineWidth = 2.5;
-            ctx.stroke();
+                // Double chevron for unique look
+                // First chevron (back)
+                ctx.beginPath();
+                ctx.moveTo(-sz * 0.15, -sz * 0.6);
+                ctx.lineTo(sz * 0.45, 0);
+                ctx.lineTo(-sz * 0.15, sz * 0.6);
+                ctx.strokeStyle = 'rgba(255,255,255,0.4)';
+                ctx.lineWidth = 2.5;
+                ctx.stroke();
 
-            // Second chevron (front)
-            ctx.beginPath();
-            ctx.moveTo(-sz * 0.5, -sz * 0.6);
-            ctx.lineTo(sz * 0.1, 0);
-            ctx.lineTo(-sz * 0.5, sz * 0.6);
-            const aGrad = ctx.createLinearGradient(-sz, -sz, sz, sz);
-            aGrad.addColorStop(0, '#00e5ff');
-            aGrad.addColorStop(1, '#4facfe');
-            ctx.strokeStyle = aGrad;
-            ctx.lineWidth = 3;
-            ctx.stroke();
+                // Second chevron (front)
+                ctx.beginPath();
+                ctx.moveTo(-sz * 0.5, -sz * 0.6);
+                ctx.lineTo(sz * 0.1, 0);
+                ctx.lineTo(-sz * 0.5, sz * 0.6);
+                const aGrad = ctx.createLinearGradient(-sz, -sz, sz, sz);
+                aGrad.addColorStop(0, '#00e5ff');
+                aGrad.addColorStop(1, '#4facfe');
+                ctx.strokeStyle = aGrad;
+                ctx.lineWidth = 3;
+                ctx.stroke();
 
-            ctx.restore();
+                ctx.restore();
+            }
 
             // ---24-02  BLUE ARROW BUTTON ON THE LEFT (TOGGLE PAGE) ---
-            const gridLeft = startX - cardW / 2;
-            const leftArrowX = gridLeft - (isMobile ? 31 : 55);
+            if (levelSelectPage > 0) {
+                const gridLeft = startX - cardW / 2;
+                const leftArrowX = gridLeft - (isMobile ? 31 : 55);
+                const arrowY = startY + (isMobile ? 2 : 1.5) * (cardH + gapX);
+                const bgR = isMobile ? 24 : 34;
+                const sz = isMobile ? 14 : 20;
+                const pulseTime = Date.now() / 1000;
+                const pulse = Math.sin(pulseTime * 2.5) * 0.12 + 1;
 
-            ctx.save();
-            ctx.translate(leftArrowX, arrowY);
+                ctx.save();
+                ctx.translate(leftArrowX, arrowY);
 
-            // Outer glow ring
-            ctx.beginPath();
-            ctx.arc(0, 0, bgR * pulse + 4, 0, Math.PI * 2);
-            ctx.strokeStyle = `rgba(0, 200, 255, ${0.15 + Math.sin(pulseTime * 2.5) * 0.08})`;
-            ctx.lineWidth = 1.5;
-            ctx.stroke();
+                // Outer glow ring
+                ctx.beginPath();
+                ctx.arc(0, 0, bgR * pulse + 4, 0, Math.PI * 2);
+                ctx.strokeStyle = `rgba(0, 200, 255, ${0.15 + Math.sin(pulseTime * 2.5) * 0.08})`;
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
 
-            // Main circle background
-            ctx.beginPath();
-            ctx.arc(0, 0, bgR, 0, Math.PI * 2);
-            const leftBg = ctx.createRadialGradient(0, -bgR * 0.3, 0, 0, 0, bgR);
-            leftBg.addColorStop(0, 'rgba(30, 100, 200, 0.35)');
-            leftBg.addColorStop(0.6, 'rgba(10, 60, 140, 0.25)');
-            leftBg.addColorStop(1, 'rgba(5, 20, 60, 0.2)');
-            ctx.fillStyle = leftBg;
-            ctx.fill();
-            ctx.strokeStyle = 'rgba(80, 180, 255, 0.5)';
-            ctx.lineWidth = 2;
-            ctx.stroke();
+                // Main circle background
+                ctx.beginPath();
+                ctx.arc(0, 0, bgR, 0, Math.PI * 2);
+                const leftBg = ctx.createRadialGradient(0, -bgR * 0.3, 0, 0, 0, bgR);
+                leftBg.addColorStop(0, 'rgba(30, 100, 200, 0.35)');
+                leftBg.addColorStop(0.6, 'rgba(10, 60, 140, 0.25)');
+                leftBg.addColorStop(1, 'rgba(5, 20, 60, 0.2)');
+                ctx.fillStyle = leftBg;
+                ctx.fill();
+                ctx.strokeStyle = 'rgba(80, 180, 255, 0.5)';
+                ctx.lineWidth = 2;
+                ctx.stroke();
 
-            // Draw left chevron (always pointing left)
-            ctx.rotate(Math.PI);
-            ctx.lineCap = 'round';
-            ctx.lineJoin = 'round';
-            ctx.shadowBlur = 12;
-            ctx.shadowColor = 'rgba(0, 210, 255, 0.9)';
+                // Draw left chevron (always pointing left)
+                ctx.rotate(Math.PI);
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+                ctx.shadowBlur = 12;
+                ctx.shadowColor = 'rgba(0, 210, 255, 0.9)';
 
-            // Double chevron - back
-            ctx.beginPath();
-            ctx.moveTo(-sz * 0.15, -sz * 0.6);
-            ctx.lineTo(sz * 0.45, 0);
-            ctx.lineTo(-sz * 0.15, sz * 0.6);
-            ctx.strokeStyle = 'rgba(255,255,255,0.4)';
-            ctx.lineWidth = 2.5;
-            ctx.stroke();
+                // Double chevron - back
+                ctx.beginPath();
+                ctx.moveTo(-sz * 0.15, -sz * 0.6);
+                ctx.lineTo(sz * 0.45, 0);
+                ctx.lineTo(-sz * 0.15, sz * 0.6);
+                ctx.strokeStyle = 'rgba(255,255,255,0.4)';
+                ctx.lineWidth = 2.5;
+                ctx.stroke();
 
-            // Double chevron - front
-            ctx.beginPath();
-            ctx.moveTo(-sz * 0.5, -sz * 0.6);
-            ctx.lineTo(sz * 0.1, 0);
-            ctx.lineTo(-sz * 0.5, sz * 0.6);
-            const lGrad = ctx.createLinearGradient(-sz, -sz, sz, sz);
-            lGrad.addColorStop(0, '#00e5ff');
-            lGrad.addColorStop(1, '#4facfe');
-            ctx.strokeStyle = lGrad;
-            ctx.lineWidth = 3;
-            ctx.stroke();
+                // Double chevron - front
+                ctx.beginPath();
+                ctx.moveTo(-sz * 0.5, -sz * 0.6);
+                ctx.lineTo(sz * 0.1, 0);
+                ctx.lineTo(-sz * 0.5, sz * 0.6);
+                const lGrad = ctx.createLinearGradient(-sz, -sz, sz, sz);
+                lGrad.addColorStop(0, '#00e5ff');
+                lGrad.addColorStop(1, '#4facfe');
+                ctx.strokeStyle = lGrad;
+                ctx.lineWidth = 3;
+                ctx.stroke();
 
-            ctx.restore();
+                ctx.restore();
+            }
 
             return;
         }
@@ -1348,9 +1358,15 @@ export default function OneLineDraw() {
             const arrowX = gridRight + (isMobile ? 31 : 55);
             const arrowY = startY + (isMobile ? 2 : 1.5) * (cardH + gapX);
 
-            if (levelSelectPage === 0 && Math.sqrt(Math.pow(pos.x - arrowX, 2) + Math.pow(pos.y - arrowY, 2)) < 40) {
-                setLevelSelectPage(1);
+            // 25-02 --icone //
+            if (levels.length > levelsPerPage && Math.sqrt(Math.pow(pos.x - arrowX, 2) + Math.pow(pos.y - arrowY, 2)) < 40) {
+                if ((levelSelectPage + 1) * levelsPerPage < levels.length) {
+                    setLevelSelectPage(levelSelectPage + 1);
+                } else {
+                    setLevelSelectPage(0); // Loop back to start
+                }
             }
+
 
             // --- 24-02 HIT DETECTION FOR LEFT ARROW BUTTON ---
             const gridLeft = startX - cardW / 2;
