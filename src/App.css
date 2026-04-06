@@ -40,3 +40,21 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Ad Layout Styles */
+.ad-layout-container {
+  display: flex;
+}
+
+.ad-side-container {
+  width: 120px;
+}
+
+.main-content-container {
+  flex: 1;
+  text-align: center;
+}
+
+.ad-unit-block {
+  display: block;
+}

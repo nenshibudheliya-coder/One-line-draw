@@ -4,35 +4,35 @@ import AdUnit from "./AdUnit";
 
 const SideAdsLayout = ({ children, showAds }) => {
     return (
-        <div style={{ display: "flex" }}>
+        <div className="ad-layout-container">
 
             {/* LEFT AD */}
             {showAds && (
-                <div style={{ width: "120px" }}>
-                    <AdUnit slot="1111111111" style={{ display: "block" }} />
+                <div className="ad-side-container">
+                    <AdUnit slot="1111111111" className="ad-unit-block" />
                 </div>
             )}
 
             {/* MAIN CONTENT */}
-            <div style={{ flex: 1, textAlign: "center" }}>
+            <div className="main-content-container">
 
                 {/* TOP AD */}
                 {showAds && (
-                    <AdUnit slot="2222222222" style={{ display: "block" }} />
+                    <AdUnit slot="2222222222" className="ad-unit-block" />
                 )}
 
                 {children}
 
                 {/* BOTTOM AD */}
                 {showAds && (
-                    <AdUnit slot="3333333333" style={{ display: "block" }} />
+                    <AdUnit slot="3333333333" className="ad-unit-block" />
                 )}
             </div>
 
             {/* RIGHT AD */}
             {showAds && (
-                <div style={{ width: "120px" }}>
-                    <AdUnit slot="4444444444" style={{ display: "block" }} />
+                <div className="ad-side-container">
+                    <AdUnit slot="4444444444" className="ad-unit-block" />
                 </div>
             )}
 
