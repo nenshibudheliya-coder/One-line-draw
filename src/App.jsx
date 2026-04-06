@@ -9,9 +9,9 @@ function App() {
   return (
     <>
       <SideAdsLayout showAds={true}> {/* Google Ads */}
-        <Suspense fallback={<div className="loading">Loading Game...</div>}>
-          <OneLineDraw />
-        </Suspense>
+        {/* <Suspense fallback={<div className="loading">Loading Game...</div>}> */}
+        <OneLineDraw />
+        {/* </Suspense> */}
       </SideAdsLayout>
     </>
   )
