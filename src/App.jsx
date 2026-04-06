@@ -1,16 +1,17 @@
-// import { useState } from 'react'
-import OneLineDraw from './Components/OneLineDraw.jsx'
+import React, { lazy, Suspense } from 'react'
 import SideAdsLayout from "./Components/SideAdsLayout"; // Google Ads //
 import './App.css'
+
+const OneLineDraw = lazy(() => import('./Components/OneLineDraw.jsx'));
 
 function App() {
 
   return (
     <>
       <SideAdsLayout showAds={true}> {/* Google Ads */}
-
-        <OneLineDraw />
-
+        <Suspense fallback={<div className="loading">Loading Game...</div>}>
+          <OneLineDraw />
+        </Suspense>
       </SideAdsLayout>
     </>
   )
