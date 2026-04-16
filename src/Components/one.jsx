@@ -691,7 +691,8 @@ export default function OneLineDraw() {
                 [0, 4], [2, 4], [6, 4], [8, 4],                                 // Ordinal Hub
                 [1, 3], [3, 7], [7, 5], [5, 1]                                  // Diamond
             ]
-        }
+        },
+
     ];
 
 

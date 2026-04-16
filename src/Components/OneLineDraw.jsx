@@ -119,13 +119,13 @@ export default function OneLineDraw() {
 
             ctx.strokeStyle = 'rgba(100,120,180,0.06)';
             ctx.lineWidth = 0.5;
-            for (let x = 0; x <= WIDTH; x += 50) {
+            for (let x = 0; x <= WIDTH; x += 100) {
                 ctx.beginPath();
                 ctx.moveTo(x, 0);
                 ctx.lineTo(x, HEIGHT);
                 ctx.stroke();
             }
-            for (let y = 0; y <= HEIGHT; y += 50) {
+            for (let y = 0; y <= HEIGHT; y += 100) {
                 ctx.beginPath();
                 ctx.moveTo(0, y);
                 ctx.lineTo(WIDTH, y);
@@ -139,21 +139,7 @@ export default function OneLineDraw() {
                 if (p.y < 0 || p.y > HEIGHT) p.vy *= -1;
             });
 
-            for (let i = 0; i < parts.length; i++) {
-                for (let j = i + 1; j < parts.length; j++) {
-                    const dx = parts[i].x - parts[j].x, dy = parts[i].y - parts[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    const maxDist = isMobile ? 80 : 120;
-                    if (dist < maxDist) {
-                        ctx.strokeStyle = `rgba(150,180,255,${(1 - dist / maxDist) * 0.25})`;
-                        ctx.lineWidth = 0.8;
-                        ctx.beginPath();
-                        ctx.moveTo(parts[i].x, parts[i].y);
-                        ctx.lineTo(parts[j].x, parts[j].y);
-                        ctx.stroke();
-                    }
-                }
-            }
+            // Particle connection logic removed to reduce main-thread work
 
             parts.forEach(p => {
                 const pulse = (Math.sin(p.pulse) * 0.5 + 0.5) * 0.4 + 0.1;
@@ -509,9 +495,26 @@ export default function OneLineDraw() {
                 [3, 8], [4, 8]          // Bottom "V"
             ]
         },
-
         {
             name: 'LEVEL 21',
+            nodes: [
+                { id: 0, x: WIDTH / 2 - 120 * G_SCALE, y: HEIGHT * 0.65 },
+                { id: 1, x: WIDTH / 2 + 30 * G_SCALE, y: HEIGHT * 0.65 },
+                { id: 2, x: WIDTH / 2 - 120 * G_SCALE, y: HEIGHT * 0.40 },
+                { id: 3, x: WIDTH / 2 + 30 * G_SCALE, y: HEIGHT * 0.40 },
+                { id: 4, x: WIDTH / 2 - 45 * G_SCALE, y: HEIGHT * 0.20 },
+                { id: 5, x: WIDTH / 2 + 160 * G_SCALE, y: HEIGHT * 0.52 }
+            ],
+            targetEdges: [
+                [0, 1], [0, 2],
+                [1, 3], [2, 3],
+                [1, 2],
+                [4, 2], [4, 3],
+                [4, 5], [3, 5], [1, 5]
+            ]
+        },
+        {
+            name: 'LEVEL 22',
             nodes: [
                 { id: 0, x: WIDTH / 2 - 120 * G_SCALE, y: HEIGHT * 0.25 },
                 { id: 1, x: WIDTH / 2 + 120 * G_SCALE, y: HEIGHT * 0.25 },
@@ -527,7 +530,7 @@ export default function OneLineDraw() {
         },
 
         {
-            name: 'LEVEL 22',
+            name: 'LEVEL 23',
             nodes: [
                 { id: 0, x: WIDTH / 2 - 160 * G_SCALE, y: HEIGHT * 0.3 },
                 { id: 1, x: WIDTH / 2 + 160 * G_SCALE, y: HEIGHT * 0.3 },
@@ -541,7 +544,7 @@ export default function OneLineDraw() {
             ]
         },
         {
-            name: 'LEVEL 23',
+            name: 'LEVEL 24',
             nodes: [
                 { id: 0, x: WIDTH / 2 - 100 * G_SCALE, y: HEIGHT * 0.25 }, // Top-Left Peak
                 { id: 1, x: WIDTH / 2 + 100 * G_SCALE, y: HEIGHT * 0.25 }, // Top-Right Peak
@@ -559,7 +562,7 @@ export default function OneLineDraw() {
             ]
         },
         {
-            name: 'LEVEL 24',
+            name: 'LEVEL 25',
             nodes: [
                 { id: 0, x: WIDTH / 2 - 150 * G_SCALE, y: HEIGHT * 0.25 }, // Top Left
                 { id: 1, x: WIDTH / 2, y: HEIGHT * 0.25 },                 // Top Center
@@ -579,7 +582,7 @@ export default function OneLineDraw() {
             ]
         },
         {
-            name: 'LEVEL 25',
+            name: 'LEVEL 26',
             nodes: [
                 { id: 0, x: WIDTH / 2 - 150 * G_SCALE, y: HEIGHT * 0.18 }, // Top Left
                 { id: 1, x: WIDTH / 2 + 150 * G_SCALE, y: HEIGHT * 0.18 }, // Top Right
@@ -600,7 +603,7 @@ export default function OneLineDraw() {
             ]
         },
         {
-            name: 'LEVEL 26',
+            name: 'LEVEL 27',
             nodes: [
                 { id: 0, x: WIDTH / 2, y: HEIGHT * 0.22 },                 // Top Peak
                 { id: 1, x: WIDTH / 2 - 130 * G_SCALE, y: HEIGHT * 0.38 }, // Upper Left
@@ -618,7 +621,7 @@ export default function OneLineDraw() {
             ]
         },
         {
-            name: 'LEVEL 27',
+            name: 'LEVEL 28',
             nodes: [
                 { id: 0, x: WIDTH / 2, y: HEIGHT * 0.28 },                 // Center Peak
                 { id: 1, x: WIDTH / 2 - 180 * G_SCALE, y: HEIGHT * 0.25 }, // Top Wing L
@@ -637,7 +640,7 @@ export default function OneLineDraw() {
             ]
         },
         {
-            name: 'LEVEL 28',
+            name: 'LEVEL 29',
             nodes: [
                 { id: 0, x: WIDTH / 2, y: HEIGHT * 0.20 },
                 { id: 1, x: WIDTH / 2 - 100 * G_SCALE, y: HEIGHT * 0.35 },
@@ -655,7 +658,7 @@ export default function OneLineDraw() {
             ] // 0:2, 1:4, 2:4, 3:2+1+1=4, 4:8, 5:4, 6:4, 7:4, 8:2. Yes.
         },
         {
-            name: 'LEVEL 29',
+            name: 'LEVEL 30',
             nodes: [
                 { id: 0, x: WIDTH / 2, y: HEIGHT * 0.15 },                 // Top
                 { id: 1, x: WIDTH / 2 - 180 * G_SCALE, y: HEIGHT * 0.35 }, // Upper L
@@ -673,7 +676,7 @@ export default function OneLineDraw() {
             ]
         },
         {
-            name: 'LEVEL 30',
+            name: 'LEVEL 31',
             nodes: [
                 { id: 0, x: WIDTH / 2 - 150 * G_SCALE, y: HEIGHT * 0.18 }, // TL
                 { id: 1, x: WIDTH / 2, y: HEIGHT * 0.30 },                 // CT
@@ -691,7 +694,26 @@ export default function OneLineDraw() {
                 [0, 4], [2, 4], [6, 4], [8, 4],                                 // Ordinal Hub
                 [1, 3], [3, 7], [7, 5], [5, 1]                                  // Diamond
             ]
-        }
+        },
+        {
+            name: 'LEVEL 32',
+            nodes: [
+                { id: 0, x: WIDTH / 2, y: HEIGHT * 0.15 },
+                { id: 1, x: WIDTH / 2 - 180 * G_SCALE, y: HEIGHT * 0.35 },
+                { id: 2, x: WIDTH / 2 + 180 * G_SCALE, y: HEIGHT * 0.35 },
+                { id: 3, x: WIDTH / 2 - 220 * G_SCALE, y: HEIGHT * 0.65 },
+                { id: 4, x: WIDTH / 2, y: HEIGHT * 0.50 },
+                { id: 5, x: WIDTH / 2 + 220 * G_SCALE, y: HEIGHT * 0.65 },
+                { id: 6, x: WIDTH / 2 - 120 * G_SCALE, y: HEIGHT * 0.85 },
+                { id: 7, x: WIDTH / 2 + 120 * G_SCALE, y: HEIGHT * 0.85 }
+            ],
+            targetEdges: [
+                [0, 1], [0, 2], [1, 3], [2, 5], [3, 6], [5, 7],
+                [6, 7], [1, 4], [2, 4], [3, 4], [5, 4],
+                [1, 2], [3, 5], [0, 4]
+            ]
+        },
+
     ];
 
 
