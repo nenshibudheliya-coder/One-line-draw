@@ -1793,7 +1793,7 @@ export default function OneLineDraw() {
             position: 'fixed', top: 0, left: 0,
             background: '#060610'
         }}>
-            <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@400;500;700;900&display=swap" rel="stylesheet" />
+
 
             <canvas ref={bgCanvasRef} width={WIDTH} height={HEIGHT}
                 style={{ position: 'absolute', top: 0, left: 0, zIndex: 0, pointerEvents: 'none' }} />
