@@ -172,6 +172,7 @@ export default function OneLineDraw() {
         },
         {
             name: 'LEVEL 2',
+            theme: 'zenith',
             nodes: [
                 { id: 0, x: WIDTH / 2 - 140 * G_SCALE, y: HEIGHT * 0.3 },
                 { id: 1, x: WIDTH / 2 + 140 * G_SCALE, y: HEIGHT * 0.3 },
@@ -182,9 +183,28 @@ export default function OneLineDraw() {
                 [0, 1], [1, 3], [3, 2], [2, 0]
             ]
         },
-
         {
             name: 'LEVEL 3',
+            theme: 'cyber',
+            nodes: [
+                { id: 0, x: WIDTH / 2, y: HEIGHT * 0.5 },
+                { id: 1, x: WIDTH / 2, y: HEIGHT * 0.3 },
+                { id: 2, x: WIDTH / 2 + 100 * G_SCALE, y: HEIGHT * 0.4 },
+                { id: 3, x: WIDTH / 2 + 100 * G_SCALE, y: HEIGHT * 0.6 },
+                { id: 4, x: WIDTH / 2, y: HEIGHT * 0.7 },
+                { id: 5, x: WIDTH / 2 - 100 * G_SCALE, y: HEIGHT * 0.6 },
+                { id: 6, x: WIDTH / 2 - 100 * G_SCALE, y: HEIGHT * 0.4 },
+                { id: 7, x: WIDTH / 2, y: HEIGHT * 0.2 },
+                { id: 8, x: WIDTH / 2 + 180 * G_SCALE, y: HEIGHT * 0.35 }
+            ],
+            targetEdges: [
+                [0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 1], [1, 7], [7, 8], [8, 2]
+            ]
+        },
+
+        {
+            name: 'LEVEL 4',
+            theme: 'plasma',
             nodes: [
                 { id: 0, x: WIDTH / 2, y: HEIGHT * 0.25 },
                 { id: 1, x: WIDTH / 2 - 140 * G_SCALE, y: HEIGHT * 0.55 },
@@ -197,7 +217,8 @@ export default function OneLineDraw() {
         },
 
         {
-            name: 'LEVEL 4',
+            name: 'LEVEL 5',
+            theme: 'neon',
             nodes: [
                 { id: 0, x: WIDTH / 2, y: HEIGHT * 0.2 },
                 { id: 1, x: WIDTH / 2 - 150 * G_SCALE, y: HEIGHT * 0.4 },
@@ -211,7 +232,8 @@ export default function OneLineDraw() {
         },
 
         {
-            name: 'LEVEL 5',
+            name: 'LEVEL 6',
+            theme: 'zenith',
             nodes: [
                 { id: 0, x: WIDTH / 2, y: HEIGHT * 0.2 },
                 { id: 1, x: WIDTH / 2 - 160 * G_SCALE, y: HEIGHT * 0.55 },
@@ -225,7 +247,7 @@ export default function OneLineDraw() {
         },
 
         {
-            name: 'LEVEL 6',
+            name: 'LEVEL 7',
             nodes: [
                 { id: 0, x: WIDTH / 2, y: HEIGHT * 0.15 },
                 { id: 1, x: WIDTH / 2 - 160 * G_SCALE, y: HEIGHT * 0.4 },
@@ -240,7 +262,8 @@ export default function OneLineDraw() {
         },
 
         {
-            name: 'LEVEL 7',
+            name: 'LEVEL 8',
+            theme: 'cyber',
             nodes: [
                 { id: 0, x: WIDTH / 2 - 150 * G_SCALE, y: HEIGHT * 0.3 },
                 { id: 1, x: WIDTH / 2 + 150 * G_SCALE, y: HEIGHT * 0.3 },
@@ -254,7 +277,8 @@ export default function OneLineDraw() {
         },
 
         {
-            name: 'LEVEL 8',
+            name: 'LEVEL 9',
+            theme: 'plasma',
             nodes: [
                 { id: 0, x: WIDTH / 2, y: HEIGHT * 0.2 },
                 { id: 1, x: WIDTH / 2 - 160 * G_SCALE, y: HEIGHT * 0.55 },
@@ -267,7 +291,8 @@ export default function OneLineDraw() {
         },
 
         {
-            name: 'LEVEL 9',
+            name: 'LEVEL 10',
+            theme: 'neon',
             nodes: [
                 { id: 0, x: WIDTH / 2 - 130 * G_SCALE, y: HEIGHT * 0.25 },
                 { id: 1, x: WIDTH / 2 + 130 * G_SCALE, y: HEIGHT * 0.25 },
@@ -281,7 +306,7 @@ export default function OneLineDraw() {
         },
 
         {
-            name: 'LEVEL 10',
+            name: 'LEVEL 11',
             nodes: [
                 { id: 0, x: WIDTH / 2 - 160 * G_SCALE, y: HEIGHT * 0.25 },
                 { id: 1, x: WIDTH / 2 + 160 * G_SCALE, y: HEIGHT * 0.25 },
@@ -295,7 +320,8 @@ export default function OneLineDraw() {
         },
 
         {
-            name: 'LEVEL 11',
+            name: 'LEVEL 12',
+            theme: 'cyber',
             nodes: [
                 { id: 0, x: WIDTH / 2, y: HEIGHT * 0.2 },
                 { id: 1, x: WIDTH / 2 - 150 * G_SCALE, y: HEIGHT * 0.4 },
@@ -310,7 +336,8 @@ export default function OneLineDraw() {
         },
 
         {
-            name: 'LEVEL 12',
+            name: 'LEVEL 13',
+            theme: 'plasma',
             nodes: [
                 { id: 0, x: WIDTH / 2 - 180 * G_SCALE, y: HEIGHT * 0.25 },
                 { id: 1, x: WIDTH / 2 - 180 * G_SCALE, y: HEIGHT * 0.55 },
@@ -327,7 +354,8 @@ export default function OneLineDraw() {
         },
 
         {
-            name: 'LEVEL 13',
+            name: 'LEVEL 14',
+            theme: 'zenith',
             nodes: [
                 { id: 0, x: WIDTH / 2 - 170 * G_SCALE, y: HEIGHT * 0.45 },
                 { id: 1, x: WIDTH / 2 - 170 * G_SCALE, y: HEIGHT * 0.75 },
@@ -343,7 +371,8 @@ export default function OneLineDraw() {
         },
 
         {
-            name: 'LEVEL 14',
+            name: 'LEVEL 15',
+            theme: 'neon',
             nodes: [
                 { id: 0, x: WIDTH / 2, y: HEIGHT * 0.2 },
                 { id: 1, x: WIDTH / 2 - 170 * G_SCALE, y: HEIGHT * 0.4 },
@@ -358,7 +387,7 @@ export default function OneLineDraw() {
             ]
         },
         {
-            name: 'LEVEL 15',
+            name: 'LEVEL 16',
             nodes: [
                 { id: 0, x: WIDTH / 2, y: HEIGHT * 0.12 },                 // Peak
                 { id: 1, x: WIDTH / 2 - 130 * G_SCALE, y: HEIGHT * 0.22 }, // Top Left
@@ -381,7 +410,8 @@ export default function OneLineDraw() {
             ]
         },
         {
-            name: 'LEVEL 16',
+            name: 'LEVEL 17',
+            theme: 'neon',
             nodes: [
                 // Top left & right
                 { id: 0, x: WIDTH / 2 - 150 * G_SCALE, y: HEIGHT * 0.25 },
@@ -411,7 +441,8 @@ export default function OneLineDraw() {
         },
 
         {
-            name: 'LEVEL 17',
+            name: 'LEVEL 18',
+            theme: 'plasma',
             nodes: [
                 // Top
                 { id: 0, x: WIDTH / 2 - 80 * G_SCALE, y: HEIGHT * 0.22 },
@@ -442,7 +473,8 @@ export default function OneLineDraw() {
         },
 
         {
-            name: 'LEVEL 18',
+            name: 'LEVEL 19',
+            theme: 'cyber',
             nodes: [
                 { id: 0, x: WIDTH / 2, y: HEIGHT * 0.25 },
                 { id: 1, x: WIDTH / 2 - 130 * G_SCALE, y: HEIGHT * 0.45 },
@@ -458,7 +490,8 @@ export default function OneLineDraw() {
         },
 
         {
-            name: 'LEVEL 19',
+            name: 'LEVEL 20',
+            theme: 'zenith',
             nodes: [
                 { id: 0, x: WIDTH / 2 - 100 * G_SCALE, y: HEIGHT * 0.25 },
                 { id: 1, x: WIDTH / 2 + 100 * G_SCALE, y: HEIGHT * 0.25 },
@@ -474,7 +507,8 @@ export default function OneLineDraw() {
         },
 
         {
-            name: 'LEVEL 20',
+            name: 'LEVEL 21',
+            theme: 'plasma',
             nodes: [
                 { id: 0, x: WIDTH / 2 - 160 * G_SCALE, y: HEIGHT * 0.25 }, // Top Left
                 { id: 1, x: WIDTH / 2 + 160 * G_SCALE, y: HEIGHT * 0.25 }, // Top Right
@@ -496,7 +530,8 @@ export default function OneLineDraw() {
             ]
         },
         {
-            name: 'LEVEL 21',
+            name: 'LEVEL 22',
+            theme: 'neon',
             nodes: [
                 { id: 0, x: WIDTH / 2 - 120 * G_SCALE, y: HEIGHT * 0.65 },
                 { id: 1, x: WIDTH / 2 + 30 * G_SCALE, y: HEIGHT * 0.65 },
@@ -514,7 +549,8 @@ export default function OneLineDraw() {
             ]
         },
         {
-            name: 'LEVEL 22',
+            name: 'LEVEL 23',
+            theme: 'zenith',
             nodes: [
                 { id: 0, x: WIDTH / 2 - 120 * G_SCALE, y: HEIGHT * 0.25 },
                 { id: 1, x: WIDTH / 2 + 120 * G_SCALE, y: HEIGHT * 0.25 },
@@ -530,7 +566,8 @@ export default function OneLineDraw() {
         },
 
         {
-            name: 'LEVEL 23',
+            name: 'LEVEL 24',
+            theme: 'cyber',
             nodes: [
                 { id: 0, x: WIDTH / 2 - 160 * G_SCALE, y: HEIGHT * 0.3 },
                 { id: 1, x: WIDTH / 2 + 160 * G_SCALE, y: HEIGHT * 0.3 },
@@ -544,7 +581,7 @@ export default function OneLineDraw() {
             ]
         },
         {
-            name: 'LEVEL 24',
+            name: 'LEVEL 25',
             nodes: [
                 { id: 0, x: WIDTH / 2 - 100 * G_SCALE, y: HEIGHT * 0.25 }, // Top-Left Peak
                 { id: 1, x: WIDTH / 2 + 100 * G_SCALE, y: HEIGHT * 0.25 }, // Top-Right Peak
@@ -562,7 +599,8 @@ export default function OneLineDraw() {
             ]
         },
         {
-            name: 'LEVEL 25',
+            name: 'LEVEL 26',
+            theme: 'cyber',
             nodes: [
                 { id: 0, x: WIDTH / 2 - 150 * G_SCALE, y: HEIGHT * 0.25 }, // Top Left
                 { id: 1, x: WIDTH / 2, y: HEIGHT * 0.25 },                 // Top Center
@@ -582,7 +620,8 @@ export default function OneLineDraw() {
             ]
         },
         {
-            name: 'LEVEL 26',
+            name: 'LEVEL 27',
+            theme: 'zenith',
             nodes: [
                 { id: 0, x: WIDTH / 2 - 150 * G_SCALE, y: HEIGHT * 0.18 }, // Top Left
                 { id: 1, x: WIDTH / 2 + 150 * G_SCALE, y: HEIGHT * 0.18 }, // Top Right
@@ -603,7 +642,8 @@ export default function OneLineDraw() {
             ]
         },
         {
-            name: 'LEVEL 27',
+            name: 'LEVEL 28',
+            theme: 'neon',
             nodes: [
                 { id: 0, x: WIDTH / 2, y: HEIGHT * 0.22 },                 // Top Peak
                 { id: 1, x: WIDTH / 2 - 130 * G_SCALE, y: HEIGHT * 0.38 }, // Upper Left
@@ -621,7 +661,8 @@ export default function OneLineDraw() {
             ]
         },
         {
-            name: 'LEVEL 28',
+            name: 'LEVEL 29',
+            theme: 'zenith',
             nodes: [
                 { id: 0, x: WIDTH / 2, y: HEIGHT * 0.28 },                 // Center Peak
                 { id: 1, x: WIDTH / 2 - 180 * G_SCALE, y: HEIGHT * 0.25 }, // Top Wing L
@@ -640,7 +681,8 @@ export default function OneLineDraw() {
             ]
         },
         {
-            name: 'LEVEL 29',
+            name: 'LEVEL 30',
+            theme: 'cyber',
             nodes: [
                 { id: 0, x: WIDTH / 2, y: HEIGHT * 0.20 },
                 { id: 1, x: WIDTH / 2 - 100 * G_SCALE, y: HEIGHT * 0.35 },
@@ -658,7 +700,8 @@ export default function OneLineDraw() {
             ] // 0:2, 1:4, 2:4, 3:2+1+1=4, 4:8, 5:4, 6:4, 7:4, 8:2. Yes.
         },
         {
-            name: 'LEVEL 30',
+            name: 'LEVEL 31',
+            theme: 'neon',
             nodes: [
                 { id: 0, x: WIDTH / 2, y: HEIGHT * 0.15 },                 // Top
                 { id: 1, x: WIDTH / 2 - 180 * G_SCALE, y: HEIGHT * 0.35 }, // Upper L
@@ -676,7 +719,30 @@ export default function OneLineDraw() {
             ]
         },
         {
-            name: 'LEVEL 31',
+            name: 'LEVEL 32',
+            theme: 'zenith',
+            nodes: [
+                { id: 0, x: WIDTH / 2 - 220 * G_SCALE, y: HEIGHT * 0.5 },
+                { id: 1, x: WIDTH / 2 + 220 * G_SCALE, y: HEIGHT * 0.5 },
+                { id: 2, x: WIDTH / 2, y: HEIGHT * 0.2 },
+                { id: 3, x: WIDTH / 2, y: HEIGHT * 0.8 },
+                { id: 4, x: WIDTH / 2, y: HEIGHT * 0.5 },
+                { id: 5, x: WIDTH / 2, y: HEIGHT * 0.35 },
+                { id: 6, x: WIDTH / 2, y: HEIGHT * 0.65 },
+                { id: 7, x: WIDTH / 2 - 100 * G_SCALE, y: HEIGHT * 0.5 },
+                { id: 8, x: WIDTH / 2 + 100 * G_SCALE, y: HEIGHT * 0.5 }
+            ],
+            targetEdges: [
+                [0, 2], [2, 1], [1, 3], [3, 0],
+                [7, 5], [5, 8], [8, 6], [6, 7],
+                [5, 4], [6, 4], [7, 4], [8, 4],
+                [0, 7], [1, 8],
+                [0, 5], [1, 6]
+            ]
+        },
+        {
+            name: 'LEVEL 33',
+            theme: 'cyber',
             nodes: [
                 { id: 0, x: WIDTH / 2 - 150 * G_SCALE, y: HEIGHT * 0.18 }, // TL
                 { id: 1, x: WIDTH / 2, y: HEIGHT * 0.30 },                 // CT
@@ -696,7 +762,28 @@ export default function OneLineDraw() {
             ]
         },
         {
-            name: 'LEVEL 32',
+            name: 'LEVEL 34',
+            nodes: [
+                { id: 0, x: WIDTH / 2 - 120 * G_SCALE, y: HEIGHT * 0.85 },
+                { id: 1, x: WIDTH / 2 + 120 * G_SCALE, y: HEIGHT * 0.85 },
+                { id: 2, x: WIDTH / 2 - 120 * G_SCALE, y: HEIGHT * 0.55 },
+                { id: 3, x: WIDTH / 2 + 120 * G_SCALE, y: HEIGHT * 0.55 },
+                { id: 4, x: WIDTH / 2 - 120 * G_SCALE, y: HEIGHT * 0.25 },
+                { id: 5, x: WIDTH / 2 + 120 * G_SCALE, y: HEIGHT * 0.25 },
+                { id: 6, x: WIDTH / 2, y: HEIGHT * 0.1 },
+                { id: 7, x: WIDTH / 2, y: HEIGHT * 0.4 },
+                { id: 8, x: WIDTH / 2 - 220 * G_SCALE, y: HEIGHT * 0.55 },
+                { id: 9, x: WIDTH / 2 + 220 * G_SCALE, y: HEIGHT * 0.55 }
+            ],
+            targetEdges: [
+                [0, 2], [2, 4], [4, 6], [6, 5], [5, 3], [3, 1],
+                [2, 8], [8, 4], [3, 9], [9, 5],
+                [2, 7], [3, 7], [4, 7], [5, 7], [6, 7], [0, 7], [1, 7]
+            ]
+        },
+        {
+            name: 'LEVEL 35',
+            theme: 'zenith',
             nodes: [
                 { id: 0, x: WIDTH / 2, y: HEIGHT * 0.15 },
                 { id: 1, x: WIDTH / 2 - 180 * G_SCALE, y: HEIGHT * 0.35 },
@@ -713,8 +800,207 @@ export default function OneLineDraw() {
                 [1, 2], [3, 5], [0, 4]
             ]
         },
+        {
+            name: 'LEVEL 36',
+            theme: 'cyber',
+            nodes: [
+                { id: 0, x: WIDTH / 2, y: HEIGHT * 0.15 },
+                { id: 1, x: WIDTH / 2 - 180 * G_SCALE, y: HEIGHT * 0.3 },
+                { id: 2, x: WIDTH / 2 + 180 * G_SCALE, y: HEIGHT * 0.3 },
+                { id: 3, x: WIDTH / 2 - 200 * G_SCALE, y: HEIGHT * 0.6 },
+                { id: 4, x: WIDTH / 2 + 200 * G_SCALE, y: HEIGHT * 0.6 },
+                { id: 5, x: WIDTH / 2, y: HEIGHT * 0.88 },
+                { id: 6, x: WIDTH / 2, y: HEIGHT * 0.45 }
+            ],
+            targetEdges: [
+                [0, 1], [0, 2], [1, 2], [1, 3], [2, 4], [3, 4], [3, 5], [4, 5], [1, 6], [4, 6], [2, 6], [3, 6]
+            ]
+        },
+        {
+            name: 'LEVEL 37',
+            theme: 'plasma',
+            nodes: [
+                { id: 0, x: WIDTH / 2, y: HEIGHT * 0.1 },
+                { id: 1, x: WIDTH / 2 - 60 * G_SCALE, y: HEIGHT * 0.3 },
+                { id: 2, x: WIDTH / 2 + 60 * G_SCALE, y: HEIGHT * 0.3 },
+                { id: 3, x: WIDTH / 2 - 60 * G_SCALE, y: HEIGHT * 0.7 },
+                { id: 4, x: WIDTH / 2 + 60 * G_SCALE, y: HEIGHT * 0.7 },
+                { id: 5, x: WIDTH / 2 - 150 * G_SCALE, y: HEIGHT * 0.85 },
+                { id: 6, x: WIDTH / 2 + 150 * G_SCALE, y: HEIGHT * 0.85 },
+                { id: 7, x: WIDTH / 2, y: HEIGHT * 0.8 }
+            ],
+            targetEdges: [
+                [0, 1], [0, 2], [1, 2], [1, 3], [2, 4], [3, 4], [1, 4], [2, 3], [3, 5], [5, 7], [7, 6], [6, 4], [3, 7], [4, 7]
+            ]
+        },
+        {
+            name: 'LEVEL 38',
+            theme: 'neon',
+            nodes: [
+                { id: 0, x: WIDTH / 2, y: HEIGHT * 0.15 },
+                { id: 1, x: WIDTH / 2 + 150 * G_SCALE, y: HEIGHT * 0.3 },
+                { id: 2, x: WIDTH / 2 + 150 * G_SCALE, y: HEIGHT * 0.6 },
+                { id: 3, x: WIDTH / 2, y: HEIGHT * 0.75 },
+                { id: 4, x: WIDTH / 2 - 150 * G_SCALE, y: HEIGHT * 0.6 },
+                { id: 5, x: WIDTH / 2 - 150 * G_SCALE, y: HEIGHT * 0.3 },
+                { id: 6, x: WIDTH / 2, y: HEIGHT * 0.45 }
+            ],
+            targetEdges: [
+                [0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 0], [0, 2], [2, 4], [4, 0], [1, 3], [3, 5], [5, 1], [0, 6], [6, 3]
+            ]
+        },
+        {
+            name: 'LEVEL 39',
+            theme: 'plasma',
+            nodes: [
+                { id: 0, x: WIDTH / 2 - 240 * G_SCALE, y: HEIGHT * 0.5 },
+                { id: 1, x: WIDTH / 2 - 100 * G_SCALE, y: HEIGHT * 0.3 },
+                { id: 2, x: WIDTH / 2 - 100 * G_SCALE, y: HEIGHT * 0.7 },
+                { id: 3, x: WIDTH / 2, y: HEIGHT * 0.5 },
+                { id: 4, x: WIDTH / 2 + 100 * G_SCALE, y: HEIGHT * 0.3 },
+                { id: 5, x: WIDTH / 2 + 100 * G_SCALE, y: HEIGHT * 0.7 },
+                { id: 6, x: WIDTH / 2 + 240 * G_SCALE, y: HEIGHT * 0.5 }
+            ],
+            targetEdges: [
+                [0, 1], [0, 2], [1, 2], [1, 3], [2, 3], [6, 4], [6, 5], [4, 5], [4, 3], [5, 3], [1, 4], [2, 5], [0, 3], [3, 6]
+            ]
+        },
+        {
+            name: 'LEVEL 40',
+            theme: 'zenith',
+            nodes: [
+                { id: 0, x: WIDTH / 2 - 120 * G_SCALE, y: HEIGHT * 0.15 },
+                { id: 1, x: WIDTH / 2 - 120 * G_SCALE, y: HEIGHT * 0.4 },
+                { id: 2, x: WIDTH / 2 - 120 * G_SCALE, y: HEIGHT * 0.65 },
+                { id: 3, x: WIDTH / 2 - 120 * G_SCALE, y: HEIGHT * 0.9 },
+                { id: 4, x: WIDTH / 2 + 120 * G_SCALE, y: HEIGHT * 0.15 },
+                { id: 5, x: WIDTH / 2 + 120 * G_SCALE, y: HEIGHT * 0.4 },
+                { id: 6, x: WIDTH / 2 + 120 * G_SCALE, y: HEIGHT * 0.65 },
+                { id: 7, x: WIDTH / 2 + 120 * G_SCALE, y: HEIGHT * 0.9 }
+            ],
+            targetEdges: [
+                [0, 1], [1, 2], [2, 3], [4, 5], [5, 6], [6, 7],
+                [0, 5], [1, 4], [1, 6], [2, 5], [2, 7], [3, 6],
+                [0, 4]
+            ]
+        },
+        {
+            name: 'LEVEL 41',
+            theme: 'neon',
+            nodes: [
+                { id: 0, x: WIDTH / 2, y: HEIGHT * 0.15 },
+                { id: 1, x: WIDTH / 2, y: HEIGHT * 0.3 },
+                { id: 2, x: WIDTH / 2, y: HEIGHT * 0.5 },
+                { id: 3, x: WIDTH / 2, y: HEIGHT * 0.7 },
+                { id: 4, x: WIDTH / 2, y: HEIGHT * 0.9 },
+                { id: 5, x: WIDTH / 2 - 140 * G_SCALE, y: HEIGHT * 0.3 },
+                { id: 6, x: WIDTH / 2 - 200 * G_SCALE, y: HEIGHT * 0.5 },
+                { id: 7, x: WIDTH / 2 - 140 * G_SCALE, y: HEIGHT * 0.7 },
+                { id: 8, x: WIDTH / 2 + 140 * G_SCALE, y: HEIGHT * 0.3 },
+                { id: 9, x: WIDTH / 2 + 200 * G_SCALE, y: HEIGHT * 0.5 },
+                { id: 10, x: WIDTH / 2 + 140 * G_SCALE, y: HEIGHT * 0.7 }
+            ],
+            targetEdges: [
+                [0, 5], [5, 6], [6, 7], [7, 4], [4, 10], [10, 9], [9, 8], [8, 0],
+                [0, 1], [1, 2], [2, 3], [3, 4],
+                [2, 5], [2, 7], [2, 10], [2, 8],
+                [1, 5], [1, 8], [3, 7], [3, 10],
+                [1, 6], [1, 9], [3, 6], [3, 9]
+            ]
+        },
+        {
+            name: 'LEVEL 42',
+            theme: 'zenith',
+            nodes: [
+                { id: 0, x: WIDTH / 2 - 80 * G_SCALE, y: HEIGHT * 0.15 },
+                { id: 1, x: WIDTH / 2 + 80 * G_SCALE, y: HEIGHT * 0.15 },
+                { id: 2, x: WIDTH / 2 - 80 * G_SCALE, y: HEIGHT * 0.3 },
+                { id: 3, x: WIDTH / 2 + 80 * G_SCALE, y: HEIGHT * 0.3 },
+                { id: 4, x: WIDTH / 2 - 80 * G_SCALE, y: HEIGHT * 0.45 },
+                { id: 5, x: WIDTH / 2 + 80 * G_SCALE, y: HEIGHT * 0.45 },
+                { id: 6, x: WIDTH / 2 - 80 * G_SCALE, y: HEIGHT * 0.6 },
+                { id: 7, x: WIDTH / 2 + 80 * G_SCALE, y: HEIGHT * 0.6 },
+                { id: 8, x: WIDTH / 2 - 80 * G_SCALE, y: HEIGHT * 0.75 },
+                { id: 9, x: WIDTH / 2 + 80 * G_SCALE, y: HEIGHT * 0.75 },
+                { id: 10, x: WIDTH / 2 - 80 * G_SCALE, y: HEIGHT * 0.9 },
+                { id: 11, x: WIDTH / 2 + 80 * G_SCALE, y: HEIGHT * 0.9 }
+            ],
+            targetEdges: [
+                [0, 3], [3, 4], [4, 7], [7, 8], [8, 11],
+                [1, 2], [2, 5], [5, 6], [6, 9], [9, 10],
+                [2, 3], [4, 5], [6, 7], [8, 9], [10, 11],
+                [2, 4], [3, 5], [6, 8], [7, 9]
+            ]
+        },
+        {
+            name: 'LEVEL 43',
+            theme: 'plasma',
+            nodes: [
+                { id: 0, x: WIDTH / 2, y: HEIGHT * 0.15 },
+                { id: 1, x: WIDTH / 2 - 80 * G_SCALE, y: HEIGHT * 0.35 },
+                { id: 2, x: WIDTH / 2 + 80 * G_SCALE, y: HEIGHT * 0.35 },
+                { id: 3, x: WIDTH / 2, y: HEIGHT * 0.35 },
+                { id: 4, x: WIDTH / 2 - 160 * G_SCALE, y: HEIGHT * 0.6 },
+                { id: 5, x: WIDTH / 2 + 160 * G_SCALE, y: HEIGHT * 0.6 },
+                { id: 6, x: WIDTH / 2, y: HEIGHT * 0.6 },
+                { id: 7, x: WIDTH / 2 - 240 * G_SCALE, y: HEIGHT * 0.85 },
+                { id: 8, x: WIDTH / 2 + 240 * G_SCALE, y: HEIGHT * 0.85 },
+                { id: 9, x: WIDTH / 2, y: HEIGHT * 0.85 }
+            ],
+            targetEdges: [
+                [0, 1], [1, 4], [4, 7], [0, 2], [2, 5], [5, 8],
+                [1, 3], [3, 2], [4, 6], [6, 5], [7, 9], [9, 8],
+                [0, 3], [3, 6], [6, 9],
+                [1, 6], [2, 6], [4, 9], [5, 9]
+            ]
+        },
+        {
+            name: 'LEVEL 44',
+            theme: 'cyber',
+            nodes: [
+                { id: 0, x: WIDTH / 2, y: HEIGHT * 0.1 },
+                { id: 1, x: WIDTH / 2 - 120 * G_SCALE, y: HEIGHT * 0.2 },
+                { id: 2, x: WIDTH / 2 + 120 * G_SCALE, y: HEIGHT * 0.2 },
+                { id: 3, x: WIDTH / 2 - 120 * G_SCALE, y: HEIGHT * 0.4 },
+                { id: 4, x: WIDTH / 2 + 120 * G_SCALE, y: HEIGHT * 0.4 },
+                { id: 5, x: WIDTH / 2, y: HEIGHT * 0.5 },
+                { id: 6, x: WIDTH / 2 - 120 * G_SCALE, y: HEIGHT * 0.6 },
+                { id: 7, x: WIDTH / 2 + 120 * G_SCALE, y: HEIGHT * 0.6 },
+                { id: 8, x: WIDTH / 2 - 120 * G_SCALE, y: HEIGHT * 0.8 },
+                { id: 9, x: WIDTH / 2 + 120 * G_SCALE, y: HEIGHT * 0.8 },
+                { id: 10, x: WIDTH / 2, y: HEIGHT * 0.9 },
+                { id: 11, x: WIDTH / 2, y: HEIGHT * 0.3 },
+                { id: 12, x: WIDTH / 2, y: HEIGHT * 0.7 }
+            ],
+            targetEdges: [
+                [0, 1], [1, 3], [3, 5], [5, 4], [4, 2], [2, 0],
+                [5, 6], [6, 8], [8, 10], [10, 9], [9, 7], [7, 5],
+                [11, 0], [11, 1], [11, 2], [11, 3], [11, 4], [11, 5],
+                [12, 5], [12, 6], [12, 7], [12, 8], [12, 9], [12, 10],
+                [1, 2], [3, 4], [6, 7], [8, 9]
+            ]
+        },
+        {
+            name: 'LEVEL 45',
+            theme: 'neon',
+            nodes: [
+                { id: 0, x: WIDTH / 2 - 150 * G_SCALE, y: HEIGHT * 0.2 },
+                { id: 1, x: WIDTH / 2 + 150 * G_SCALE, y: HEIGHT * 0.2 },
+                { id: 2, x: WIDTH / 2 - 250 * G_SCALE, y: HEIGHT * 0.5 },
+                { id: 3, x: WIDTH / 2 + 250 * G_SCALE, y: HEIGHT * 0.5 },
+                { id: 4, x: WIDTH / 2 - 150 * G_SCALE, y: HEIGHT * 0.8 },
+                { id: 5, x: WIDTH / 2 + 150 * G_SCALE, y: HEIGHT * 0.8 },
+                { id: 6, x: WIDTH / 2, y: HEIGHT * 0.5 },
+                { id: 7, x: WIDTH / 2, y: HEIGHT * 0.3 },
+                { id: 8, x: WIDTH / 2, y: HEIGHT * 0.7 }
+            ],
+            targetEdges: [
+                [0, 1], [1, 3], [3, 5], [5, 4], [4, 2], [2, 0], [0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [7, 0], [7, 1], [8, 4], [8, 5]
+            ]
+        },
 
     ];
+
 
 
 
@@ -722,52 +1008,52 @@ export default function OneLineDraw() {
     const nodes = currentLevelData.nodes;
     const targetEdges = currentLevelData.targetEdges;
 
-    {/* Undo ane Retry Button */ }
-    const getFooterButtons = () => {
-        const btnScale = isLandscape ? 0.7 : (isMobile ? 0.75 : 1);
-        let footY = isLandscape ? HEIGHT - 22 : HEIGHT - (isMobile ? 50 : 60);
-        let undoX, retryX, btnW, btnH;
-        if (isTabletLandscape) {
-            btnW = 160;
-            btnH = 55;
-            const aw = btnW * btnScale;
-            undoX = aw / 2 + 40;
-            retryX = undoX + aw + 15;
-            footY = HEIGHT - 90;
-        }
-        else if (isTabletPortrait) {
-            btnW = 160;
-            btnH = 55;
-            const aw = btnW * btnScale;
-            undoX = aw / 2 + 40;
-            retryX = undoX + aw + 15;
-            footY = HEIGHT - 135;
-        }
-        else if (isMobile && !isLandscape) {
-            btnW = 50;
-            btnH = 50;
-            undoX = 30;
-            retryX = 75;
-            footY = HEIGHT - 65;
-        }
-        else if (isLandscape) {
-            btnW = 60;
-            btnH = 60;
-            const aw = btnW * btnScale;
-            undoX = aw / 2 + 10;
-            retryX = undoX + aw + 5;
-            footY = HEIGHT - 55;
-        }
-        else {
-            btnW = 180;
-            btnH = 60;
-            undoX = 120;
-            retryX = 310;
-            footY = HEIGHT - 40;
-        }
-        const actualW = btnW * btnScale, actualH = btnH * btnScale;
-        return { footY, undoX, retryX, btnW, btnH, actualW, actualH, btnScale };
-    };
+    // {/* Undo ane Retry Button */ }
+    // const getFooterButtons = () => {
+    //     const btnScale = isLandscape ? 0.7 : (isMobile ? 0.75 : 1);
+    //     let footY = isLandscape ? HEIGHT - 22 : HEIGHT - (isMobile ? 50 : 60);
+    //     let undoX, retryX, btnW, btnH;
+    //     if (isTabletLandscape) {
+    //         btnW = 160;
+    //         btnH = 55;
+    //         const aw = btnW * btnScale;
+    //         undoX = aw / 2 + 40;
+    //         retryX = undoX + aw + 15;
+    //         footY = HEIGHT - 90;
+    //     }
+    //     else if (isTabletPortrait) {
+    //         btnW = 160;
+    //         btnH = 55;
+    //         const aw = btnW * btnScale;
+    //         undoX = aw / 2 + 40;
+    //         retryX = undoX + aw + 15;
+    //         footY = HEIGHT - 135;
+    //     }
+    //     else if (isMobile && !isLandscape) {
+    //         btnW = 50;
+    //         btnH = 50;
+    //         undoX = 30;
+    //         retryX = 75;
+    //         footY = HEIGHT - 65;
+    //     }
+    //     else if (isLandscape) {
+    //         btnW = 60;
+    //         btnH = 60;
+    //         const aw = btnW * btnScale;
+    //         undoX = aw / 2 + 10;
+    //         retryX = undoX + aw + 5;
+    //         footY = HEIGHT - 55;
+    //     }
+    //     else {
+    //         btnW = 180;
+    //         btnH = 60;
+    //         undoX = 120;
+    //         retryX = 310;
+    //         footY = HEIGHT - 40;
+    //     }
+    //     const actualW = btnW * btnScale, actualH = btnH * btnScale;
+    //     return { footY, undoX, retryX, btnW, btnH, actualW, actualH, btnScale };
+    // };
 
     useEffect(() => { drawGame(); }, [drawnPath, currentPos, drawing, edgesDrawn, currentLevel, lives, gameState, dimensions, isWinAnimating, levelSelectPage]);
 
@@ -1264,8 +1550,9 @@ export default function OneLineDraw() {
             }
             ctx.save();
             ctx.shadowBlur = isWinAnimating ? 0 : 18 * G_SCALE;
-            ctx.shadowColor = 'rgba(100,180,255,0.6)';
-            ctx.strokeStyle = isWinAnimating ? '#00ffaa' : 'rgba(100,180,255,0.9)';
+            const theme = currentLevelData.theme;
+            ctx.shadowColor = theme === 'cyber' ? '#00ccff' : (theme === 'neon' ? '#39ff14' : (theme === 'plasma' ? '#ff00ff' : (theme === 'galaxy' ? '#aa88ff' : (theme === 'void' ? '#330066' : (theme === 'zenith' ? '#ff9900' : (theme === 'mythic' ? '#ffcc00' : (theme === 'spiral' ? '#00ffa2' : (theme === 'glass' ? '#00e5ff' : (theme === 'gem' ? '#ff33aa' : 'rgba(100,180,255,0.6)')))))))));
+            ctx.strokeStyle = isWinAnimating ? '#00ffaa' : (theme === 'cyber' ? '#00f2ff' : (theme === 'neon' ? '#00ff00' : (theme === 'plasma' ? '#ff00ff' : (theme === 'galaxy' ? '#ccbbff' : (theme === 'void' ? '#aa44ff' : (theme === 'zenith' ? '#ffd700' : (theme === 'mythic' ? '#ffd700' : (theme === 'spiral' ? '#00ffaa' : (theme === 'glass' ? '#00e5ff' : (theme === 'gem' ? '#ff0088' : 'rgba(100,180,255,0.9)'))))))))));
             ctx.lineWidth = 14 * G_SCALE; ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
             ctx.beginPath();
@@ -1313,13 +1600,14 @@ export default function OneLineDraw() {
             ctx.stroke(); ctx.restore();
             const innerR = 16 * G_SCALE;
             const ng = ctx.createRadialGradient(node.x - 4 * G_SCALE, node.y - 4 * G_SCALE, 1, node.x, node.y, innerR);
+            const theme = currentLevelData.theme;
             if (isVisited) {
-                ng.addColorStop(0, '#80ffcc');
-                ng.addColorStop(1, '#00aa77');
+                ng.addColorStop(0, theme === 'cyber' ? '#d4ffff' : (theme === 'neon' ? '#ccffcc' : (theme === 'plasma' ? '#ffccff' : (theme === 'galaxy' ? '#cc88ff' : (theme === 'void' ? '#aa00ff' : (theme === 'zenith' ? '#fff080' : (theme === 'mythic' ? '#fff080' : (theme === 'spiral' ? '#80ffcc' : (theme === 'glass' ? '#80d4ff' : (theme === 'gem' ? '#ff80cc' : '#80ffcc'))))))))));
+                ng.addColorStop(1, theme === 'cyber' ? '#00bbcc' : (theme === 'neon' ? '#00cc00' : (theme === 'plasma' ? '#cc00cc' : (theme === 'galaxy' ? '#6622aa' : (theme === 'void' ? '#440066' : (theme === 'zenith' ? '#ccaa00' : (theme === 'mythic' ? '#ccaa00' : (theme === 'spiral' ? '#00aa77' : (theme === 'glass' ? '#0066cc' : (theme === 'gem' ? '#cc0066' : '#00aa77'))))))))));
             }
             else {
-                ng.addColorStop(0, '#80b4ff');
-                ng.addColorStop(1, '#2255cc');
+                ng.addColorStop(0, theme === 'cyber' ? '#003344' : (theme === 'neon' ? '#004400' : (theme === 'plasma' ? '#440044' : (theme === 'galaxy' ? '#331144' : (theme === 'void' ? '#110022' : (theme === 'zenith' ? '#665500' : (theme === 'mythic' ? '#665500' : (theme === 'spiral' ? '#004433' : (theme === 'glass' ? '#003366' : (theme === 'gem' ? '#662244' : '#80b4ff'))))))))));
+                ng.addColorStop(1, theme === 'cyber' ? '#001122' : (theme === 'neon' ? '#002200' : (theme === 'plasma' ? '#220022' : (theme === 'galaxy' ? '#110022' : (theme === 'void' ? '#000000' : (theme === 'zenith' ? '#332200' : (theme === 'mythic' ? '#332200' : (theme === 'spiral' ? '#002211' : (theme === 'glass' ? '#001133' : (theme === 'gem' ? '#331122' : '#2255cc'))))))))));
             }
             ctx.beginPath();
             ctx.arc(node.x, node.y, innerR, 0, Math.PI * 2);
