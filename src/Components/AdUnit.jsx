@@ -2,28 +2,23 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const AdUnit = ({ slot, style }) => {
+const AdUnit = ({ slot, style, className }) => {
     const adRef = useRef(null);
-    const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
         try {
-            if (window.adsbygoogle && adRef.current) {
-                window.adsbygoogle.push({});
-                setLoaded(true);
+            if (window.adsbygoogle) {
+                (window.adsbygoogle = window.adsbygoogle || []).push({});
             }
         } catch (e) {
-            console.log("Ad error:", e);
+            console.error("Ad error:", e);
         }
     }, []);
 
-    // agar ad load nahi hua toh hide
-    if (!loaded) return null;
-
     return (
         <ins
-            className="adsbygoogle"
-            style={style}
+            className={`adsbygoogle ${className || ""}`}
+            style={style || { display: 'block' }}
             data-ad-client="ca-pub-XXXXXXXXXXXX"
             data-ad-slot={slot}
             data-ad-format="auto"
